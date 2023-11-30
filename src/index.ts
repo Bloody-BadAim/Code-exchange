@@ -7,7 +7,7 @@ import { User } from "./models/user";
  */
 async function setup(): Promise<void> {
     // Kijk of de gebruiker is ingelogd anders mag je hier niet komen.
-    security();
+    // security();
 
     // Maak een actie aan voor de logout knop. Als je hier op drukt wordt de logout functie aangeroepen
     document.querySelector(".logout-btn")?.addEventListener("click", logout);
@@ -25,13 +25,13 @@ async function setup(): Promise<void> {
  * Check if the user is logged in
  * De methode geeft niets terug (void) en heeft daarom geen return statement
  */
-function security(): void {
-    // Als de sessie met naam user_id niet bestaat (door de ! werkt de if als nietwaar) dan is de gebruiker niet ingelogd
-    if (!session.get("user") || session.get("user") === undefined) {
-        // Stuur de gebruiker door naar de login pagina
-        url.redirect("login.html");
-    }
-}
+// function security(): void {
+//     // Als de sessie met naam user_id niet bestaat (door de ! werkt de if als nietwaar) dan is de gebruiker niet ingelogd
+//     if (!session.get("user") || session.get("user") === undefined) {
+//         // Stuur de gebruiker door naar de login pagina
+//         url.redirect("login.html");
+//     }
+// }
 
 /**
  * Haal alle gegevens van de gebruiker op uit de database

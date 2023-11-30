@@ -1,13 +1,3 @@
-const letters: string = "hello";
-console.log(letters);
-const age: number = 21;
-const isFriday: boolean = true;
-
-const header: HTMLHeadElement | null = document.querySelector("h1");
-
-console.log(header?.textContent);
-
-
 class Phone {
     private _model: string;
     private _size: number;
@@ -18,16 +8,26 @@ class Phone {
         this._size = size;
         this._color = color;
     }
-    public cut(): void {
-        this._size+=100;
-        console.log("Er is 200 cm gezaagd, er is nog "+ this._size + "cm over");
+    public printSize(toAdd: number): void {
+        this._size += toAdd;
+        console.log("mijn telefoon is " + this._size + " cm lang");
+    }
+    public get color(): string {
+        return this._color;
+    }
+
+    public set color(color: string) {
+        this._color = color;
     }
 }
 
 const phone: Phone = new Phone("iphone", 20, "black");
-phone.cut();
-const phone1:Phone = new Phone ("samsung",30,"white");
-const phone2:Phone = new Phone ("nokia",10,"red");
+console.log(phone);
+phone.color = "blue";
+console.log(phone);
+phone.printSize(10);
+const phone1: Phone = new Phone("samsung", 30, "white");
+const phone2: Phone = new Phone("nokia", 10, "red");
 console.log(phone);
 console.log(phone1);
 console.log(phone2);
