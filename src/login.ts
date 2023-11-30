@@ -61,3 +61,25 @@ async function loginFromDatabase(username: string, password: string): Promise<Ar
 
 // Roep de setup functie aan als de pagina is geladen
 setup();
+
+
+
+// const btn: any = document.getElementById("btnRegister") as HTMLButtonElement;
+// btn.addEventListener("click", setup);
+
+// async function setup(): Promise<void> {
+
+
+//     const email: string = (<HTMLInputElement>document.getElementById("email")).value;
+//     const username: string = (<HTMLInputElement>document.getElementById("username")).value;
+//     const firstname: string = (<HTMLInputElement>document.getElementById("firstname")).value;
+//     const lastname: string = (<HTMLInputElement>document.getElementById("lastname")).value;
+//     const password: string = (<HTMLInputElement>document.getElementById("password")).value;
+
+//     const insert: any = await api.queryDatabase("INSERT INTO user WHERE email = ?, username = ?, firstname = ?, lastname = ?, password = ?",
+//         email, username, firstname, lastname, password);
+
+//     if (insert) {
+//         alert("Je hebt succesvol geregistreert");
+//     }
+// }

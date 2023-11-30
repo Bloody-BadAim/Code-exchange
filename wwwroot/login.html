@@ -4,45 +4,37 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- Gebruik bootstrap -->
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-            integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-            crossorigin="anonymous"
-        />
         <title>Aanmelden bij SE Code Exchange</title>
-        <link rel="stylesheet" href="/assets/css/index.css" />
+        <link rel="stylesheet" href="/assets/css/inloggen.css" />
     </head>
     <body>
+        <header>
+            <nav>
+                <a href="registreren.html">registreren</a>
+            </nav>
+        </header>
         <main>
             <div class="container">
                 <div class="wrapper">
-                    <div class="login-box">
-                        <div class="login-section">
-                            <img src="/assets/img/code_exchange.png" alt="Logo" class="logo" />
-                            <h1>halloooooooooooo</h1>
-                            <div class="alert alert-danger" role="alert">De gegevens kloppen niet!</div>
-                            <div class="form-outline form-white mb-4">
-                                <label class="form-label" for="username">Gebruikersnaam</label>
-                                <input type="text" id="username" class="form-control form-control-lg" />
+                    <div class="registerBox">
+                        <div class="registerSection">
+                            <h2>Email</h2>
+                            <div class="inputs">  
+                                <input type="email" id="emailLogin" name="emailLogin" required>
                             </div>
-                            <div class="form-outline form-white mb-4">
-                                <label class="form-label" for="password">Wachtwoord</label>
-                                <input type="password" id="password" class="form-control form-control-lg" />
+                            <h2>Password</h2>
+                            <div class="inputs">
+                                <input type="password" id="passwordLogin" name="passwordLogin" required>
                             </div>
-                            <button
-                                class="btn btn-primary btn-lg btn-block login-btn"
-                                id="loginButton"
-                                type="submit"
-                            >
-                                Login
-                            </button>
+                            <div class="button">
+                                <button type="button" id="btnLogin">Log in</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
         <!-- Laad Typescript bestand in om deze pagina aan te sturen -->
-        <script src="/src/login.ts" type="module"></script>
+        <script src="/src/registreren.ts" type="module"></script>
     </body>
 </html>
