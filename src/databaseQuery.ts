@@ -1,6 +1,18 @@
 import "./config";
-import { api, session } from "@hboictcloud/api";
+import { api } from "@hboictcloud/api";
 
+interface Question {
+    id: number;
+    content: string;
+    user_id: number;
+}
+
+interface Answer {
+    id: number;
+    content: string;
+    question_id: number;
+    user_id: number;
+}
 
 export async function checkEmailExists(email: string): Promise<boolean> {
     try {
@@ -86,6 +98,62 @@ export async function getInfoData (userid: number): Promise<any> {
         }
     } catch (error) {
         console.log("error during getting user info:", error);
+        throw error;
+    }
+}
+
+export async function postQuestion(userId: number, content: string): Promise<number | undefined> {
+    try {
+        const queryQuestion: string = "INSERT INTO questions (userid, content) VALUES (?, ?)";
+        const result: any = await api.queryDatabase(queryQuestion, userId, content);
+        return result.insertId;
+    } catch (error) {
+        console.error("Error posting question:", error);
+        throw error;
+    }
+}
+
+export async function getAllQuestions(): Promise<Question[]> {
+    try {
+        const queryAllQuestions: string = "SELECT * FROM questions";
+        const questions:any = await api.queryDatabase(queryAllQuestions);
+        return questions;
+    } catch (error) {
+        console.error("Error getting questions:", error);
+        throw error;
+    }
+}
+
+export async function postAnswer(questionId: number, userId: number, content: string): Promise<number | undefined> {
+    try {
+        const queryAnswer: string = "INSERT INTO answers (questionid, userid, content) VALUES (?, ?, ?)";
+        const result: any = await api.queryDatabase(queryAnswer, questionId, userId, content);
+        return result.insertId;
+    } catch (error) {
+        console.error("Error posting answer:", error);
+        throw error;
+    }
+}
+
+
+export async function getQuestionById(questionId: number): Promise<Question | undefined> {
+    try {
+        const queryGetQ:string = "SELECT * FROM questions WHERE id = ?";
+        const result: any = await api.queryDatabase(queryGetQ, questionId);
+        return result.length > 0 ? result[0] : undefined;
+    } catch (error) {
+        console.error("Error getting question by ID:", error);
+        throw error;
+    }
+}
+
+export async function getAnswersByQuestionId(questionId: number): Promise<Answer[]> {
+    try {
+        const queryGeta:string = "SELECT * FROM answers WHERE questionid = ?";
+        const answers: any = await api.queryDatabase(queryGeta, questionId);
+        return answers;
+    } catch (error) {
+        console.error("Error getting answers by question ID:", error);
         throw error;
     }
 }

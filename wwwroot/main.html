@@ -13,17 +13,40 @@
 <body>
     <main>
         <div class="container">
-            <div class="wrapper">
-                <div class="login-box">
-                    <div class="login-section">
-                        <h1>Welkom, je bent ingelogd <span class="name">username</span>.</h1>
 
-                        <button class="dark-btn" id="logoutButton" type="submit">
-                            Logout
-                        </button>
-                    </div>
+
+
+            <h1>Welkom, je bent ingelogd <span class="name">username</span>.</h1>
+       
+            <button class="dark-btn" id="askQuestionButton">Ask Question</button>
+
+         
+            <div id="askQuestionModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <textarea id="questionInput" placeholder="Enter your question here..."></textarea>
+                    <button id="submitQuestion">Submit Question</button>
                 </div>
             </div>
+
+        
+            <div class="questions-list">
+                <h2>Questions</h2>
+                <div id="questionsDisplay"></div>
+            </div>
+
+           
+            <div id="questionDetailView" class="modal">
+                <div class="modal-content">
+                    <span class="closeDetail">&times;</span>
+                    <div id="questionContent"></div>
+                    <div id="answersList"></div>
+                </div>
+            </div>
+
+
+
+
         </div>
     </main>
 
@@ -31,7 +54,7 @@
         <input type="checkbox" id="nav-toggle">
         <div id="nav-header">
             <h1 id="nav-title">
-            Code exchange
+                Code exchange
             </h1>
             <label for="nav-toggle">
                 <span id="nav-toggle-burger"></span>
@@ -42,6 +65,7 @@
             <div class="nav-button"><span>Profile</span></div>
             <div class="nav-button"><span>My questions</span></div>
             <div class="nav-button"><span>My answers</span></div>
+            <div><button class="dark-btn-cancel nav-button" id="logout"><span>Log out</span></button></div>
         </div>
         <input type="checkbox" id="nav-footer-toggle">
         <div id="nav-footer">
@@ -57,16 +81,13 @@
                     <i class="fas fa-caret-up"></i>
                 </label>
             </div>
-            <div class="nav-button"><span>Log out</span></div>
-            <div id="nav-footer-content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </div>
         </div>
     </div>
-    
 
-    
-    <script src="/src/index.ts" type="module"></script>
+
+
+
+    <script src="/src/main.ts" type="module"></script>
 </body>
 
 </html>

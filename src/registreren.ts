@@ -50,21 +50,13 @@ async function login(): Promise<any> {
         const doneNew: string = String(done);
         sessionStorage.setItem("userid", doneNew);
         const getInfo: number = await getInfoData(done);
+        window.location.href = "main.html";
 
         if(getInfo) {
-            window.location.replace("./main.html");
+            window.location.reload();
+            window.location.href = "main.html";
         }
     }
 }
 
-const btnLogout: any = document.getElementById("logout") as HTMLButtonElement;
-if(btnLogout) {
-    btnLogout.addEventListener("click", logout);
 
-}
-function logout(): void {
-    const sessie: any = sessionStorage.clear();
-    if(sessie) {
-        window.location.replace("/index.html");
-    }
-}
