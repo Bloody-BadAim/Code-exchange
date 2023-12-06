@@ -71,8 +71,15 @@ async function login(): Promise<any> {
         sessionStorage.setItem("userid", doneNew);
         const getInfo: number = await getInfoData(done);
         window.location.href = "main.html";
+
+
+        if(getInfo) {
+            window.location.reload();
+            window.location.href = "main.html";
+        }
     }
 }
+
 
 const btnLogout: any = document.getElementById("logout") as HTMLButtonElement;
 if(btnLogout) {

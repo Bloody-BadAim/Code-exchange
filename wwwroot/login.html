@@ -1,53 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <!-- Gebruik bootstrap -->
-        <title>Aanmelden bij SE Code Exchange</title>
-       
-    </head>
-    <body>
 
-        <header>
-            <nav>
-                <a href="registreren.html">registreren</a>
-            </nav>
-        </header>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/assets/css/login.css" />
+    <!-- Gebruik bootstrap -->
+    <title>Aanmelden bij SE Code Exchange</title>
 
-        <!-- #70F4FD -->
-        <!-- #4BFF9E -->
+</head>
 
-        <main>
+<body>
+        <form id="myFormLogin">
             <div class="container">
-                <div class="wrapper">
-                    <div class="registerBox">
-                        <div class="registerSection">
-                            <h2>Email</h2>
-                            <div class="inputs">  
-                                <input type="email" id="emailLogin" name="emailLogin" required>
-                            </div>
-                            <h2>Password</h2>
-                            <div class="inputs">
-                                <input type="password" id="passwordLogin" name="passwordLogin" required>
-                            </div>
-                            <div class="button">
-                                <button type="button" id="btnLogin">Log in</button>
-                            </div>
-                            <div class="button">
-                                <button type="button" id="logout">Log out</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <label for="email"><b>Email</b></label>
+            <input type="email" placeholder="Enter Email" name="email" id="emailLogin" autocomplete="email">
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" id="passwordLogin"
+                autocomplete="current-password">
+            <div class="button">
+                <button class="dark-btn" type="button" id="btnLogin">Login</button>
+                <a href="registreren.html"> <button style="float: right;" class="dark-btn" type="button">Sign up</button></a>
             </div>
-        </main>
-        <!-- Laad Typescript bestand in om deze pagina aan te sturen -->
+        </div>
+        </form>
+    <!-- Laad Typescript bestand in om deze pagina aan te sturen -->
 
-        <script src="/src/registreren.ts" type="module"></script>
+    <script src="/src/registreren.ts" type="module"></script>
 
-       
-      
 
-    </body>
+
+
+</body>
+
 </html>
