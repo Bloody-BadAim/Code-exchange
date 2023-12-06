@@ -1,17 +1,20 @@
 import "./config";
-import { loadQuestions, setupQuestionModal ,displayQuestionDetail} from "./questionHandler";
+import QuestionHandler from "./questionHandler"; // Make sure to export default the QuestionHandler class
 
-const btnLogout: any = document.getElementById("logout") as HTMLButtonElement;
-if(btnLogout) {
+// Instantiate the QuestionHandler class
+const questionHandler: QuestionHandler = new QuestionHandler();
+
+const btnLogout: HTMLElement | null = document.getElementById("logout");
+if (btnLogout) {
     btnLogout.addEventListener("click", logout);
-
 }
+
 function logout(): void {
     sessionStorage.clear();
     window.location.href = "index.html";
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-    await loadQuestions();
-    setupQuestionModal();
+    // Now use the questionHandler instance to call the loadQuestions method
+    await questionHandler.loadQuestions();
 });

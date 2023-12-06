@@ -1,95 +1,131 @@
 import "./config";
-import { session } from "@hboictcloud/api";
 import { createAccount, validateLogin, getInfoData, checkEmailExists, checkUsernameExists } from "./databaseQuery";
 
+class UserRegistration {
+    private email: string;
+    private username: string;
+    private firstname: string;
+    private lastname: string;
+    private password: string;
 
-
-
-const btn: any = document.getElementById("btnRegister") as HTMLButtonElement;
-if(btn) {
-    btn.addEventListener("click", setup);
-}
-
-async function setup(): Promise<void> {
-
-    const email: string = (<HTMLInputElement>document.getElementById("email")).value;
-    const username: string = (<HTMLInputElement>document.getElementById("username")).value;
-    const firstname: string = (<HTMLInputElement>document.getElementById("firstname")).value;
-    const lastname: string = (<HTMLInputElement>document.getElementById("lastname")).value;
-    const password: string = (<HTMLInputElement>document.getElementById("password")).value;
-
-    const check: boolean | undefined = await checkEmailExists(email);
-    console.log(check);
-
-    if(check === false) {
-        const checkUsername: boolean | undefined = await checkUsernameExists(username);
-        
-        if(checkUsername === false) {
-            
-            const done: number | undefined = await createAccount(email, username, firstname, lastname, password);
-            
-            if (done !== undefined) {
-                alert("Succesfull, registration complete!");
-                window.location.replace("./login.html");
-            
-            }else {
-                console.log("Registration failed");
-                alert("Registration failed");
-                location.reload();
-
-            }
-        
-        }else {
-            console.log("username already exists.");
-            alert("registration failed, username already exists.");
-            location.reload();
-        } 
-
-    }else {
-        console.log("registration failed, email already exists");
-        alert("registration failed, email already exists");
-        location.reload();
+    public constructor(email: string, username: string, firstname: string, lastname: string, password: string) {
+        this.email = email;
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.password = password;
     }
-    
-}
 
+    public async register(): Promise<void> {
+        const emailExists:boolean = await checkEmailExists(this.email);
+        if (emailExists) {
+            this.alertFailure("email already exists");
+            return;
+        }
 
+        const usernameExists:boolean = await checkUsernameExists(this.username);
+        if (usernameExists) {
+            this.alertFailure("username already exists");
+            return;
+        }
 
-const btnLogin: any = document.getElementById("btnLogin") as HTMLButtonElement;
-if(btnLogin) {
-    btnLogin.addEventListener("click", login);
-}
+        if (!this.validateInputs()) {
+            this.alertFailure("All fields are required.");
+            return;
+        }
 
-async function login(): Promise<any> {
-    const email: string = (<HTMLInputElement>document.getElementById("emailLogin")).value;
-    const password: string = (<HTMLInputElement>document.getElementById("passwordLogin")).value;
-
-    const done: number | undefined = await validateLogin(email, password);
-
-    if(done) {
-        const doneNew: string = String(done);
-        sessionStorage.setItem("userid", doneNew);
-        const getInfo: number = await getInfoData(done);
-        window.location.href = "main.html";
-
-
-        if(getInfo) {
-            window.location.reload();
-            window.location.href = "main.html";
+        const accountId:number | undefined = await createAccount(this.email, this.username, this.firstname, this.lastname, this.password);
+        if (accountId !== undefined) {
+            this.alertSuccess();
+        } else {
+            this.alertFailure("Registration failed");
         }
     }
+
+    private alertSuccess(): void {
+        alert("Successful, registration complete!");
+        window.location.replace("./main.html");
+    }
+    private validateInputs(): boolean {
+        return this.email.trim() !== "" && this.username.trim() !== "" && this.firstname.trim() !== "" && this.lastname.trim() !== "" && this.password.trim() !== "";
+    }
+
+    private alertFailure(message: string): void {
+        console.log(message);
+        alert(`Registration failed, ${message}`);
+    }
+}
+class UserLogin {
+    private email: string;
+    private password: string;
+
+    public constructor(email: string, password: string) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public async login(): Promise<void> {
+        const userId: number | undefined = await validateLogin(this.email, this.password);
+        if (userId) {
+            sessionStorage.setItem("userid", String(userId));
+            const userInfo:any = await getInfoData(userId);
+            if (userInfo) {
+                sessionStorage.setItem("email", userInfo.email);
+                sessionStorage.setItem("firstname", userInfo.firstname);
+                sessionStorage.setItem("lastname", userInfo.lastname);
+                sessionStorage.setItem("username", userInfo.username);
+                
+                this.alertSuccess();
+            } else {
+                this.alertFailure("Unable to retrieve user information");
+            }
+        } else {
+            this.alertFailure("Invalid email or password");
+        }
+    }
+
+    private alertSuccess(): void {
+        alert("Login successfull!");
+        window.location.href = "main.html";
+    }
+
+    private alertFailure(message: string): void {
+        console.log(message);
+        alert(`Login failed, ${message}`);
+    }
 }
 
-
-const btnLogout: any = document.getElementById("logout") as HTMLButtonElement;
-if(btnLogout) {
-    btnLogout.addEventListener("click", logout);
-
-}
-function logout(): void {
-    const sessie: any = sessionStorage.clear();
-    if(sessie) {
+class UserLogout {
+    public logout(): void {
+        sessionStorage.clear();
         window.location.replace("/index.html");
     }
 }
 
+
+document.getElementById("btnRegister")?.addEventListener("click", async () => {
+    const email:string = (document.getElementById("email") as HTMLInputElement).value;
+    const username:string = (document.getElementById("username") as HTMLInputElement).value;
+    const firstname:string = (document.getElementById("firstname") as HTMLInputElement).value;
+    const lastname:string = (document.getElementById("lastname") as HTMLInputElement).value;
+    const password:string = (document.getElementById("password") as HTMLInputElement).value;
+
+    const userRegistration: UserRegistration = new UserRegistration(email, username, firstname, lastname, password);
+    await userRegistration.register();
+});
+
+document.getElementById("myFormLogin")?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const email: string = (document.getElementById("emailLogin") as HTMLInputElement).value;
+    const password: string = (document.getElementById("passwordLogin") as HTMLInputElement).value;
+
+    const userLogin: UserLogin = new UserLogin(email, password);
+    await userLogin.login();
+});
+
+
+document.getElementById("logout")?.addEventListener("click", () => {
+    const userLogout: UserLogout = new UserLogout();
+    userLogout.logout();
+});

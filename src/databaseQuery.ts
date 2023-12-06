@@ -49,10 +49,10 @@ export async function checkUsernameExists(username: string): Promise<boolean> {
 
 export async function createAccount(email: string, username: string, firstname: string, lastname: string, password: string): Promise<number | undefined> {
     try {
-        const createAccountString: string = "INSERT INTO user (email, username, firstname, lastname, password) VALUES ( ? , ? , ? , ? , ? )";
+        const createAccountString: string = "INSERT INTO user (email, username, firstname, lastname, password) VALUES (?, ?, ?, ?, ?)";
         const registerData: any = await api.queryDatabase(createAccountString, email, username, firstname, lastname, password);
-        const userId: number = Number(registerData);
-
+        // Assuming 'insertId' is the property holding the newly created user ID
+        const userId: number = registerData.insertId;
         return userId;
     } catch (error) {
         console.error("Error creating account:", error);
@@ -62,22 +62,17 @@ export async function createAccount(email: string, username: string, firstname: 
 
 export async function validateLogin(email: string, password: string): Promise<number | undefined> {
     try {
-        const validateLoginString: string = "SELECT email, password, userid FROM user WHERE email = ?";
- 
+        const validateLoginString: string = "SELECT userid, password FROM user WHERE email = ?";
         const userData: any = await api.queryDatabase(validateLoginString, email);
- 
+
         if (userData.length === 0) {
-            console.log("no users found");
-            alert("no users found");
+            console.log("No user found with that email");
             return undefined;
         }
- 
-        const user: {
-            userid: number,
-            email: string,
-            password: string,
-        } = userData[0];
 
+        const user:any = userData[0];
+
+        // Assuming you're storing plaintext passwords (not recommended)
         if (user.password === password) {
             return user.userid;
         } else {
@@ -89,30 +84,20 @@ export async function validateLogin(email: string, password: string): Promise<nu
     }
 }
 
-
-export async function getInfoData (userid: number): Promise<any> {
-    try{
-        const getInfoDataString: string = "SELECT email, username, firstname, lastname, password FROM user WHERE userid = ?";
+export async function getInfoData(userid: number): Promise<{ email: string, firstname: string, lastname: string , username:string } | null> {
+    try {
+        const getInfoDataString: string = "SELECT email, username, firstname, lastname FROM user WHERE userid = ?";
         const getData: any = await api.queryDatabase(getInfoDataString, userid);
 
-        if(getData.length === 0) {
-            console.log("couldnt get user info.");
+        if (getData.length === 0) {
+            console.log("Could not get user info.");
+            return null;
         } else {
-            const user:  {
-                userid: number,
-                email: string, 
-                firstname: string,
-                lastname: string,
-                password: string,
-            } = getData[0];
-
-            sessionStorage.setItem("email", user.email),
-            sessionStorage.setItem("firstname", user.firstname),
-            sessionStorage.setItem("lastname", user.lastname),
-            sessionStorage.setItem("password", user.password);
+            const user:any = getData[0];
+            return { email: user.email, firstname: user.firstname, lastname: user.lastname,username: user.username };
         }
     } catch (error) {
-        console.log("error during getting user info:", error);
+        console.log("Error during getting user info:", error);
         throw error;
     }
 }
@@ -128,6 +113,7 @@ export async function postQuestion(userId: number, content: string): Promise<num
     }
 }
 
+
 export async function getAllQuestions(): Promise<Question[]> {
     try {
         const queryAllQuestions: string = "SELECT * FROM questions";
@@ -139,16 +125,17 @@ export async function getAllQuestions(): Promise<Question[]> {
     }
 }
 
-export async function postAnswer(questionId: number, userId: number, content: string): Promise<number | undefined> {
+export async function postAnswer(questionId: number, userId: number, contentAnswer: string): Promise<number | undefined> {
     try {
-        const queryAnswer: string = "INSERT INTO answers (questionid, userid, content) VALUES (?, ?, ?)";
-        const result: any = await api.queryDatabase(queryAnswer, questionId, userId, content);
+        const queryAnswer: string = "INSERT INTO answers (questionid, userid, contentAnswer) VALUES (?, ?, ?)";
+        const result: any = await api.queryDatabase(queryAnswer, questionId, userId, contentAnswer);
         return result.insertId;
     } catch (error) {
         console.error("Error posting answer:", error);
         throw error;
     }
 }
+
 
 
 export async function getQuestionById(questionId: number): Promise<Question | undefined> {
