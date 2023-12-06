@@ -1,9 +1,9 @@
 import { postQuestion, getAllQuestions, postAnswer } from "./databaseQuery";
 import { getQuestionById, getAnswersByQuestionId } from "./databaseQuery";
 
-export async function loadQuestions() : Promise<void>{
-    const questionsDisplay:HTMLElement = document.getElementById("questionsDisplay")!;
-    const questions:any = await getAllQuestions();
+export async function loadQuestions(): Promise<void> {
+    const questionsDisplay: HTMLElement = document.getElementById("questionsDisplay")!;
+    const questions: any = await getAllQuestions();
     questionsDisplay.innerHTML = "";
     questions.forEach((question: { content: any; id: number; }) => {
         const questionDiv: HTMLDivElement = document.createElement("div");
@@ -14,11 +14,11 @@ export async function loadQuestions() : Promise<void>{
 }
 
 export function setupQuestionModal(): void {
-    const askQuestionButton:HTMLElement  = document.getElementById("askQuestionButton")!;
-    const askQuestionModal:HTMLElement  = document.getElementById("askQuestionModal")!;
-    const closeAskModal:HTMLElement  = document.querySelector(".close")!;
-    const submitQuestionButton:HTMLElement  = document.getElementById("submitQuestion")!;
-    const questionInput:HTMLTextAreaElement = document.getElementById("questionInput") as HTMLTextAreaElement;
+    const askQuestionButton: HTMLElement = document.getElementById("askQuestionButton")!;
+    const askQuestionModal: HTMLElement = document.getElementById("askQuestionModal")!;
+    const closeAskModal: HTMLElement = document.querySelector(".close")!;
+    const submitQuestionButton: HTMLElement = document.getElementById("submitQuestion")!;
+    const questionInput: HTMLTextAreaElement = document.getElementById("questionInput") as HTMLTextAreaElement;
 
     askQuestionButton.addEventListener("click", () => {
         askQuestionModal.style.display = "block";
@@ -37,17 +37,17 @@ export function setupQuestionModal(): void {
 }
 
 export async function displayQuestionDetail(questionId: number): Promise<void> {
-    const questionDetailView:HTMLElement = document.getElementById("questionDetailView")!;
-    const questionContentDiv:HTMLElement = document.getElementById("questionContent")!;
-    const answersListDiv:HTMLElement = document.getElementById("answersList")!;
+    const questionDetailView: HTMLElement = document.getElementById("questionDetailView")!;
+    const questionContentDiv: HTMLElement = document.getElementById("questionContent")!;
+    const answersListDiv: HTMLElement = document.getElementById("answersList")!;
 
-    
+
     questionContentDiv.innerHTML = "";
     answersListDiv.innerHTML = "";
 
-   
-    const question:any = await getQuestionById(questionId);
-    const answers:any = await getAnswersByQuestionId(questionId);
+
+    const question: any = await getQuestionById(questionId);
+    const answers: any = await getAnswersByQuestionId(questionId);
 
     if (question) {
         questionContentDiv.innerHTML = `<h3>${question.content}</h3>`;
@@ -72,22 +72,22 @@ export async function displayQuestionDetail(questionId: number): Promise<void> {
 
     document.getElementById("submitAnswer")!.addEventListener("click", async () => {
         const answerInput: HTMLTextAreaElement = document.getElementById("answerInput") as HTMLTextAreaElement;
-        await postAnswer(questionId, 1 , answerInput.value);
+        await postAnswer(questionId, 1, answerInput.value);
         answerInput.value = "";
-        await displayQuestionDetail(questionId); 
+        await displayQuestionDetail(questionId);
     });
 
-//     function setupModalCloseButton(modalElementId, closeButtonClass) {
-//     const modal = document.getElementById(modalElementId);
-//     const closeButton = modal.querySelector(closeButtonClass);
-//     closeButton.addEventListener('click', () => {
-//         modal.style.display = 'none';
-//     });
-// }
+    //     function setupModalCloseButton(modalElementId, closeButtonClass) {
+    //     const modal = document.getElementById(modalElementId);
+    //     const closeButton = modal.querySelector(closeButtonClass);
+    //     closeButton.addEventListener('click', () => {
+    //         modal.style.display = 'none';
+    //     });
+    // }
 
-// // Call this function in setupQuestionModal and displayQuestionDetail
-// setupModalCloseButton('askQuestionModal', '.close');
-// setupModalCloseButton('questionDetailView', '.closeDetail');
+    // // Call this function in setupQuestionModal and displayQuestionDetail
+    // setupModalCloseButton('askQuestionModal', '.close');
+    // setupModalCloseButton('questionDetailView', '.closeDetail');
 
     questionDetailView.style.display = "block";
 }
