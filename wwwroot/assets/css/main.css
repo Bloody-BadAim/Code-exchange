@@ -224,24 +224,6 @@ a {
     justify-content: center;
 } 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 :root {
     --background: #9c88ff;
     --navbar-width: 256px;
@@ -417,6 +399,10 @@ a {
     transition: width .2s;
   }
   
+  #nav-content a:hover {
+    color: #D62929;
+  }
+
   #nav-content::-webkit-scrollbar {
     width: 8px;
     height: 8px;

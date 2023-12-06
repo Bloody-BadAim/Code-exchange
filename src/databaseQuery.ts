@@ -159,3 +159,7 @@ export async function getAnswersByQuestionId(questionId: number): Promise<Answer
         throw error;
     }
 }
+
+// export async function updateProfileFunction(key: string, input: string | number): Promise<boolean> {
+    
+// }
