@@ -1,6 +1,6 @@
 import "./config";
 import { session } from "@hboictcloud/api";
-import { createAccount, validateLogin, getInfoData, checkEmailExists } from "./databaseQuery";
+import { createAccount, validateLogin, getInfoData, checkEmailExists, checkUsernameExists } from "./databaseQuery";
 
 
 
@@ -20,20 +20,40 @@ async function setup(): Promise<void> {
 
     const check: boolean | undefined = await checkEmailExists(email);
     console.log(check);
+
     if(check === false) {
-        const done: number | undefined = await createAccount(email, username, firstname, lastname, password);
-        if (done !== undefined) {
-            alert("Succesfull, registration complete!");
-            window.location.replace("./login.html");
+        const checkUsername: boolean | undefined = await checkUsernameExists(username);
+        
+        if(checkUsername === false) {
+            
+            const done: number | undefined = await createAccount(email, username, firstname, lastname, password);
+            
+            if (done !== undefined) {
+                alert("Succesfull, registration complete!");
+                window.location.replace("./login.html");
+            
+            }else {
+                console.log("Registration failed");
+                alert("Registration failed");
+                location.reload();
+
+            }
+        
         }else {
-            console.log("Registration failed");
-            alert("Registration failed");
-        }
+            console.log("username already exists.");
+            alert("registration failed, username already exists.");
+            location.reload();
+        } 
+
     }else {
         console.log("registration failed, email already exists");
         alert("registration failed, email already exists");
-    } 
+        location.reload();
+    }
+    
 }
+
+
 
 const btnLogin: any = document.getElementById("btnLogin") as HTMLButtonElement;
 if(btnLogin) {
@@ -52,6 +72,7 @@ async function login(): Promise<any> {
         const getInfo: number = await getInfoData(done);
         window.location.href = "main.html";
 
+
         if(getInfo) {
             window.location.reload();
             window.location.href = "main.html";
@@ -59,4 +80,16 @@ async function login(): Promise<any> {
     }
 }
 
+
+const btnLogout: any = document.getElementById("logout") as HTMLButtonElement;
+if(btnLogout) {
+    btnLogout.addEventListener("click", logout);
+
+}
+function logout(): void {
+    const sessie: any = sessionStorage.clear();
+    if(sessie) {
+        window.location.replace("/index.html");
+    }
+}
 

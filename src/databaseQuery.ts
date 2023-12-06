@@ -32,6 +32,21 @@ export async function checkEmailExists(email: string): Promise<boolean> {
     }
 }
 
+export async function checkUsernameExists(username: string): Promise<boolean> {
+    try{
+        const result: { count: number}[] | any = await api.queryDatabase("SELECT COUNT(*) AS count FROM user WHERE username = ?", [username]);
+
+        if (typeof result === "string") {
+            throw new Error(`Database error: ${result}`);
+        }
+        const count: number = result[0].count;
+        return count > 0;
+    } catch (error) {
+        console.error("Error checking if username exists", error);
+        throw error;
+    }
+}
+
 export async function createAccount(email: string, username: string, firstname: string, lastname: string, password: string): Promise<number | undefined> {
     try {
         const createAccountString: string = "INSERT INTO user (email, username, firstname, lastname, password) VALUES ( ? , ? , ? , ? , ? )";
