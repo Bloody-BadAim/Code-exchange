@@ -1,7 +1,6 @@
-import "./config";
-import { createAccount, validateLogin, getInfoData, checkEmailExists, checkUsernameExists } from "./databaseQuery";
+import { createAccount, validateLogin, getInfoData, checkEmailExists, checkUsernameExists } from "../controller/databaseQuery";
 
-class UserRegistration {
+export class UserRegistration {
     private email: string;
     private username: string;
     private firstname: string;
@@ -17,13 +16,13 @@ class UserRegistration {
     }
 
     public async register(): Promise<void> {
-        const emailExists:boolean = await checkEmailExists(this.email);
+        const emailExists: boolean = await checkEmailExists(this.email);
         if (emailExists) {
             this.alertFailure("email already exists");
             return;
         }
 
-        const usernameExists:boolean = await checkUsernameExists(this.username);
+        const usernameExists: boolean = await checkUsernameExists(this.username);
         if (usernameExists) {
             this.alertFailure("username already exists");
             return;
@@ -34,7 +33,7 @@ class UserRegistration {
             return;
         }
 
-        const accountId:number | undefined = await createAccount(this.email, this.username, this.firstname, this.lastname, this.password);
+        const accountId: number | undefined = await createAccount(this.email, this.username, this.firstname, this.lastname, this.password);
         if (accountId !== undefined) {
             this.alertSuccess();
         } else {
@@ -55,7 +54,7 @@ class UserRegistration {
         alert(`Registration failed, ${message}`);
     }
 }
-class UserLogin {
+export class UserLogin {
     private email: string;
     private password: string;
 
@@ -68,13 +67,13 @@ class UserLogin {
         const userId: number | undefined = await validateLogin(this.email, this.password);
         if (userId) {
             sessionStorage.setItem("userid", String(userId));
-            const userInfo:any = await getInfoData(userId);
+            const userInfo: any = await getInfoData(userId);
             if (userInfo) {
                 sessionStorage.setItem("email", userInfo.email);
                 sessionStorage.setItem("firstname", userInfo.firstname);
                 sessionStorage.setItem("lastname", userInfo.lastname);
                 sessionStorage.setItem("username", userInfo.username);
-                
+
                 this.alertSuccess();
             } else {
                 this.alertFailure("Unable to retrieve user information");
@@ -95,37 +94,9 @@ class UserLogin {
     }
 }
 
-class UserLogout {
+export class UserLogout {
     public logout(): void {
         sessionStorage.clear();
         window.location.replace("/index.html");
     }
 }
-
-
-document.getElementById("btnRegister")?.addEventListener("click", async () => {
-    const email:string = (document.getElementById("email") as HTMLInputElement).value;
-    const username:string = (document.getElementById("username") as HTMLInputElement).value;
-    const firstname:string = (document.getElementById("firstname") as HTMLInputElement).value;
-    const lastname:string = (document.getElementById("lastname") as HTMLInputElement).value;
-    const password:string = (document.getElementById("password") as HTMLInputElement).value;
-
-    const userRegistration: UserRegistration = new UserRegistration(email, username, firstname, lastname, password);
-    await userRegistration.register();
-});
-
-document.getElementById("myFormLogin")?.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    const email: string = (document.getElementById("emailLogin") as HTMLInputElement).value;
-    const password: string = (document.getElementById("passwordLogin") as HTMLInputElement).value;
-
-    const userLogin: UserLogin = new UserLogin(email, password);
-    await userLogin.login();
-});
-
-
-document.getElementById("logout")?.addEventListener("click", () => {
-    const userLogout: UserLogout = new UserLogout();
-    userLogout.logout();
-});

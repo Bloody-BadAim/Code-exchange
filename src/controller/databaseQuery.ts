@@ -1,17 +1,18 @@
-import "./config";
+import "../config";
 import { api } from "@hboictcloud/api";
 
-interface Question {
+export interface Question {
     id: number;
     content: string;
-    user_id: number;
+    userid: number;
 }
 
-interface Answer {
+export interface Answer {
+    contentAnswer: any;
     id: number;
     content: string;
-    question_id: number;
-    user_id: number;
+    questionid: number;
+    userid: number;
 }
 
 export async function checkEmailExists(email: string): Promise<boolean> {

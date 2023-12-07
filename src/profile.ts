@@ -1,6 +1,6 @@
 import "./config";
 import { session } from "@hboictcloud/api";
-import { updateProfileFunction } from "./databaseQuery";
+import { updateProfileFunction } from "./controller/databaseQuery";
 
 function loadProfile(): void {
 

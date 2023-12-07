@@ -47,15 +47,11 @@
         </div>
     </div>
 
+
     <main>
         <div class="container">
-
-
-
-            <h1>Welkom, je bent ingelogd <span class="name">username</span>.</h1>
-
+            <h1>Welcome, you are logged in <span class="name">username</span>.</h1>
             <button class="dark-btn" id="askQuestionButton">Ask Question</button>
-
 
             <div id="askQuestionModal" class="modal">
                 <div class="modal-content">
@@ -65,31 +61,24 @@
                 </div>
             </div>
 
-
             <div class="questions-list">
                 <h2>Questions</h2>
                 <div id="questionsDisplay"></div>
             </div>
-
 
             <div id="questionDetailView" class="modal">
                 <div class="modal-content">
                     <span class="closeDetail">&times;</span>
                     <div id="questionContent"></div>
                     <div id="answersList"></div>
+                    
                 </div>
             </div>
-
-
-
-
         </div>
     </main>
 
 
-
-
-    <script src="/src/main.ts" type="module"></script>
+    <script src="/src/view/main.ts" type="module"></script>
 </body>
 
 </html>

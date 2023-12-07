@@ -596,3 +596,166 @@ a {
     cursor: pointer;
 }
 
+/* Custom Styles */
+
+/* Style for Questions List */
+#questionsDisplay {
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+#questionsDisplay div {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+#questionsDisplay div:last-child {
+  border-bottom: none;
+}
+
+#questionsDisplay div:hover {
+  background-color: #f1f1f1;
+}
+
+/* Style for Question and Answer Details */
+#questionDetailView .modal-content {
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#questionContent, #answersList {
+  padding: 15px;
+  border-top: 1px solid #ddd;
+  background-color: #fff;
+}
+
+#questionContent h3 {
+  margin-top: 0;
+}
+
+#answerSection {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f7f7f7;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+#answerInput {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Additional Styling for Readability and Aesthetics */
+body {
+  background-color: #f4f4f4;
+  color: #333;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+h1, h2 {
+  color: #333;
+}
+
+.dark-btn, .dark-btn-cancel {
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.dark-btn {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.dark-btn-cancel {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.dark-btn:hover {
+  background-color: #0056b3;
+}
+
+.dark-btn-cancel:hover {
+  background-color: #545b62;
+}
+#addCodeSnippet {
+  background-color: #4CAF50; /* Green */
+  color: white;
+  padding: 10px 15px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#addCodeSnippet:hover {
+  background-color: #45a049;
+}
+
+.answer-input {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: monospace;
+  line-height: 1.5;
+  background-color: #fff;
+}
+
+.code-preview {
+  display: none; /* Initially hidden */
+  white-space: pre-wrap;
+  background-color: #282c34; /* Dark background for code */
+  color: #abb2bf; /* Light grey color for text */
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  overflow-x: auto;
+}
+
+/* Add this CSS to your existing stylesheet */
+.code-preview {
+  display: none; /* Initially hidden */
+  white-space: pre-wrap;
+  background-color: #282c34; /* Dark background for code */
+  color: #abb2bf; /* Light grey color for text */
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  overflow-x: auto;
+}
+
+/* Style for the textarea and the code snippet */
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: 'Courier New', Courier, monospace; /* Monospace font for code */
+  background-color: #f8f8f8; /* Light grey background */
+  color: #333; /* Dark text for contrast */
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+textarea.code-snippet {
+  background-color: #272822; /* Dark background for code snippet */
+  color: #f8f2c1; /* Light color text for code */
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+}
