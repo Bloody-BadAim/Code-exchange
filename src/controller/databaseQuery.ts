@@ -161,6 +161,21 @@ export async function getAnswersByQuestionId(questionId: number): Promise<Answer
     }
 }
 
-// export async function updateProfileFunction(key: string, input: string | number): Promise<boolean> {
-    
-// }
+export async function updateProfileFunction(key: string, input: string | number): Promise<boolean> {
+    const userid: string | null = sessionStorage.getItem("userid");
+    const newUserid: number = Number(userid);
+    const updateProfile: any = `UPDATE user SET ${key} = ? WHERE userid = ?`;
+    const updateReal: any = await api.queryDatabase(updateProfile, input, newUserid);
+    if(updateReal){
+        alert("You're information is succesfully updated");
+    }
+    return updateReal;
+}
+
+export async function deleteProfile(userid: string | null): Promise<boolean> {
+    const newUserid: number = Number(userid);
+    const deleteString: string = "DELETE FROM user WHERE userid = ?";
+    const deleteStringFunction: any = await api.queryDatabase(deleteString, newUserid);
+    return deleteStringFunction;
+
+}
