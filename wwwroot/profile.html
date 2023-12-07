@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/profile.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <title>Document</title>
 </head>
 <body>
@@ -12,6 +14,11 @@
             <div class="wrapper">
                 <div class="profile">
                     <div class="profileBox">
+                        <div class="user-img">
+                            <img src="/assets/img" id="photo"/>
+                            <input type="file" id="file"/>
+                            <label for="file" id="uploadbtn"><i class='bx bx-camera'></i></label>
+                        </div>
                         <div class="inputField">
                             <div>
                                 <h2>firstname</h2>
@@ -32,6 +39,7 @@
                         </div>
                         <div class="btn">
                             <button type="submit" id="btnUpdateProfile">Update</button>
+                            <button type="submit" id="deleteBtn">Delete Profile</button>
                         </div>
                     </div>
                 </div>

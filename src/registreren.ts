@@ -69,6 +69,7 @@ class UserLogin {
         if (userId) {
             sessionStorage.setItem("userid", String(userId));
             const userInfo:any = await getInfoData(userId);
+            console.log(userInfo);
             if (userInfo) {
                 sessionStorage.setItem("email", userInfo.email);
                 sessionStorage.setItem("firstname", userInfo.firstname);

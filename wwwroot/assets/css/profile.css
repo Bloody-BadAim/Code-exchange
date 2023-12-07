@@ -1,6 +1,6 @@
 body {
     font-family: "Poppins", sans-serif;
-    background-color: #9c88ff;
+    background-color: #fff;
 }
 
 
@@ -16,18 +16,94 @@ body {
     
 }
 .profileBox{
-    background-color: white;
-    padding: 3% 15%;
+    background-color: #a392fac4;
+    padding: 4% 12%;
+    margin-right: 20px;
+    border-radius: 30px;
+   
+    
 }
-
 input {
     width: 110%;
     border-radius: 8px;
     padding: 5px 15px;
+    outline: none;
+    border: none;
     border-color: grey;
 }
 
 h2 {
     margin-bottom: 0px;
     font-size: 24px;
+}
+
+#btnUpdateProfile{
+    outline: none;
+    border: none;
+    background-color: #70F4FD;
+    cursor: pointer;
+    float: left;
+    padding: 6px 24px;
+    border-radius: 100px;
+    margin-top: 20px;
+}
+
+#deleteBtn {
+    outline: none;
+    border: none;
+    background-color: red;
+    float: right;
+    color: #fff;
+    cursor: pointer;
+    padding: 6px 24px;
+    border-radius: 100px;
+    margin-top: 20px;
+}
+
+
+img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    
+}
+
+.user-image {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+}
+
+#photo{
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+}
+#file {
+    display: none;
+}
+
+#uploadbtn {
+    position: absolute;
+    padding: 3px 3px;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    color: #fff;
+    transform: translateY(-15%);
+    transform: translateX(-60%);
+    margin-top: 100px;
+    background-color: rgb(173, 172, 172, 0.801);
+    box-shadow: 2px 4px rgb(0, 0, 0, 0.644);
+}
+
+i {
+    margin: 20%;
+    margin: 20%;
+
 }
