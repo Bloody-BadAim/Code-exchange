@@ -1,4 +1,4 @@
- DE FEEDBACK AAN YUSUF VAN EXPERT REVIEW
+ DE FEEDBACK AAN YUSUF VAN EXPERT REVIEW PHILLIP
 
 
 (DIT IS MIJN UML VAN YUSUF)
@@ -9,21 +9,22 @@
 FEEDBACK
 
 
-We moeten 1 user/story per persoon hebben in doing in plaats van meerdere per persoon, want we kunnen maar 1 ding tegelijk doen en daarmee zijn we ook efficiënter bezig.
+1. We moeten 1 user/story per persoon hebben in doing in plaats van meerdere per persoon, want we kunnen maar 1 ding tegelijk doen en daarmee zijn we ook efficiënter bezig.
 
-We kregen ook de feedback dat we de user-stories moeten koppelen aan een persoon, dus Matin of Yusuf. Dat zorgt ervoor dat het overzichtelijk is van wie wat heeft gedaan en wie wat doet.
+2. We kregen feedback dat we de user-stories moeten koppelen aan een persoon, dus Matin of Yusuf. Dat zorgt ervoor dat het overzichtelijk wordt van wie wat heeft gedaan en wie wat doet. 
 
-We moeten ook in gitlab de user stories in milestones zetten.
+3. We moeten ook in gitlab de user stories in milestones zetten.
 
-Als we user stories af hebben en geverifyed en alles gechecked dan kunnen we het afsluiten. Dan zijn ze ook niet meer te zien, maar we kunnen het altijd nog unclosen als we een foutje hadden gemaakt.
+4. Zodra we user stories hebben afgemaakt, gevalideerd en alles hebben gecontroleerd, kunnen we ze sluiten. Ze zijn dan niet meer zichtbaar, maar we hebben altijd de mogelijkheid om ze weer te openen als er een fout is gemaakt.
 
-We moeten ook gebruikmaken van een burndown chart, want daarmee kunnen we kijken en meten hoe we de afgelopen sprint hebben gepresteerd. Om erachter te komen of we alles op tijd hebben gemaakt of juist tijd te kort kwamen.
+5. We zouden ook een burndown chart moeten gebruiken, omdat we hiermee de prestaties van de laatste sprint kunnen analyseren en meten. Zo kunnen wij beoordelen of we alles op tijd hebben afgerond of dat er sprake is van tijdgebrek. 
 
-We moeten niet zo maar beginnen met een idee, dat moet stapsgewijs volgens steps and iterations. Dat zijn “Observe, empathize, define, ideate, prototype, test en execute”.
+6. We moeten niet zo maar beginnen met een idee, het proces moet stapsgewijs verlopen volgens steps and iterations. Deze stappen zijn “Observe, empathize, define, ideate, prototype, test en execute”.
 
-We moeten ook meer UML’s maken ( class diagrams) 
+7. We moeten ook meer UML’s maken, dit zal helpen met het inzicht van ons code. 
 
-Hij zei dat we konden starten met de 3 hoofd classes, dat zijn “User, Questions, Answers”. 
+8. We kregen ook als feedback om te beginnen met de 3 hoofd classes; "Questions, Answers, Users". En door middel van deze drie te beginnen en denken wat we er allemaal in die classes moeten hebben.
 
-We kregen ook de feedback om aan onze naamgeving te letten, want we gebruiken onzin volle namen.
-We hebben ook als feedback gekregen, om nu documentatie toetepassen, want we hebben tot nu toe niks gedocumenteerd. En dat moet anders, hij zei daarbij ook dat we dat nu moesten doen inplaats van alles op het einde, om een beter begrip van de betekenis van de code te behouden.
+9. We kregen ook de feedback om aan onze naamgeving te letten, want we gebruiken soms onzin volle namen die nergens op slaan. Dus als we de naamgeving verbeteren dan zorgt dat voor een overzichtelijkere en beter leesbare code.
+
+10. We hebben ook feedback gekregen om de documentatie nu te implementeren, aangezien we tot nu toe nog niets hebben gedocumenteerd. Dit moet veranderen, waarbij werd vertelt dat we dit nu moeten doen en niet alles op het einde. Dit is omdat je op het einde van de project al gauw vergeet wat alle functies en code stukjes betekenen, daarom is het handig en beter om dat nu gelijk te implementeren.
