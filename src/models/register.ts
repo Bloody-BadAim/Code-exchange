@@ -1,102 +1,123 @@
-import { createAccount, validateLogin, getInfoData, checkEmailExists, checkUsernameExists } from "../controller/databaseQuery";
+import { 
+    checkEmailExists, 
+    checkUsernameExists, 
+    createAccount, 
+    deleteProfile, 
+    getInfoData, 
+    updateProfileFunction, 
+    validateLogin 
+} from "../controller/databaseQuery";
 
-export class UserRegistration {
-    private email: string;
-    private username: string;
-    private firstname: string;
-    private lastname: string;
-    private password: string;
+export class UserProfileManager {
 
-    public constructor(email: string, username: string, firstname: string, lastname: string, password: string) {
-        this.email = email;
-        this.username = username;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.password = password;
-    }
-
-    public async register(): Promise<void> {
-        const emailExists: boolean = await checkEmailExists(this.email);
-        if (emailExists) {
-            this.alertFailure("email already exists");
-            return;
-        }
-
-        const usernameExists: boolean = await checkUsernameExists(this.username);
-        if (usernameExists) {
-            this.alertFailure("username already exists");
-            return;
-        }
-
-        if (!this.validateInputs()) {
-            this.alertFailure("All fields are required.");
-            return;
-        }
-
-        const accountId: number | undefined = await createAccount(this.email, this.username, this.firstname, this.lastname, this.password);
-        if (accountId !== undefined) {
-            this.alertSuccess();
-        } else {
-            this.alertFailure("Registration failed");
-        }
-    }
-
-    private alertSuccess(): void {
-        alert("Successful, registration complete!");
-        window.location.replace("./main.html");
-    }
-    private validateInputs(): boolean {
-        return this.email.trim() !== "" && this.username.trim() !== "" && this.firstname.trim() !== "" && this.lastname.trim() !== "" && this.password.trim() !== "";
-    }
-
-    private alertFailure(message: string): void {
-        console.log(message);
-        alert(`Registration failed, ${message}`);
-    }
-}
-export class UserLogin {
-    private email: string;
-    private password: string;
-
-    public constructor(email: string, password: string) {
-        this.email = email;
-        this.password = password;
-    }
-
-    public async login(): Promise<void> {
-        const userId: number | undefined = await validateLogin(this.email, this.password);
-        if (userId) {
-            sessionStorage.setItem("userid", String(userId));
-            const userInfo: any = await getInfoData(userId);
-            if (userInfo) {
-                sessionStorage.setItem("email", userInfo.email);
-                sessionStorage.setItem("firstname", userInfo.firstname);
-                sessionStorage.setItem("lastname", userInfo.lastname);
-                sessionStorage.setItem("username", userInfo.username);
-
-                this.alertSuccess();
-            } else {
-                this.alertFailure("Unable to retrieve user information");
+    
+    public async register(email: string, username: string, firstname: string, lastname: string, password: string): Promise<void> {
+        try {
+            const emailExists: boolean = await checkEmailExists(email);
+            if (emailExists) {
+                throw new Error("Email already exists");
             }
-        } else {
-            this.alertFailure("Invalid email or password");
+
+            const usernameExists: boolean = await checkUsernameExists(username);
+            if (usernameExists) {
+                throw new Error("Username already exists");
+            }
+
+            const userId: number | undefined = await createAccount(email, username, firstname, lastname, password);
+            if (userId === undefined) {
+                throw new Error("Registration failed");
+            }
+
+           
+            sessionStorage.setItem("userid", String(userId));
+            sessionStorage.setItem("email", email);
+            sessionStorage.setItem("firstname", firstname);
+            sessionStorage.setItem("lastname", lastname);
+            sessionStorage.setItem("username", username);
+
+            alert("Registration successful!");
+            window.location.href = "./main.html";
+        } catch (error) {
+            alert(`Registration failed: ${error}`);
         }
     }
 
-    private alertSuccess(): void {
-        alert("Login successfull!");
-        window.location.href = "main.html";
+   
+    public async login(email: string, password: string): Promise<void> {
+        try {
+            const userId: number | undefined = await validateLogin(email, password);
+            if (!userId) {
+                throw new Error("Invalid email or password");
+            }
+
+            const userInfo: any = await getInfoData(userId);
+            if (!userInfo) {
+                throw new Error("Unable to retrieve user information");
+            }
+
+            
+            sessionStorage.setItem("userid", String(userId));
+            sessionStorage.setItem("email", userInfo.email);
+            sessionStorage.setItem("firstname", userInfo.firstname);
+            sessionStorage.setItem("lastname", userInfo.lastname);
+            sessionStorage.setItem("username", userInfo.username);
+
+            alert("Login successful!");
+            window.location.href = "main.html"; 
+        } catch (error) {
+            alert(`Login failed: ${error}`);
+        }
     }
 
-    private alertFailure(message: string): void {
-        console.log(message);
-        alert(`Login failed, ${message}`);
-    }
-}
 
-export class UserLogout {
     public logout(): void {
         sessionStorage.clear();
-        window.location.replace("/index.html");
+        alert("You have been logged out.");
+        window.location.replace("/index.html"); 
+    }
+
+  
+    public async updateProfile(firstname: string, lastname: string, username: string, email: string): Promise<void> {
+        try {
+            const userId: string = sessionStorage.getItem("userid")!;
+            if (!userId) {
+                throw new Error("User not logged in");
+            }
+
+            const updateFirstname: boolean = await updateProfileFunction("firstname", firstname);
+            const updateLastname: boolean = await updateProfileFunction("lastname", lastname);
+            const updateUsername: boolean = await updateProfileFunction("username", username);
+            const updateEmail: boolean = await updateProfileFunction("email", email);
+
+            if (updateFirstname && updateLastname && updateUsername && updateEmail) {
+              
+                sessionStorage.setItem("firstname", firstname);
+                sessionStorage.setItem("lastname", lastname);
+                sessionStorage.setItem("username", username);
+                sessionStorage.setItem("email", email);
+
+                alert("Profile successfully updated");
+            } else {
+                throw new Error("Profile update failed");
+            }
+        } catch (error) {
+            alert(`Update failed: ${error}`);
+        }
+    }
+
+   
+    public async deleteProfile(): Promise<void> {
+        try {
+            const userId: string = sessionStorage.getItem("userid")!;
+            if (!userId) {
+                throw new Error("User not logged in");
+            }
+
+            await deleteProfile(userId);
+            this.logout(); 
+            alert("Your account has been deleted.");
+        } catch (error) {
+            alert(`Deletion failed: ${error}`);
+        }
     }
 }

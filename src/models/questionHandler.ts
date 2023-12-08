@@ -7,13 +7,11 @@ export class QuestionHandler {
     private questionInput: HTMLTextAreaElement;
 
     public constructor() {
-        // Ensure that these elements exist in your HTML file with the exact IDs.
         this.questionsDisplay = document.getElementById("questionsDisplay") as HTMLElement;
         this.askQuestionModal = document.getElementById("askQuestionModal") as HTMLElement;
         this.questionInput = document.getElementById("questionInput") as HTMLTextAreaElement;
 
         this.setupQuestionModal();
-        // Removed 'this.loadQuestions().catch(console.error);' since it should be called after the DOM is loaded.
     }
 
     private setupQuestionModal(): void {
@@ -58,23 +56,18 @@ export class QuestionHandler {
         const questionDetailView: HTMLElement = document.getElementById("questionDetailView") as HTMLElement;
         const questionContentDiv : HTMLElement= document.getElementById("questionContent") as HTMLElement;
         const answersListDiv: HTMLElement = document.getElementById("answersList") as HTMLElement;
-
         questionContentDiv.innerHTML = "";
         answersListDiv.innerHTML = "";
-
         const question:Question | undefined  = await getQuestionById(questionId);
         const answers: Answer[] = await getAnswersByQuestionId(questionId);
-
         const userId: string = sessionStorage.getItem("userid")!;
         if (!userId) {
             console.error("User ID not found in session storage");
             return;
         }
-
         if (question) {
             questionContentDiv.innerHTML = `<h3>${question.content}</h3>`;
         }
-
         this.createAnswerSection(questionDetailView, questionId);
 
         if (answers && answers.length > 0) {
@@ -86,10 +79,8 @@ export class QuestionHandler {
         } else {
             answersListDiv.innerHTML = "<p>No answers yet.</p>";
         }
-
         this.setupModalCloseButton("askQuestionModal", ".close");
         this.setupModalCloseButton("questionDetailView", ".closeDetail");
-
         questionDetailView.style.display = "block";
     }
 
@@ -98,7 +89,6 @@ export class QuestionHandler {
         if (existingAnswerSection) {
             existingAnswerSection.remove();
         }
-
         const answerSection: HTMLDivElement = document.createElement("div");
         answerSection.id = "answerSection";
         answerSection.innerHTML = `

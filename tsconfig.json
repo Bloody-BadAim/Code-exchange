@@ -16,5 +16,5 @@
         "noImplicitReturns": true,
         "skipLibCheck": true
     },
-    "include": ["src", "vite.config.ts", "global.d.ts"]
+    "include": ["src", "vite.config.ts", "global.d.ts", "Opdracht/opdracht.ts"]
 }

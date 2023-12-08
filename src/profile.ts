@@ -1,6 +1,7 @@
 import "./config";
-import { deleteProfile, getInfoData, updateProfileFunction } from "./controller/databaseQuery";
+import { UserProfileManager } from "./models/register";
 
+const userManager: UserProfileManager = new UserProfileManager(); // Create an instance of UserProfileManager
 
 function loadProfile(): void {
 
@@ -33,91 +34,41 @@ const btnUpdate: HTMLButtonElement | null = document.getElementById("btnUpdatePr
 btnUpdate.addEventListener("click", updateProfile);
 
 async function updateProfile(): Promise<void> {
+    const inputFirstname: string = (document.getElementById("inputFirstname") as HTMLInputElement).value;
+    const inputLastname: string = (document.getElementById("inputLastname") as HTMLInputElement).value;
+    const inputUsername: string = (document.getElementById("inputUsername") as HTMLInputElement).value;
+    const inputEmail: string = (document.getElementById("inputEmail") as HTMLInputElement).value;
 
-    const firstname1: string = sessionStorage.getItem("firstname")!;
-    const lastname2: string = sessionStorage.getItem("lastname")!;
-    const username3: string = sessionStorage.getItem("username")!;
-    const email4: string = sessionStorage.getItem("email")!;
-    const userid: string = sessionStorage.getItem("userid")!;
-
-
-    const inputFirstname: string = (<HTMLInputElement>document.getElementById("inputFirstname")).value;
-    const inputLastname: string | null = (<HTMLInputElement>document.getElementById("inputLastname")).value;
-    const inputUsername: string | null = (<HTMLInputElement>document.getElementById("inputUsername")).value ;
-    const inputEmail: string | null = (<HTMLInputElement>document.getElementById("inputEmail")).value;
-    const newUserid: number = Number(userid);
-
-    if (inputFirstname !== firstname1){
-        const updateFirstname: boolean = await updateProfileFunction("firstname",inputFirstname);
-        if(updateFirstname){
-            const updateStorage: any = await getInfoData(newUserid);
-            console.log(updateStorage);
-            if (updateStorage) {
-                sessionStorage.setItem("email", updateStorage.email);
-                sessionStorage.setItem("firstname", updateStorage.firstname);
-                sessionStorage.setItem("lastname", updateStorage.lastname);
-                sessionStorage.setItem("username", updateStorage.username);
-                window.location.reload;
-                
-            } else {
-                console.log("error");
-            }
-        }
-
-    }else if (inputLastname !== lastname2){
-        const updateLastname: boolean = await updateProfileFunction("lastname",inputLastname);
-        if(updateLastname){
-            const updateStorage: any = await getInfoData(newUserid);
-        }
-
-    }else if (inputUsername !== username3){
-        const updateUsername: boolean = await updateProfileFunction("username",inputUsername);
-        if(updateUsername){
-            const updateStorage: any = await getInfoData(newUserid);
-        }
-
-    }else if (inputEmail !== email4){
-        const updateEmail: boolean = await updateProfileFunction("email",inputEmail);
-        if(updateEmail){
-            const updateStorage: any = await getInfoData(newUserid);
-        }
-
-    }else{
-        console.log("error");
-        alert("error. A mistake happend when updating");
+    try {
+        await userManager.updateProfile(inputFirstname, inputLastname, inputUsername, inputEmail);
+        window.location.reload();
+    } catch (error) {
+        console.error(error);
+        alert("An error occurred while updating the profile.");
     }
-    
 }
 
+// const image: any = document.getElementById("photo");
+// const input: any = document.getElementById("file");
 
-const image: any = document.getElementById("photo");
-const input: any = document.getElementById("file");
-
-input.addEventListener("change", () => {
-    const imagesrc:string = URL.createObjectURL(input.files[0]);
-});
+// input.addEventListener("change", () => {
+//     const imagesrc:string = URL.createObjectURL(input.files[0]);
+// });
 // console.log(imagesrc);
 
 // const imageElement: HTMLImageElement = document.getElementById("photo") as HTMLImageElement;
 // const imagePath: string = imageElement.src;
 // console.log("Image Path:", imagePath);
-
-
-
-
 const deleteBtn: HTMLButtonElement = document.getElementById("deleteBtn") as HTMLButtonElement;
 deleteBtn.addEventListener("click", deleteProfileFunction);
 
-
-async function deleteProfileFunction(): Promise<undefined> {
-    const userid: string | null = sessionStorage.getItem("userid");
-    const deleted: boolean = await deleteProfile(userid);
-    
-    if(deleted){
-        sessionStorage.clear();
-        alert("You're account is succesfully deleted.");
+async function deleteProfileFunction(): Promise<void> {
+    try {
+        await userManager.deleteProfile();
+        alert("Your account is successfully deleted.");
         window.location.replace("./index.html");
+    } catch (error) {
+        console.error(error);
+        alert("An error occurred while deleting the profile.");
     }
-    
-
 }

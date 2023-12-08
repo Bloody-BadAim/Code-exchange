@@ -166,9 +166,6 @@ export async function updateProfileFunction(key: string, input: string | number)
     const newUserid: number = Number(userid);
     const updateProfile: any = `UPDATE user SET ${key} = ? WHERE userid = ?`;
     const updateReal: any = await api.queryDatabase(updateProfile, input, newUserid);
-    if(updateReal){
-        alert("You're information is succesfully updated");
-    }
     return updateReal;
 }
 

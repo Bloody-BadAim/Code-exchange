@@ -1,16 +1,22 @@
 import "../config";
-import { UserLogin, UserLogout, UserRegistration } from "../models/register";
+import { UserProfileManager } from "../models/register";
 
+
+const userManager: UserProfileManager = new UserProfileManager();
 
 document.getElementById("btnRegister")?.addEventListener("click", async () => {
-    const email:string = (document.getElementById("email") as HTMLInputElement).value;
-    const username:string = (document.getElementById("username") as HTMLInputElement).value;
-    const firstname:string = (document.getElementById("firstname") as HTMLInputElement).value;
-    const lastname:string = (document.getElementById("lastname") as HTMLInputElement).value;
-    const password:string = (document.getElementById("password") as HTMLInputElement).value;
+    const email: string = (document.getElementById("email") as HTMLInputElement).value;
+    const username: string = (document.getElementById("username") as HTMLInputElement).value;
+    const firstname: string = (document.getElementById("firstname") as HTMLInputElement).value;
+    const lastname: string = (document.getElementById("lastname") as HTMLInputElement).value;
+    const password: string = (document.getElementById("password") as HTMLInputElement).value;
 
-    const userRegistration: UserRegistration = new UserRegistration(email, username, firstname, lastname, password);
-    await userRegistration.register();
+    try {
+        await userManager.register(email, username, firstname, lastname, password);
+        // Handle successful registration 
+    } catch (error) {
+        // Handle registration errors 
+    }
 });
 
 document.getElementById("myFormLogin")?.addEventListener("submit", async (event) => {
@@ -18,13 +24,17 @@ document.getElementById("myFormLogin")?.addEventListener("submit", async (event)
 
     const email: string = (document.getElementById("emailLogin") as HTMLInputElement).value;
     const password: string = (document.getElementById("passwordLogin") as HTMLInputElement).value;
-
-    const userLogin: UserLogin = new UserLogin(email, password);
-    await userLogin.login();
+   
+    try {
+        await userManager.login(email, password);
+        
+    } catch (error) {
+        console.error("Login error:", error);
+    
+    }
 });
 
-
 document.getElementById("logout")?.addEventListener("click", () => {
-    const userLogout: UserLogout = new UserLogout();
-    userLogout.logout();
+    userManager.logout();
+    // Handle post-logout 
 });
