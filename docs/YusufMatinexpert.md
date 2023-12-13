@@ -1,8 +1,8 @@
  DE FEEDBACK AAN YUSUF EN MATIN VAN EXPERT REVIEW PHILLIP
 
 
-(DIT IS MIJN UML VAN YUSUF)
- https://gitlab.fdmci.hva.nl/propedeuse-hbo-ict/onderwijs/2023-2024/out-b-se-bim/blok-2/mooruukaanuu54/-/blob/main/docs/umlexpert.png
+(DIT IS MIJN UML VAN Matin)
+ https://gitlab.fdmci.hva.nl/propedeuse-hbo-ict/onderwijs/2023-2024/out-b-se-bim/blok-2/mooruukaanuu54/-/blob/main/docs/Screenshot_2023-12-12_134013.png
 
 
 
@@ -10,7 +10,7 @@
 FEEDBACK
 
 
-1. We moeten 1 user/story per persoon hebben in doing in plaats van meerdere per persoon, want we kunnen maar 1 ding tegelijk doen en daarmee zijn we ook efficiënter bezig.
+1. We moeten 1 userstory per persoon hebben in doing in plaats van meerdere per persoon, want we kunnen maar 1 ding tegelijk doen en daarmee zijn we ook efficiënter bezig.
 
 2. We kregen feedback dat we de user-stories moeten koppelen aan een persoon, dus Matin of Yusuf. Dat zorgt ervoor dat het overzichtelijk wordt van wie wat heeft gedaan en wie wat doet. 
 
@@ -29,3 +29,5 @@ FEEDBACK
 9. We kregen ook de feedback om aan onze naamgeving te letten, want we gebruiken soms onzin volle namen die nergens op slaan. Dus als we de naamgeving verbeteren dan zorgt dat voor een overzichtelijkere en beter leesbare code.
 
 10. We hebben ook feedback gekregen om de documentatie nu te implementeren, aangezien we tot nu toe nog niets hebben gedocumenteerd. Dit moet veranderen, waarbij werd vertelt dat we dit nu moeten doen en niet alles op het einde. Dit is omdat je op het einde van de project al gauw vergeet wat alle functies en code stukjes betekenen, daarom is het handig en beter om dat nu gelijk te implementeren.
+
+11. we moeten kijken hoe kunnen het best onze code structuur mvc en oop maken en als tip niet de database quarys in de controller folder zetten en ook classes van de quary functies maken.
