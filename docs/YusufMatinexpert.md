@@ -8,6 +8,11 @@
 Prototype:
 https://www.figma.com/file/yFX2kFdhWTxz8p7FfqoMwG/Code-Exchange?type=design&node-id=0-1&mode=design&t=VQQtSqKAXB7gXWFd-0
 
+Database (tot nu toe):
+
+https://gitlab.fdmci.hva.nl/propedeuse-hbo-ict/onderwijs/2023-2024/out-b-se-bim/blok-2/mooruukaanuu54/-/blob/main/docs/Screenshot_2023-12-13_100400.png
+
+
 
 
 FEEDBACK
