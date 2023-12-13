@@ -1,8 +1,7 @@
 import "../config";
-import { UserProfileManager } from "../models/register";
+import { UserController } from "../controller/userController";
 
-
-const userManager: UserProfileManager = new UserProfileManager();
+const userController : UserController = new UserController();
 
 document.getElementById("btnRegister")?.addEventListener("click", async () => {
     const email: string = (document.getElementById("email") as HTMLInputElement).value;
@@ -10,31 +9,27 @@ document.getElementById("btnRegister")?.addEventListener("click", async () => {
     const firstname: string = (document.getElementById("firstname") as HTMLInputElement).value;
     const lastname: string = (document.getElementById("lastname") as HTMLInputElement).value;
     const password: string = (document.getElementById("password") as HTMLInputElement).value;
-
     try {
-        await userManager.register(email, username, firstname, lastname, password);
-        // Handle successful registration 
+        await userController.register(email, username, firstname, lastname, password);
+      
     } catch (error) {
-        // Handle registration errors 
+        
     }
 });
-
 document.getElementById("myFormLogin")?.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const email: string = (document.getElementById("emailLogin") as HTMLInputElement).value;
     const password: string = (document.getElementById("passwordLogin") as HTMLInputElement).value;
-   
+
     try {
-        await userManager.login(email, password);
+        await userController.login(email, password);
         
     } catch (error) {
         console.error("Login error:", error);
     
     }
 });
-
 document.getElementById("logout")?.addEventListener("click", () => {
-    userManager.logout();
-    // Handle post-logout 
+    userController.logout();
 });
