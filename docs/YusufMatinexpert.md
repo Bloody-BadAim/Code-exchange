@@ -1,8 +1,9 @@
- DE FEEDBACK AAN YUSUF VAN EXPERT REVIEW PHILLIP
+ DE FEEDBACK AAN YUSUF EN MATIN VAN EXPERT REVIEW PHILLIP
 
 
 (DIT IS MIJN UML VAN YUSUF)
  https://gitlab.fdmci.hva.nl/propedeuse-hbo-ict/onderwijs/2023-2024/out-b-se-bim/blok-2/mooruukaanuu54/-/blob/main/docs/umlexpert.png
+
 
 
 
