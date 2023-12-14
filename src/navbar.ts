@@ -1,14 +1,13 @@
 import "./config";
+// import { UserController } from "./controller/userController";
 // import { api } from "@hboictcloud/api";
-import { UserProfileManager } from "./models/register";
+
+
 
 async function insertNavbarIntoHeader(): Promise<void> {
     try {
-     
         const response: Response = await fetch("navbar.html");
         const navbarHtml: string = await response.text();
-
-       
         const headerElement: HTMLElement | null = document.getElementById("header");
         if (headerElement) {
             headerElement.innerHTML = navbarHtml;
@@ -22,8 +21,24 @@ async function insertNavbarIntoHeader(): Promise<void> {
 insertNavbarIntoHeader();
 
 
-const userManager: UserProfileManager = new UserProfileManager();
-document.getElementById("logout")?.addEventListener("click", () => {
-    userManager.logout();
-    // Handle post-logout 
-});
+// const btnnn: any = document.getElementById("click")
+
+const btnLogout: HTMLElement = document.getElementById("logout")!;
+if (btnLogout) {
+    btnLogout.addEventListener("click", logout);
+}
+function logout(): void {
+    sessionStorage.clear();
+    window.location.href = "index.html";
+}
+
+
+// const userController: UserController = new UserController();
+// const btn: any = document.getElementById("logout");
+// if(btn){
+//     btn.addEventListener("click", function() {
+//         console.log("je moeder");
+//     });
+// }
+
+
