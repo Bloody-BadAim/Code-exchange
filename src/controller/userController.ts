@@ -134,13 +134,13 @@ export class UserController {
     }
 
 
-    public checkStorageForNavbar(): Promise<boolean | undefined> {
-        try{
-            const info: any = this.UserController.checkNavbar();
-            return info;
-        } catch (error){
-            throw error;
-        }
-    }
+    // public checkStorageForNavbar(): Promise<boolean | undefined> {
+    //     try{
+    //         const info: any = this.UserController.checkNavbar();
+    //         return info;
+    //     } catch (error){
+    //         throw error;
+    //     }
+    // }
 
 }
