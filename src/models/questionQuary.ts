@@ -1,17 +1,18 @@
 import "../config";
 import { api } from "@hboictcloud/api";
-export class QuestionQueries {
+import { FormBlock } from "./formBlock";
+export class QuestionQueries extends FormBlock {
 
     public _id: number;
     public _content: string;
-    public _userid: number;
     public _createdAt:Date;
 
 
     public constructor(id: number, content: string, userid: number,createdAt:Date) {
+        super(userid);
         this._id = id;
         this._content = content;
-        this._userid = userid;
+        // this._userid = userid;
         this._createdAt = createdAt;
     }
 
