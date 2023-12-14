@@ -1,6 +1,6 @@
 import "./config";
 // import { api } from "@hboictcloud/api";
-import { UserProfileManager } from "./models/register";
+import { UserController } from "./controller/userController";
 
 async function insertNavbarIntoHeader(): Promise<void> {
     try {
@@ -22,7 +22,7 @@ async function insertNavbarIntoHeader(): Promise<void> {
 insertNavbarIntoHeader();
 
 
-const userManager: UserProfileManager = new UserProfileManager();
+const userManager: UserController = new UserController();
 document.getElementById("logout")?.addEventListener("click", () => {
     userManager.logout();
     // Handle post-logout 

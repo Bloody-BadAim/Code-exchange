@@ -1,18 +1,18 @@
 import "../config";
 import { api } from "@hboictcloud/api";
+import { BaseQueries } from "./baseqaQuery";
 
-export class AnswerQuaries {
+export class AnswerQuaries extends BaseQueries{
 
     public _answerid: number;
     public _questionid: number;
-    public _userid: number;
     public _contentAnswer: string;
     public _createdatAnswer: Date;
 
     public constructor(answerid: number,questionid: number,userid: number,contentAnswer: string,createdatAnswer: Date) {
+        super(userid);
         this._answerid = answerid;
         this._questionid = questionid;
-        this._userid = userid;
         this._contentAnswer = contentAnswer;
         this._createdatAnswer = createdatAnswer;
     }

@@ -1,16 +1,15 @@
 import "../config";
 import { api } from "@hboictcloud/api";
+import { BaseQueries } from "./baseqaQuery";
 
-export class UserQueries {
-    
-    public _id: number;
+export class UserQueries extends BaseQueries {
     public _username: string;
     public _email: string;
     public _firstname: string;
     public _lastname: string;
 
-    public constructor(id: number, username: string, email: string, firstname: string, lastname: string) {
-        this._id = id;
+    public constructor(userid: number, username: string, email: string, firstname: string, lastname: string) {
+        super(userid);
         this._username = username;
         this._email = email;
         this._firstname = firstname;
