@@ -3,18 +3,22 @@ import { UserController } from "../controller/userController";
 const userController : UserController = new UserController();
 
 function loadProfile(): void {
-    const inputFirstname: HTMLInputElement = document.getElementById("inputFirstname") as HTMLInputElement;
-    const inputLastname: HTMLInputElement = document.getElementById("inputLastname") as HTMLInputElement;
-    const inputUsername: HTMLInputElement = document.getElementById("inputUsername") as HTMLInputElement;
-    const inputEmail: HTMLInputElement = document.getElementById("inputEmail") as HTMLInputElement;
+    const inputFirstname: HTMLElement = document.getElementById("inputFirstname") as HTMLElement;
+    const inputLastname: HTMLElement = document.getElementById("inputLastname") as HTMLElement;
+    const inputUsername: HTMLElement = document.getElementById("inputUsername") as HTMLElement;
+    const inputEmail: HTMLElement = document.getElementById("inputEmail") as HTMLElement;
 
     // Retrieve user data from session storage
-    inputFirstname.value = sessionStorage.getItem("firstname") || "";
-    inputLastname.value = sessionStorage.getItem("lastname") || "";
-    inputUsername.value = sessionStorage.getItem("username") || "";
-    inputEmail.value = sessionStorage.getItem("email") || "";
-}
+    const firstname: string | null = sessionStorage.getItem("firstname");
+    const lastname: string | null = sessionStorage.getItem("lastname");
+    const username: any  = sessionStorage.getItem("username");
+    const email: any = sessionStorage.getItem("email");
 
+    inputFirstname.textContent = `Firstname: ${firstname}`;
+    inputLastname.textContent = `Lastname: ${lastname}`;
+    inputUsername.textContent = `Username: ${username}`;
+    inputEmail.textContent = `Email: ${email}`;
+}
 loadProfile();
 
 
@@ -46,3 +50,12 @@ document.getElementById("deleteBtn")?.addEventListener("click", async () => {
         alert("An error occurred while deleting the profile.");
     }
 });
+
+const btnLogout: HTMLElement = document.getElementById("logout")!;
+if (btnLogout) {
+    btnLogout.addEventListener("click", logout);
+}
+function logout(): void {
+    sessionStorage.clear();
+    window.location.href = "index.html";
+}

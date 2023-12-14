@@ -1,67 +1,72 @@
 body {
     font-family: "Poppins", sans-serif;
-    background-color: #fff;
+    background-color: #d8f3dc;
 }
 
-
-
-.profile{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: 1;
-    flex-grow: 1;
-    flex-direction: row;
-    height: 100vh;
-    
-}
-.profileBox{
-    background-color: #fff;
-    padding: 4% 12%;
-    border: 5px;
-    border-style: solid;
-    border-color: #70F4FD;
-    margin-right: 20px;
-    border-radius: 24px;
-   
-    
-}
-input {
-    width: 110%;
-    border-radius: 8px;
-    padding: 5px 15px;
-    outline: none;
-    border: none;
-    border-color: grey;
-}
-
-h2 {
-    margin-bottom: 0px;
-    font-size: 24px;
-}
-
-#btnUpdateProfile{
-    outline: none;
-    border: none;
-    background-color: #70F4FD;
-    cursor: pointer;
-    float: left;
+.dark-btn {
+    /* margin: 0 auto; */
     padding: 6px 24px;
     border-radius: 100px;
-    margin-top: 20px;
-}
-
-#deleteBtn {
-    outline: none;
-    border: none;
-    background-color: red;
+    background-color:#3DAC78;
+    color: rgb(0, 0, 0);
+    min-width: 128px;
+    font-weight: bold;
+    height: 50px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    margin-top: 50px;
     float: right;
-    color: #fff;
-    cursor: pointer;
-    padding: 6px 24px;
-    border-radius: 100px;
-    margin-top: 20px;
+    outline: none;
+    border-style: solid;
+    margin-left: 12px;
+
+
 }
+
+.container {
+    max-width: 1280px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
+    background-color: #95d5b2;
+    margin: 0 auto;
+    padding: 10px;
+    margin-top: 100px;
+}
+
+@media only screen and (min-width: 601px) {
+    .container {
+        width: 85%;
+    }
+}
+
+@media only screen and (min-width: 993px) {
+    .container {
+        width: 70%;
+    }
+}
+
+#deleteBtn{
+    background-color: rgb(139, 1, 1);
+    color: rgb(203, 203, 203);
+}
+#deleteBtn:hover {
+    background-color: rgb(87, 2, 2);
+}
+
+#btnUpdateProfile:hover {
+    background-color: #74C69D;
+}
+#logout {
+    cursor: pointer;
+}
+
+h3 {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+
+
 
 
 img {
@@ -76,8 +81,8 @@ img {
     width: 130px;
     height: 130px;
     border-radius: 50%;
-    position: fixed;
-    justify-content: center;
+    
+    justify-content: right;
     align-items: center;
 }
 
@@ -111,6 +116,3 @@ i {
 
 }
 
-#logout {
-    cursor: pointer;
-}

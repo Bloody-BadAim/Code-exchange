@@ -51,4 +51,13 @@ export class UserController {
             throw error;
         }
     }
+
+    public checkStorageForNavbar(): Promise<boolean | undefined> {
+        try{
+            const info: any = this.userProfileManager.checkNavbar();
+            return info;
+        } catch (error){
+            throw error;
+        }
+    }
 }

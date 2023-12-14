@@ -50,4 +50,15 @@ export class QuestionQueries extends FormBlock {
         }
     }
 
+    public static async getAllPersonalQuestions(): Promise<QuestionQueries[]> {
+        try {
+            const queryAllQuestions: string = "SELECT content, createdAt FROM questions WHERE userid = ?";
+            const questions: any = await api.queryDatabase(queryAllQuestions);
+            return questions;
+        } catch (error) {
+            console.error("Error getting questions:", error);
+            throw error;
+        }
+    }
+
 }
