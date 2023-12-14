@@ -1,19 +1,21 @@
 import "../config";
 import { api } from "@hboictcloud/api";
-import { FormBlock } from "./formBlock";
-export class QuestionQueries extends FormBlock {
+import { BaseQueries } from "./baseqaQuery";
+export class QuestionQueries extends BaseQueries{
+
 
     public _id: number;
     public _content: string;
     public _createdAt:Date;
+    public _username: any;
+   
 
-
-    public constructor(id: number, content: string, userid: number,createdAt:Date) {
+    public constructor(id: number, content: string, userid: number,createdAt:Date,username:string) {
         super(userid);
         this._id = id;
         this._content = content;
-        // this._userid = userid;
         this._createdAt = createdAt;
+        this._username = username;
     }
 
     public static async getQuestionById(questionId: number): Promise<QuestionQueries | undefined> {
@@ -39,9 +41,12 @@ export class QuestionQueries extends FormBlock {
     }
 
 
-    public static async getAllQuestions(): Promise<QuestionQueries[]> {
+    public static async getAllQuestions(): Promise<any[]> {
         try {
-            const queryAllQuestions: string = "SELECT * FROM questions";
+            const queryAllQuestions: string = `
+                SELECT questions.*, user.username 
+                FROM questions 
+                JOIN user ON questions.userid = user.userid`;
             const questions: any = await api.queryDatabase(queryAllQuestions);
             return questions;
         } catch (error) {
@@ -49,6 +54,7 @@ export class QuestionQueries extends FormBlock {
             throw error;
         }
     }
+
 
     public static async getAllPersonalQuestions(): Promise<QuestionQueries[]> {
         try {

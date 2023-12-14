@@ -1,5 +1,5 @@
-import { QuestionQueries } from "../models/questionQuary";
-import { AnswerQuaries } from "../models/answerQuary";
+import { QuestionQueries } from "../model/questionQuary";
+import { AnswerQuaries } from "../model/answerQuary";
 
 class QuestionDetailHandler {
     private questionTitle = document.getElementById("questionTitle") as HTMLElement;

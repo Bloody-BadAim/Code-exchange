@@ -13,42 +13,8 @@
 <body>
 
 
-    <div id="nav-bar">
-        <input type="checkbox" id="nav-toggle">
-        <div id="nav-header">
-            <h1 id="nav-title">
-                Code exchange
-            </h1>
-            <label for="nav-toggle">
-                <span id="nav-toggle-burger"></span>
-            </label>
-            <hr>
-        </div>
-        <div id="nav-content">
-            <div class="nav-button"><a href="profile.html"><span>Profile</span></a></div>
-            <div class="nav-button"><span>My questions</span></div>
-            <div class="nav-button"><span>My answers</span></div>
-            <div><button class="dark-btn-cancel nav-button" id="logout"><span>Log out</span></button></div>
-        </div>
-        <input type="checkbox" id="nav-footer-toggle">
-        <div id="nav-footer">
-            <div id="nav-footer-heading">
-                <div id="nav-footer-avatar">
-                    <img src="https://gravatar.com/avatar/4474ca42d303761c2901fa819c4f2547">
-                </div>
-                <div id="nav-footer-titlebox">
-                    <a id="nav-footer-title">Matin</a>
-                    <span id="nav-footer-subtitle">Online</span>
-                </div>
-                <label for="nav-footer-toggle">
-                    <i class="fas fa-caret-up"></i>
-                </label>
-            </div>
-        </div>
-    </div>
-
-
     <div class="container">
+<<<<<<< HEAD
         <h1>Questions</h1>
         <div id="questionsDisplay" class="questions-display">
             <!-- Questions will be dynamically loaded here -->
@@ -56,6 +22,26 @@
     </div>
     <script src="src/navbar.ts" type="module"></script>
     <script src="/src/models/main.ts" type="module"></script>
+=======
+        <h1>Recent Questions</h1>
+        <div style="overflow-x: auto;">
+          <table>
+
+            <thead>
+              <th>username</th>
+              <th>question</th>
+              <th>Date posted</th>
+            </thead>
+    
+            <tbody id="questionsDisplay">
+            </tbody>
+    
+          </table>
+        </div>
+      </div>
+
+    <script src="/src/view/mainView.ts" type="module"></script>
+>>>>>>> c50e833a23298b6f4591b4e3f7e52fbfff92698c
 </body>
 
 </html>

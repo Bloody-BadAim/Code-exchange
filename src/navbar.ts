@@ -1,7 +1,4 @@
-import "./config";
-// import { UserController } from "./controller/userController";
-// import { api } from "@hboictcloud/api";
-
+import { UserController } from "./controller/userController";
 
 
 async function insertNavbarIntoHeader(): Promise<void> {
@@ -21,7 +18,6 @@ async function insertNavbarIntoHeader(): Promise<void> {
 insertNavbarIntoHeader();
 
 
-// const btnnn: any = document.getElementById("click")
 
 const btnLogout: HTMLElement = document.getElementById("logout")!;
 if (btnLogout) {
@@ -41,4 +37,11 @@ function logout(): void {
 //     });
 // }
 
+
+
+const userManager: UserController = new UserController();
+document.getElementById("logout")?.addEventListener("click", () => {
+    userManager.logout();
+    // Handle post-logout 
+});
 
