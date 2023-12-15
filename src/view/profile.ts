@@ -24,6 +24,22 @@ loadProfile();
 
 
 
+document.getElementById("btnEdit")?.addEventListener("click", async () => {
+    
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 document.getElementById("btnUpdateProfile")?.addEventListener("click", async () => {
     const inputFirstname: string = (document.getElementById("inputFirstname") as HTMLInputElement).value;
     const inputLastname: string = (document.getElementById("inputLastname") as HTMLInputElement).value;

@@ -8,7 +8,7 @@ body {
     padding: 6px 24px;
     border-radius: 100px;
     background-color:#3DAC78;
-    color: rgb(0, 0, 0);
+    color: #fff;
     min-width: 128px;
     font-weight: bold;
     height: 50px;
@@ -27,7 +27,7 @@ body {
     max-width: 1280px;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 30px;
-    background-color: #95d5b2;
+    background-color: #fff;
     margin: 0 auto;
     padding: 10px;
     margin-top: 100px;
@@ -47,13 +47,13 @@ body {
 
 #deleteBtn{
     background-color: rgb(139, 1, 1);
-    color: rgb(203, 203, 203);
+    color: #fff;
 }
 #deleteBtn:hover {
     background-color: rgb(87, 2, 2);
 }
 
-#btnUpdateProfile:hover {
+#btnEdit:hover {
     background-color: #74C69D;
 }
 #logout {
@@ -72,14 +72,14 @@ h3 {
 img {
     width: 130px;
     height: 130px;
-    border-radius: 50%;
+    border-radius: 30%;
     object-fit: cover;
     
 }
 
 .user-image {
-    width: 130px;
-    height: 130px;
+    /* width: 130px;
+    height: 130px; */
     border-radius: 50%;
     
     justify-content: right;
@@ -87,9 +87,9 @@ img {
 }
 
 #photo{
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
+    /* width: 130px;
+    height: 130px; */
+    border-radius: 30%;
 }
 #file {
     display: none;
@@ -116,3 +116,12 @@ i {
 
 }
 
+#popup {
+    top: 50%;
+    left: 50%;
+    transform: translate(50%, -80%);
+    width: 380px;
+    padding: 20px 30px;
+    background: #fff;
+    border-radius: 10px;
+}

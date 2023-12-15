@@ -1,4 +1,4 @@
-import { UserController } from "./controller/userController";
+import { UserController } from "../controller/userController";
 
 
 async function insertNavbarIntoHeader(): Promise<void> {
@@ -28,20 +28,8 @@ function logout(): void {
     window.location.href = "index.html";
 }
 
-
-// const userController: UserController = new UserController();
-// const btn: any = document.getElementById("logout");
-// if(btn){
-//     btn.addEventListener("click", function() {
-//         console.log("je moeder");
-//     });
-// }
-
-
-
 const userManager: UserController = new UserController();
 document.getElementById("logout")?.addEventListener("click", () => {
     userManager.logout();
-    // Handle post-logout 
 });
 

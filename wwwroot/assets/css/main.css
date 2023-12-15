@@ -6,7 +6,7 @@
 
 html,
 body {
-    background: rgb(3, 150, 255);
+    background: #d8f3dc;
     margin: 0 auto;
     font-family: "Poppins", sans-serif ;
     padding: 0;
@@ -387,24 +387,24 @@ th {
 
 
 th {
-    border: 1px solid #000000e0;
-    box-shadow: 1px 3px #000000b1;
+    border: 1px solid #3dac78;
+    box-shadow: 1px 3px #74c69d;
 
 }
 
 tbody tr {
-    border: 1px solid #c61aff;
-    box-shadow: 1px 1px 4px 2px #c61aff;
+    border: 1px solid #3dac78;
+    box-shadow: 1px 1px 4px 2px #74c69d;
     border-radius: 0px;
     transition: 0.4s ease;
 
 }
 
 tbody tr:hover {
-    box-shadow: 1px 1px 4px 2px #000000;
+    box-shadow: 1px 1px 4px 2px #3dac78;
     border-radius: 50px;
     color: black;
-    cursor: alias;
+    cursor: pointer;
     overflow: hidden;
     transition: 0.2s ease;
 
