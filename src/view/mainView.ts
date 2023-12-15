@@ -1,6 +1,5 @@
 import { QuestionController } from "../controller/questionController";
-import { QuestionQueries } from "../model/questionQuary";
-
+import { QuestionQueries } from "../model/questionQuery";
 
 export class MainView {
     private questionsDisplay: HTMLElement;
@@ -16,7 +15,9 @@ export class MainView {
 
     private async loadQuestions(): Promise<void> {
         const questions: QuestionQueries[] = await this.questionController.getAllQuestions();
-        questions.forEach(question => {
+        console.log(questions);
+        
+        questions.forEach((question: { _username: string; _content: string; _createdAt:Date; _questionid: { toString: () => string; }; }) => {
             const row: HTMLTableRowElement = document.createElement("tr");
             row.innerHTML = `
                 <td>${question._username}</td>
@@ -24,8 +25,12 @@ export class MainView {
                 <td>${new Date(question._createdAt).toLocaleDateString()}</td>
             `;
             row.addEventListener("click", () => {
-                sessionStorage.setItem("SelectedQuestionid", String(question._id));
-                window.location.href = "questionDetail.html";
+                if (question._questionid !== undefined) {
+                    sessionStorage.setItem("selectedQuestionId", question._questionid.toString());
+                    window.location.href = "questionDetail.html";
+                } else {
+                    console.error("Question ID is undefined.");
+                }
             });
             this.questionsDisplay.appendChild(row);
         });
@@ -33,6 +38,6 @@ export class MainView {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const questionController:any = new QuestionController();
+    const questionController: QuestionController = new QuestionController();
     new MainView(questionController);
 });

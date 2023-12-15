@@ -1,5 +1,5 @@
-import { QuestionQueries } from "../model/questionQuary";
-import { AnswerQuaries } from "../model/answerQuary";
+import { QuestionQueries } from "../model/questionQuery";
+import { AnswerQuaries } from "../model/answerQuery";
 
 export class QuestionController {
 
@@ -12,8 +12,8 @@ export class QuestionController {
     }
 
     // Method to get a specific question by its ID
-    public async getQuestionById(questionId: number): Promise<QuestionQueries | undefined> {
-        return QuestionQueries.getQuestionById(questionId);
+    public async getQuestionById(questionid: number): Promise<QuestionQueries | undefined> {
+        return QuestionQueries.getQuestionById(questionid);
     }
 
     // Method to get all questions
@@ -22,12 +22,12 @@ export class QuestionController {
     }
 
     // Method to post a new answer to a question
-    public async postAnswer(questionId: number, userId: number, contentAnswer: string): Promise<number | undefined> {
-        return AnswerQuaries.postAnswer(questionId, userId, contentAnswer);
+    public async postAnswer(questionid: number, userId: number, contentAnswer: string): Promise<number | undefined> {
+        return AnswerQuaries.postAnswer(questionid, userId, contentAnswer);
     }
 
     // Method to get all answers for a specific question
-    public async getAnswersByQuestionId(questionId: number): Promise<AnswerQuaries[]> {
-        return AnswerQuaries.getAnswersByQuestionId(questionId);
+    public async getAnswersByQuestionId(questionid: number): Promise<AnswerQuaries[]> {
+        return AnswerQuaries.getAnswersByQuestionId(questionid);
     }
 }

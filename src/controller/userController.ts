@@ -1,4 +1,4 @@
-import { UserQueries } from "../model/userQuary";
+import { UserQueries } from "../model/userQuery";
 
 export class UserController {
 

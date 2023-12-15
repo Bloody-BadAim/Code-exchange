@@ -1,6 +1,6 @@
 import "../config";
 import { api } from "@hboictcloud/api";
-import { BaseQueries } from "./baseqaQuery";
+import { BaseQueries } from "./baseQaQuery";
 
 export class UserQueries extends BaseQueries {
     public _username: string;

@@ -10,14 +10,16 @@
     <!-- Navigation and other elements -->
 
     <div class="container">
-        <h1 id="questionTitle">Question Title</h1>
+        <div id="questionTitle" class="question-title">
+            <!-- Question will be loaded here -->
+        </div>
         <div id="answersList" class="answers-list">
-            <!-- Answers will be loaded here -->
+            <!-- Styled answers will be loaded here -->
         </div>
         <textarea id="newAnswer" placeholder="Your answer..."></textarea>
         <button id="submitAnswer">Submit Answer</button>
     </div>
 
-    <script src="/src/models/questionDetail.ts" type="module"></script>
+    <script src="/src/controller/questionDetail.ts" type="module"></script>
 </body>
 </html>
