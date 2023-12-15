@@ -1,14 +1,14 @@
 import "../config";
 import { api } from "@hboictcloud/api";
-import { BaseQueries } from "./baseQaQuery";
+import { BaseQueries } from "./baseQa";
 
 export class QuestionQueries extends BaseQueries{
 
 
     public _questionid: number;
     public _content: string;
-    public _createdAt:Date;
-    public _username: any;
+    public _createdAt: Date;
+    public _username: string;
    
 
     public constructor(questionid: number, content: string, userid: number,createdAt:Date,username:string) {
@@ -19,17 +19,31 @@ export class QuestionQueries extends BaseQueries{
         this._username = username;
     }
 
-    public static async getQuestionById(questionid: number): Promise<QuestionQueries | undefined> {
+    public static async getQuestionById(questionId: number): Promise<QuestionQueries | undefined> {
         try {
-            const queryGetQ: string = "SELECT * FROM questions WHERE questionid = ?";
-            const result: any = await api.queryDatabase(queryGetQ, questionid);
-            return result.length > 0 ? result[0] : undefined;
+            const queryGetQ: string = `
+                SELECT questions.*, user.username 
+                FROM questions 
+                JOIN user ON questions.userid = user.userid
+                WHERE questions.questionid = ?`;
+            const result: any = await api.queryDatabase(queryGetQ, questionId);
+            if (result.length > 0) {
+                const questionData:any = result[0];
+                return new QuestionQueries(
+                    questionData.questionid,
+                    questionData.content,
+                    questionData.userid,
+                    questionData.createdAt,
+                    questionData.username
+                );
+            }
+            return undefined;
         } catch (error) {
             console.error("Error getting question by ID:", error);
             throw error;
         }
     }
-
+    
     public static async postQuestion(userid: number, content: string): Promise<number | undefined> {
         try {
             const queryQuestion: string = "INSERT INTO questions (userid, content) VALUES (?, ?)";
