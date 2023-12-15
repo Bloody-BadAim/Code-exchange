@@ -1,5 +1,5 @@
 import { QuestionController } from "../controller/questionController";
-import { QuestionQueries } from "../model/questionQuery";
+import { QuestionQueries } from "../model/question";
 
 export class MainView {
     private questionsDisplay: HTMLElement;

@@ -1,6 +1,6 @@
 html,
 body {
-    background: rgb(3, 150, 255);
+    background-color: #d8f3dc;
     margin: 0 auto;
     font-family: "Poppins", sans-serif ;
     padding: 0;
@@ -15,7 +15,7 @@ button {
     margin: 0 auto;
     padding: 6px 24px;
     border-radius: 100px;
-    background-color:#4af3ff ;
+    background-color:#74c69d ;
     color: rgb(0, 0, 0);
     min-width: 128px;
     font-weight: bold;
@@ -25,8 +25,8 @@ button {
     margin-top: 50px;
 
     &:hover {
-        background-color:#2afe8d ;
-        color: black;
+        background-color:#3dac78 ;
+        color: white;
         transition: 0.3s ease;
     }
 }

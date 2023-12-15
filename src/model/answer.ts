@@ -1,6 +1,6 @@
 import "../config";
 import { api } from "@hboictcloud/api";
-import { BaseQueries } from "./baseQaQuery";
+import { BaseQueries } from "./baseQa";
 
 export class AnswerQuaries extends BaseQueries{
 

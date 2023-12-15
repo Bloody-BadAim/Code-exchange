@@ -1,9 +1,16 @@
-import { UserQueries } from "../model/userQuery";
+import { UserQueries } from "../model/user";
 
 export class UserController {
 
     public async register(email: string, username: string, firstname: string, lastname: string, password: string): Promise<void> {
+
+        if (!email.trim() || !username.trim() || !firstname.trim() || !lastname.trim() || !password.trim()) {
+            alert("All fields are required.");
+            return; // Exit the function if any field is empty
+        }
         try {
+
+            
             // Check if email exists
             const emailExists: boolean = await UserQueries.checkEmailExists(email);
             if (emailExists) {
