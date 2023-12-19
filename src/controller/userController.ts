@@ -1,16 +1,25 @@
 import { UserQueries } from "../model/user";
 
+/**
+ * Class representing the controller for user-related actions.
+ */
 export class UserController {
 
+    /**
+     * Registers a new user.
+     * @param {string} email - User's email address.
+     * @param {string} username - User's username.
+     * @param {string} firstname - User's first name.
+     * @param {string} lastname - User's last name.
+     * @param {string} password - User's password.
+     * @returns {Promise<void>} A promise that resolves when registration is complete.
+     */
     public async register(email: string, username: string, firstname: string, lastname: string, password: string): Promise<void> {
-
         if (!email.trim() || !username.trim() || !firstname.trim() || !lastname.trim() || !password.trim()) {
             alert("All fields are required.");
             return; // Exit the function if any field is empty
         }
         try {
-
-            
             // Check if email exists
             const emailExists: boolean = await UserQueries.checkEmailExists(email);
             if (emailExists) {
@@ -43,6 +52,12 @@ export class UserController {
         }
     }
 
+    /**
+     * Logs in a user.
+     * @param {string} email - User's email address.
+     * @param {string} password - User's password.
+     * @returns {Promise<void>} A promise that resolves when the login process is complete.
+     */
     public async login(email: string, password: string): Promise<void> {
         try {
             // Validate login
@@ -70,6 +85,9 @@ export class UserController {
         }
     }
 
+    /**
+     * Logs out the current user.
+     */
     public logout(): void {
         // Confirmation dialog
         const isConfirmed: boolean = window.confirm("Are you sure you want to log out?");
@@ -84,8 +102,15 @@ export class UserController {
             console.log("Logout cancelled.");
         }
     }
-    
 
+    /**
+     * Updates the profile of the current user.
+     * @param {string} firstname - User's first name.
+     * @param {string} lastname - User's last name.
+     * @param {string} username - User's username.
+     * @param {string} email - User's email address.
+     * @returns {Promise<void>} A promise that resolves when the profile update is complete.
+     */
     public async updateProfile(firstname: string, lastname: string, username: string, email: string): Promise<void> {
         try {
             // Retrieve the user ID from session storage
@@ -115,6 +140,10 @@ export class UserController {
         // Post-update logic, such as refreshing the page or showing a message
     }
 
+    /**
+     * Deletes the profile of the current user.
+     * @returns {Promise<void>} A promise that resolves when the profile deletion is complete.
+     */
     public async deleteProfile(): Promise<void> {
         try {
             // Confirmation dialog
@@ -139,15 +168,5 @@ export class UserController {
             alert(`Deletion failed: ${error}`);
         }
     }
-
-
-    // public checkStorageForNavbar(): Promise<boolean | undefined> {
-    //     try{
-    //         const info: any = this.UserController.checkNavbar();
-    //         return info;
-    //     } catch (error){
-    //         throw error;
-    //     }
-    // }
 
 }

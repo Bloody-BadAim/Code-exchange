@@ -1,15 +1,25 @@
 import { QuestionQueries } from "../model/question";
 import { AnswerQuaries } from "../model/answer";
 
+/**
+ * Class responsible for handling question details and associated answers.
+ */
 class QuestionDetailHandler {
     private questionTitle = document.getElementById("questionTitle") as HTMLElement;
     private answersList = document.getElementById("answersList") as HTMLElement;
     private newAnswer = document.getElementById("newAnswer") as HTMLTextAreaElement;
 
+    /**
+     * Constructor for QuestionDetailHandler class.
+     * Initializes the handler by loading the question details.
+     */
     public constructor() {
         this.initialize();
     }
 
+    /**
+     * Initializes the handler by setting up the UI and event listeners.
+     */
     public async initialize(): Promise<void> {
         const questionId: number = Number(sessionStorage.getItem("selectedQuestionId"));
         await this.loadQuestionDetails(questionId);
@@ -21,10 +31,13 @@ class QuestionDetailHandler {
                 this.newAnswer.value = ""; // Clear the textarea after posting
                 await this.loadQuestionDetails(questionId); // Refresh the answers list
             }
-            
         });
     }
 
+    /**
+     * Loads and displays the details of a specific question and its answers.
+     * @param {number} questionId - The ID of the question to load.
+     */
     private async loadQuestionDetails(questionId: number): Promise<void> {
         // Load question details
         const question: QuestionQueries | undefined = await QuestionQueries.getQuestionById(questionId);
@@ -35,6 +48,7 @@ class QuestionDetailHandler {
             `;
         }
 
+        // Load and display answers
         const answers: AnswerQuaries[] = await AnswerQuaries.getAnswersByQuestionId(questionId);
         this.answersList.innerHTML = ""; // Clear the answers list before adding new ones
         answers.forEach(answer => {
