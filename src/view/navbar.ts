@@ -45,9 +45,9 @@ function logout(): void {
 }
 
 // Create an instance of UserController
-const userManager: UserController = new UserController();
+// const userManager: UserController = new UserController();
 
-// Add an event listener to the logout button to trigger the UserController's logout method
-document.getElementById("logout")?.addEventListener("click", () => {
-    userManager.logout(); // Call the logout method from UserController
-});
+// // Add an event listener to the logout button to trigger the UserController's logout method
+// document.getElementById("logout")?.addEventListener("click", () => {
+//     userManager.logout(); // Call the logout method from UserController
+// });
