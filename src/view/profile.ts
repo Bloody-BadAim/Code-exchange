@@ -26,6 +26,9 @@ function loadProfile(): void {
 loadProfile();
 
 
+document.getElementById("closeBtn")?.addEventListener("click", function(){
+    document.querySelector("#popup")?.classList.remove("active");
+});
 
 
 
@@ -33,6 +36,7 @@ document.getElementById("btnEdit")?.addEventListener("click", function(){
     console.log("het werkt");
     document.querySelector("#popup")?.classList.add("active");
 
+    
     const editFirstname: HTMLInputElement = (document.getElementById("editFirstname") as HTMLInputElement);
     const editLastname: HTMLInputElement = (document.getElementById("editLastname") as HTMLInputElement);
     const editUsername: HTMLInputElement = (document.getElementById("editUsername") as HTMLInputElement);
