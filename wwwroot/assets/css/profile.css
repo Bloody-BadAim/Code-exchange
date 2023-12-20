@@ -6,7 +6,7 @@ body {
 .dark-btn {
     padding: 6px 24px;
     border-radius: 100px;
-    background-color:#3DAC78;
+    background-color:#74c69d;
     color: #fff;
     min-width: 128px;
     font-weight: bold;
@@ -18,6 +18,14 @@ body {
     outline: none;
     border-style: solid;
     margin-left: 12px;
+
+
+
+    &:hover {
+        background-color:#3dac78 ;
+        color: white;
+        transition: 0.3s ease;
+    }
 }
 
 .container {
