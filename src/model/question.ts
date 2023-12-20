@@ -67,7 +67,7 @@ export class QuestionQueries extends BaseQueries {
             throw error;
         }
     }
-    
+
     /**
      * Posts a new question to the database.
      * @param {number} userid - The ID of the user posting the question.
@@ -109,18 +109,27 @@ export class QuestionQueries extends BaseQueries {
             throw error;
         }
     }
-    
+
+
     /**
      * Retrieves all personal questions posted by a specific user.
+     * @param {number} userid - User ID of the user whose questions are being retrieved.
      * @returns {Promise<QuestionQueries[]>} An array of QuestionQueries instances representing the personal questions of a user.
      */
-    public static async getAllPersonalQuestions(): Promise<QuestionQueries[]> {
+    // In QuestionQueries class
+    public static async getAllPersonalQuestions(userid: number): Promise<any[]> {
         try {
-            const queryAllQuestions: string = "SELECT content, createdAt FROM questions WHERE userid = ?";
-            const questions: any = await api.queryDatabase(queryAllQuestions);
-            return questions;
+            const query: string = "SELECT * FROM questions WHERE userid = ?";
+            const questions: any = await api.queryDatabase(query, [userid]); // Make sure to pass the userid to the query
+            return questions.map((q: { questionid: any; content: any; createdAt: any; username: any; }) => ({
+                _questionid: q.questionid,
+                _content: q.content,
+                _createdAt: q.createdAt,
+                // Include username if it's part of the question record, or if it's needed, join with the user table to get it
+                _username: q.username, 
+            }));
         } catch (error) {
-            console.error("Error getting questions:", error);
+            console.error("Error getting personal questions:", error);
             throw error;
         }
     }

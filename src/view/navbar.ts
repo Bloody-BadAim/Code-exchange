@@ -40,14 +40,15 @@ if (btnLogout) {
  * Clears the session storage and redirects the user to the 'index.html' page.
  */
 function logout(): void {
-    sessionStorage.clear(); // Clear session storage
-    window.location.href = "index.html"; // Redirect to the index page
+    // Redirect to the index page
 }
 
 // Create an instance of UserController
-// const userManager: UserController = new UserController();
+const userManager: UserController = new UserController();
 
-// // Add an event listener to the logout button to trigger the UserController's logout method
-// document.getElementById("logout")?.addEventListener("click", () => {
-//     userManager.logout(); // Call the logout method from UserController
-// });
+// Add an event listener to the logout button to trigger the UserController's logout method
+document.getElementById("logout")?.addEventListener("click", () => {
+    userManager.logout(); // Call the logout method from UserController
+    sessionStorage.clear(); // Clear session storage
+    window.location.href = "index.html";
+});
