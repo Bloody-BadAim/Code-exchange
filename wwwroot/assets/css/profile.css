@@ -51,11 +51,11 @@ body {
 }
 
 #deleteBtn{
-    background-color: rgb(139, 1, 1);
+    background-color: black;
     color: #fff;
 }
 #deleteBtn:hover {
-    background-color: rgb(87, 2, 2);
+    background-color: rgb(57, 57, 57);
 }
 
 #btnEdit:hover {
@@ -162,7 +162,7 @@ img {
     top: 50%;
     opacity: 1;
     transform: translate(70%, -80%) scale(1);
-    transition: top 0ms ease-in-out 0ms, 
+    transition: top 0ms ease-in-out 200ms, 
                 opacity 200ms ease-in-out 0ms,
                 transform 20ms ease-in-out 0ms;
 
