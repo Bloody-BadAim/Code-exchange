@@ -38,15 +38,15 @@ Gebruik het onderstaande schema voor eventuele extra informatie.
 
 ### FEEDBACK class diagram
 
-<mark>ze hebben een class diagram van login.ts classes , netjes alleen ik miss nog de user answer en question diagram maar daar zijn ze ook mee bezig </mark>
+<mark>ze hebben een class diagram van login.ts classes , netjes alleen ik miss nog de user answer en question diagram maar daar zijn ze ook mee bezig. </mark>
 
 ### FEEDBACK Entity Relationship Diagram (ERD)
 
-<mark>Erd ziet er goed uit! er zijn drie tabellen van vragen,antwoorden en gebruikers. De columen zijn op juiste manier met elkaar gekoppeld zijn  </mark>
+<mark>Erd ziet er goed uit! er zijn drie tabellen van vragen,antwoorden en gebruikers. De columen zijn op juiste manier met elkaar gekoppeld zijn. </mark>
 
 ### FEEDBACK Database ontwerp
 
-<mark>Database ziet er goed uit , ik zi paar extra columen zoals date of birth en de code snippten hebben ook hun eigen column dus best wel veel detail daarom vind ik het netjes edaan. </mark>
+<mark>Database ziet er goed uit , ik zi paar extra columen zoals date of birth en de code snippten hebben ook hun eigen column dus best wel veel detail daarom vind ik het netjes gedaan. </mark>
 
 ### FEEDBACK Inheritance (OOP principe)
 
@@ -54,7 +54,7 @@ Gebruik het onderstaande schema voor eventuele extra informatie.
 
 ### FEEDBACK Encapsulation (OOP principe)
 
-<mark>Het principe is duidelijk gebruikt bij showpassword in login.ts file het is wel een duidelijke gebruik van oop. </mark>
+<mark>Het principe is duidelijk gebruikt bij showpassword in login.ts file het is wel een duidelijke gebruik van oop Encapsulation. </mark>
 
 ### FEEDBACK Polymorphism (OOP principe)
 
@@ -62,7 +62,7 @@ Gebruik het onderstaande schema voor eventuele extra informatie.
 
 ### FEEDBACK Abstraction (OOP principe)
 
-<mark>Het principe is duidelijk gebruikt bij showpassword in login.ts file het is wel een duidelijke gebruik van oop.</mark>
+<mark>Het principe is duidelijk gebruikt bij showpassword in login.ts file het is wel een duidelijke gebruik van oop Abstraction.</mark>
 
 ### FEEDBACK Documentatie
 
