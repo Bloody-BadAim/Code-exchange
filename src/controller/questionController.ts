@@ -3,7 +3,6 @@ import { AnswerQuaries } from "../model/answer";
 
 export class QuestionController {
 
-    // Constructor doesn't need to take any parameters for this use case
     public constructor() {}
 
     // Method to post a new question
