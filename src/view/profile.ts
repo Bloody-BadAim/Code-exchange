@@ -16,10 +16,12 @@ function loadProfile(): void {
     const username: any  = sessionStorage.getItem("username");
     const email: any = sessionStorage.getItem("email");
 
-    inputFirstname.textContent = `Firstname: ${firstname}`;
-    inputLastname.textContent = `Lastname: ${lastname}`;
-    inputUsername.textContent = `Username: ${username}`;
-    inputEmail.textContent = `Email: ${email}`;
+    inputFirstname.innerHTML = `<strong>Firstname:</strong> <em>${firstname}</em>`;
+    inputLastname.innerHTML = `<strong>Lastname:</strong> <em>${lastname}</em>`;
+    inputUsername.innerHTML = `<strong>Username:</strong> <em>${username}</em>`;
+    inputEmail.innerHTML = `<strong>Email:</strong> <em>${email}</em>`;
+
+
 
     
 }

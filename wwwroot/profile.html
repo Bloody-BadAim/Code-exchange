@@ -18,12 +18,12 @@
         </header>
         <div class="container">
             <div class="wrapper">
-                <div class="inputBox">
-                    <div class="user-img">
-                        <img src="/assets/img" id="photo" />
-                        <input type="file" id="file" />
-                        <label for="file" id="uploadbtn"><i class='bx bx-camera'></i></label>
-                    </div>
+                <div class="user-img">
+                    <img src="/assets/img" id="photo" />
+                    <input type="file" id="file" />
+                    <label for="file" id="uploadbtn"><i class='bx bx-camera'></i></label>
+                </div>
+                <div class="inputBackground">
                     <div class="inputFullnameField">
                         <div>
                             <h3 id="inputFirstname"></h3><br>
@@ -40,10 +40,13 @@
                     <div class="inputEmailField">
                         <h3 id="inputEmail"></h3><br>
                     </div>
-                        <button style="float: right;" type="submit" class="dark-btn" id="btnEdit">Edit</button>
-                        <button type="submit" class="dark-btn" id="deleteBtn">Delete Profile</button>
+
                 </div>
                 
+                    <button style="float: right;" type="submit" class="dark-btn" id="btnEdit">Edit</button>
+                    <button type="submit" class="dark-btn" id="deleteBtn">Delete Profile</button>
+        </div>
+            
 
                 <div id="popup">
                     <label for="closeBtn"><i class='bx bx-x'></i></label>
@@ -71,7 +74,6 @@
                     </div>
                 </div>    
             </div>
-        </div>
     </main>
     <script src="src/view/navbar.ts" type="module"></script>
     <script src="src/view/profile.ts" type="module"></script>

@@ -4,12 +4,12 @@ body {
 }
 
 
-/* .inputBox{
-    background-color:#74c69d;
-    border-radius: 30px;
-    margin: 0 auto;
-    padding: 10px;
-} */
+
+.inputBackground{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .dark-btn {
     padding: 6px 24px;
@@ -24,7 +24,7 @@ body {
     margin-top: 50px;
     float: right;
     outline: none;
-    border-style: solid;
+    border: none;
     margin-left: 12px;
 
 
@@ -36,8 +36,8 @@ body {
     }
 }
 
-.container {
-    max-width: 1280px;
+.wrapper {
+    max-width: 550px;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 30px;
     background-color:#fff;
@@ -47,13 +47,13 @@ body {
 }
 
 @media only screen and (min-width: 601px) {
-    .container {
+    .wrapper {
         width: 85%;
     }
 }
 
 @media only screen and (min-width: 993px) {
-    .container {
+    .wrapper {
         width: 70%;
     }
 }
@@ -61,15 +61,23 @@ body {
 #deleteBtn{
     background-color: black;
     color: #fff;
-    /* float: left; */
+    float: left;
     cursor: pointer;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2);
 }
 #deleteBtn:hover {
-    background-color: rgb(57, 57, 57);
+
+    background-color: #fff;
+    color: black;
 }
 
+#btnEdit{
+    color: black;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2);
+}
 #btnEdit:hover {
     background-color: #74C69D;
+    color: #fff;
 }
 #btnUpdateProfile:hover {
     background-color: #74C69D;
@@ -84,22 +92,22 @@ h3 {
     font-family: "Poppins", sans-serif;
 }
 
+
 img {
+    /* transform:translateX(250%); */
     width: 130px;
     height: 130px;
-    border-radius: 30%;
+    border-radius: 70%;
     object-fit: cover;
 }
 
-.user-image {
-    border-radius: 50%;
-    justify-content: right;
-    align-items: center;
+.user-img {
+    background-color: #3DAC78;
+    padding: 5px 5px;
+    border-radius: 30px 30px 0px 0px;
 }
 
-#photo{
-    border-radius: 30%;
-}
+
 #file {
     display: none;
 }
@@ -112,8 +120,8 @@ img {
     width: 30px;
     cursor: pointer;
     color: #fff;
-    transform: translateY(-15%);
-    transform: translateX(-60%);
+    /* transform: translateY(-15%);
+    transform: translateX(1025%); */
     margin-top: 100px;
     background-color: rgb(173, 172, 172, 0.801);
     box-shadow: 2px 4px rgb(0, 0, 0, 0.644);
@@ -172,7 +180,7 @@ img {
 #popup.active {
     top: 50%;
     opacity: 1;
-    transform: translate(70%, -80%) scale(1);
+    transform: translate(110%, -80%) scale(1);
     transition: top 0ms ease-in-out 200ms, 
                 opacity 200ms ease-in-out 0ms,
                 transform 20ms ease-in-out 0ms;
