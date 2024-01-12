@@ -1,7 +1,7 @@
 
 html,
 body {
-    background: #d8f3dc;
+    background: rgb(3, 150, 255);
     margin: 0 auto;
     font-family: "Poppins", sans-serif ;
     padding: 0;
@@ -19,7 +19,7 @@ button {
     margin: 0 auto;
     padding: 6px 24px;
     border-radius: 100px;
-    background-color:#4af3ff ;
+    background-color:#74c69d ;
     color: rgb(0, 0, 0);
     min-width: 128px;
     font-weight: bold;
@@ -29,8 +29,8 @@ button {
     margin-top: 50px;
 
     &:hover {
-        background-color:#2afe8d ;
-        color: black;
+        background-color:#3dac78 ;
+        color: white;
         transition: 0.3s ease;
     }
 }
@@ -38,7 +38,7 @@ button {
     margin-bottom: 20px;
     padding: 15px;
     background-color: #f9f9f9;
-    border-left: 4px solid #3DAC78;
+    border-left: 4px solid #007bff;
 }
 .container {
     max-width: 1280px;
