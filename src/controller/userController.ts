@@ -144,26 +144,28 @@ export class UserController {
      * Deletes the profile of the current user.
      * @returns {Promise<void>} A promise that resolves when the profile deletion is complete.
      */
-    public async deleteProfile(): Promise<void> {
+    public async deleteProfile(): Promise<boolean|undefined> {
         try {
             // Confirmation dialog
             const isConfirmed: boolean = window.confirm("Are you sure you want to delete your profile? This action cannot be undone.");
+
+            if (isConfirmed) {
+                const userId: string = sessionStorage.getItem("userid")!;
+                await UserQueries.deleteProfile(userId);
+                return true;
     
-            if (!isConfirmed) {
-                console.log("Profile deletion cancelled.");
-                return; // Exit the function if the user cancels
+            } else{
+                window.location.reload();
+                return;
             }
     
-            // Retrieve the user ID from session storage
-            const userId: string = sessionStorage.getItem("userid")!;
-            if (!userId) {
-                throw new Error("User not logged in");
-            }
+            
+            // if (!userId) {
+            //     throw new Error("User not logged in");
+            // }
     
             // Delete the profile
-            await UserQueries.deleteProfile(userId);
-            this.logout(); // This will navigate away from the current page
-            alert("Your account has been deleted."); // This alert might not be shown due to page navigation
+           
         } catch (error) {
             alert(`Deletion failed: ${error}`);
         }

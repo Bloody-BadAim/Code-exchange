@@ -3,6 +3,14 @@ body {
     background-color: #d8f3dc;
 }
 
+
+/* .inputBox{
+    background-color:#74c69d;
+    border-radius: 30px;
+    margin: 0 auto;
+    padding: 10px;
+} */
+
 .dark-btn {
     padding: 6px 24px;
     border-radius: 100px;
@@ -32,7 +40,7 @@ body {
     max-width: 1280px;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 30px;
-    background-color: #fff;
+    background-color:#fff;
     margin: 0 auto;
     padding: 10px;
     margin-top: 100px;
@@ -53,6 +61,8 @@ body {
 #deleteBtn{
     background-color: black;
     color: #fff;
+    /* float: left; */
+    cursor: pointer;
 }
 #deleteBtn:hover {
     background-color: rgb(57, 57, 57);
@@ -70,7 +80,8 @@ body {
 
 h3 {
     font-size: 22px;
-    font-weight: 600;
+    /* font-weight: 600; */
+    font-family: "Poppins", sans-serif;
 }
 
 img {
@@ -206,3 +217,4 @@ img {
     outline: none;
     border-style: solid;
 }
+

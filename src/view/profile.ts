@@ -89,9 +89,13 @@ document.getElementById("btnUpdateProfile")?.addEventListener("click", async () 
 //user.cotroller deletes with cascade everything.
 document.getElementById("deleteBtn")?.addEventListener("click", async () => {
     try {
-        await userController.deleteProfile();
-        alert("Your account is successfully deleted.");
-        window.location.replace("./index.html");
+        const answer: any = await userController.deleteProfile();
+        if(answer === true){
+            alert("your account has been succesfully deleted");
+            window.location.replace("./index.html");
+        }else{
+            alert("your deletion is cancelled");
+        }
     } catch (error) {
         console.error("Delete Profile Error:", error);
         alert("An error occurred while deleting the profile.");
