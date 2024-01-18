@@ -51,7 +51,8 @@ class QuestionDetailHandler {
         // Load and display answers
         const answers: AnswerQuaries[] = await AnswerQuaries.getAnswersByQuestionId(questionId);
         this.answersList.innerHTML = ""; // Clear the answers list before adding new ones
-        answers.forEach(answer => {
+
+        answers.forEach((answer, index) => {
             const answerElement: HTMLDivElement = document.createElement("div");
             answerElement.classList.add("answer-item");
             answerElement.innerHTML = `
@@ -60,7 +61,10 @@ class QuestionDetailHandler {
             `;
             this.answersList.appendChild(answerElement);
         });
+        
     }
+
 }
 
 new QuestionDetailHandler();
+

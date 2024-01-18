@@ -149,4 +149,19 @@ export class UserQueries extends BaseQueries {
         const deleteStringFunction: any = await api.queryDatabase("DELETE FROM user WHERE userid = ?", newUserid);
         return deleteStringFunction;
     }
+
+
+    public static async insertVote(userid: string, answerid: string, upvote: string | null, downvote: string | null ): Promise<boolean>{
+        const insertString: string = "INSERT INTO vote WHERE userid, answerid, upvote, downvote";
+        const insert: any = await api.queryDatabase(insertString, userid, answerid, upvote, downvote);
+        return insert;
+
+
+    }
+
+    public static async checkVote(userid: string, answerid: string): Promise<boolean>{
+        const selectString: string = "SELECT COUNT(*) as COUNT FROM vote WHERE userid = ?, answerid = ?";
+        const select: any = await api.queryDatabase(selectString, userid, answerid);
+        return select[0].count > 0;
+    }
 }

@@ -171,4 +171,23 @@ export class UserController {
         }
     }
 
+    // public async vote(userid: string, answerid: string, upvote: string|null, downvote: string|null): Promise<boolean|undefined>{
+
+    //     const checkVote: boolean |undefined = await UserQueries.checkVote(userid, answerid);
+    //     if(checkVote.upvote === !null){
+    //         return checkVote;
+    //     }
+    //     if(checkVote.downvote === !null){
+    //         return checkVote;
+    //     }
+
+    //     const insertVote: boolean | undefined = await UserQueries.insertVote(userid, answerid, upvote, downvote);
+    //     if(!insertVote){
+    //         return false;
+    //     }
+        
+        
+
+    // }
+
 }
