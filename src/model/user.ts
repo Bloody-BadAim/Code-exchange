@@ -6,21 +6,9 @@ import { BaseQueries } from "./baseQa";
  * Class representing the queries related to users in a Q&A application.
  * Extends from BaseQueries.
  */
+
 export class UserQueries extends BaseQueries {
-    /**
-     * Public member representing the user's email.
-     */
-    public _email: string;
-
-    /**
-     * Public member representing the user's first name.
-     */
-    public _firstname: string;
-
-    /**
-     * Public member representing the user's last name.
-     */
-    public _lastname: string;
+  
 
     /**
      * Constructs a new instance of the UserQueries class.
@@ -30,18 +18,21 @@ export class UserQueries extends BaseQueries {
      * @param {string} firstname - The first name of the user.
      * @param {string} lastname - The last name of the user.
      */
-    public constructor(userid: number, username: string, email: string, firstname: string, lastname: string) {
+    public constructor(userid: number, username: string) {
         super(userid, username);
-        this._email = email;
-        this._firstname = firstname;
-        this._lastname = lastname;
     }
 
-    /**
-     * Checks if an email already exists in the database.
-     * @param {string} email - The email to check.
-     * @returns {Promise<boolean>} True if the email exists, false otherwise.
-     */
+    // public async checkExists(key: string, value: string): Promise<boolean> {
+    //     try {
+    //         const checkQuery: string = `SELECT COUNT(*) AS count FROM user WHERE ${key} = ?`;
+    //         const result: any = await api.queryDatabase(checkQuery, [value]);
+    //         return result[0].count > 0;
+    //     } catch (error) {
+    //         console.error(`Error checking if ${key} exists:`, error);
+    //         throw error;
+    //     }
+    // }
+
     public static async checkEmailExists(email: string): Promise<boolean> {
         try {
             const result: any = await api.queryDatabase("SELECT COUNT(*) AS count FROM user WHERE email = ?", [email]);
@@ -52,17 +43,13 @@ export class UserQueries extends BaseQueries {
         }
     }
 
-    /**
-     * Checks if a username already exists in the database.
-     * @param {string} username - The username to check.
-     * @returns {Promise<boolean>} True if the username exists, false otherwise.
-     */
+    // Static utility method for checking if a username exists
     public static async checkUsernameExists(username: string): Promise<boolean> {
         try {
             const result: any = await api.queryDatabase("SELECT COUNT(*) AS count FROM user WHERE username = ?", [username]);
             return result[0].count > 0;
         } catch (error) {
-            console.error("Error checking if username exists", error);
+            console.error("Error checking if username exists:", error);
             throw error;
         }
     }
@@ -78,13 +65,14 @@ export class UserQueries extends BaseQueries {
      */
     public static async createAccount(email: string, username: string, firstname: string, lastname: string, password: string): Promise<number | undefined> {
         try {
-            const registerData: any = await api.queryDatabase("INSERT INTO user (email, username, firstname, lastname, password) VALUES (?, ?, ?, ?, ?)", email, username, firstname, lastname, password);
+            const registerData: any = await api.queryDatabase("INSERT INTO user (email, username, firstname, lastname, password) VALUES (?, ?, ?, ?, ?)", [email, username, firstname, lastname, password]);
             return registerData.insertId;
         } catch (error) {
             console.error("Error creating account:", error);
             throw error;
         }
     }
+    
 
     /**
      * Validates a user login.

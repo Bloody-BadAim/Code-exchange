@@ -25,7 +25,7 @@ export class AnswerQuaries extends BaseQueries {
     public _createdatAnswer: Date;
 
     public constructor(answerid: number, questionid: number, userid: number, contentAnswer: string, createdatAnswer: Date, username: string) {
-        super(userid,username);
+        super(userid, username);
         this._answerid = answerid;
         this._questionid = questionid;
         this._contentAnswer = contentAnswer;
@@ -93,4 +93,24 @@ export class AnswerQuaries extends BaseQueries {
             throw error;
         }
     }
+
+    // In AnswerQuaries class
+    public static async updateAnswer(answerId: number, userId: number, newContent: string): Promise<boolean> {
+        try {
+            // Check if the answer belongs to the user
+            const answerData: any = await api.queryDatabase("SELECT * FROM answers WHERE answerid = ? AND userid = ?", answerId, userId);
+            if (answerData.length === 0) {
+                throw new Error("Answer not found or user not authorized to edit this answer.");
+            }
+
+            // Update the answer content
+            const queryUpdate: string = "UPDATE answers SET contentAnswer = ? WHERE answerid = ?";
+            await api.queryDatabase(queryUpdate, newContent, answerId);
+            return true;
+        } catch (error) {
+            console.error("Error updating answer:", error);
+            return false;
+        }
+    }
+
 }

@@ -1,37 +1,41 @@
 import { UserController } from "../controller/userController";
 
-/**
- * Asynchronously inserts the navigation bar into the header of the page.
- * It fetches 'navbar.html' and sets its content as the inner HTML of the header element.
- */
-async function insertNavbarIntoHeader(): Promise<void> {
-    try {
-        // Fetch the navbar HTML from 'navbar.html'
-        const response: Response = await fetch("navbar.html");
-        const navbarHtml: string = await response.text();
+class NavbarHandler {
+    private userController: UserController;
 
-        // Insert the fetched HTML into the header element of the page
-        const headerElement: HTMLElement | null = document.getElementById("header");
-        if (headerElement) {
-            headerElement.innerHTML = navbarHtml;
-        } else {
-            // Log an error if the header element is not found
-            console.error("Element with ID header not found.");
+    public constructor() {
+        this.userController = new UserController();
+        this.initializeNavbar();
+    }
+
+    private async initializeNavbar(): Promise<void> {
+        try {
+            const response: Response = await fetch("navbar.html");
+            const navbarHtml: string = await response.text();
+
+            const headerElement: HTMLElement = document.getElementById("header")!;
+            if (headerElement) {
+                headerElement.innerHTML = navbarHtml;
+                this.setupLogoutButton();
+            }
+        } catch (error) {
+            console.error("Error fetching navbar:", error);
         }
-    } catch (error) {
-        // Log any errors that occur during the fetch operation
-        console.error("Error fetching navbar:", error);
+    }
+
+    private setupLogoutButton(): void {
+        const logoutButton: HTMLElement = document.getElementById("logout")!;
+        if (logoutButton) {
+            logoutButton.addEventListener("click", () => {
+                this.userController.logout();
+            });
+        } else {
+            console.error("Logout button not found in the navbar.");
+        }
     }
 }
 
-// Call the function to insert the navbar into the header
-insertNavbarIntoHeader();
-
-
-// Create an instance of UserController
-const userManager: UserController = new UserController();
-
-// Add an event listener to the logout button to trigger the UserController's logout method
-document.getElementById("logout")?.addEventListener("click", () => {
-    userManager.logout(); // Call the logout method from UserController
+// Initialize the NavbarHandler when the document is loaded
+document.addEventListener("DOMContentLoaded", () => {
+    new NavbarHandler();
 });
