@@ -94,18 +94,39 @@ export class AnswerQuaries extends BaseQueries {
         }
     }
 
-    // In AnswerQuaries class
-    public static async updateAnswer(answerId: number, userId: number, newContent: string): Promise<boolean> {
+    /**
+    * Retrieves all answers posted by a specific user.
+    * @param {number} userId - The ID of the user.
+    * @returns {Promise<AnswerQuaries[]>} An array of AnswerQuaries instances representing the user's answers.
+    */
+    public static async getAnswersByUserId(userId: number): Promise<AnswerQuaries[]> {
         try {
-            // Check if the answer belongs to the user
-            const answerData: any = await api.queryDatabase("SELECT * FROM answers WHERE answerid = ? AND userid = ?", answerId, userId);
-            if (answerData.length === 0) {
-                throw new Error("Answer not found or user not authorized to edit this answer.");
-            }
-
-            // Update the answer content
-            const queryUpdate: string = "UPDATE answers SET contentAnswer = ? WHERE answerid = ?";
-            await api.queryDatabase(queryUpdate, newContent, answerId);
+            const query: string = `
+            SELECT answers.*, user.username 
+            FROM answers 
+            JOIN user ON answers.userid = user.userid 
+            WHERE answers.userid = ?`;
+            const answers: any = await api.queryDatabase(query, userId);
+            return answers.map((a: any) => {
+                return new AnswerQuaries(
+                    a.answerid,
+                    a.questionid,
+                    a.userid,
+                    a.contentAnswer,
+                    a.createdatAnswer,
+                    a.username,
+                );
+            });
+        } catch (error) {
+            console.error("Error getting answers by user ID:", error);
+            throw error;
+        }
+    }
+    public static async updateAnswer(answerId: number, newContent: string, userId: number): Promise<boolean> {
+        try {
+            const currentDate: Date = new Date();
+            const queryUpdate: string = "UPDATE answers SET contentAnswer = ?, createdatAnswer = ? WHERE answerid = ? AND userid = ?";
+            await api.queryDatabase(queryUpdate, newContent, currentDate, answerId, userId);
             return true;
         } catch (error) {
             console.error("Error updating answer:", error);
