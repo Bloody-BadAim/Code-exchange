@@ -52,7 +52,7 @@ class QuestionDetailHandler {
         const answers: AnswerQuaries[] = await AnswerQuaries.getAnswersByQuestionId(questionId);
         this.answersList.innerHTML = ""; // Clear the answers list before adding new ones
 
-        answers.forEach((answer, index) => {
+        answers.forEach((answer) => {
             const answerElement: HTMLDivElement = document.createElement("div");
             answerElement.classList.add("answer-item");
             answerElement.innerHTML = `

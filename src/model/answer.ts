@@ -25,7 +25,7 @@ export class AnswerQuaries extends BaseQueries {
     public _createdatAnswer: Date;
 
     public constructor(answerid: number, questionid: number, userid: number, contentAnswer: string, createdatAnswer: Date, username: string) {
-        super(userid,username);
+        super(userid, username);
         this._answerid = answerid;
         this._questionid = questionid;
         this._contentAnswer = contentAnswer;
@@ -93,4 +93,45 @@ export class AnswerQuaries extends BaseQueries {
             throw error;
         }
     }
+
+    /**
+    * Retrieves all answers posted by a specific user.
+    * @param {number} userId - The ID of the user.
+    * @returns {Promise<AnswerQuaries[]>} An array of AnswerQuaries instances representing the user's answers.
+    */
+    public static async getAnswersByUserId(userId: number): Promise<AnswerQuaries[]> {
+        try {
+            const query: string = `
+            SELECT answers.*, user.username 
+            FROM answers 
+            JOIN user ON answers.userid = user.userid 
+            WHERE answers.userid = ?`;
+            const answers: any = await api.queryDatabase(query, userId);
+            return answers.map((a: any) => {
+                return new AnswerQuaries(
+                    a.answerid,
+                    a.questionid,
+                    a.userid,
+                    a.contentAnswer,
+                    a.createdatAnswer,
+                    a.username,
+                );
+            });
+        } catch (error) {
+            console.error("Error getting answers by user ID:", error);
+            throw error;
+        }
+    }
+    public static async updateAnswer(answerId: number, newContent: string, userId: number): Promise<boolean> {
+        try {
+            const currentDate: Date = new Date();
+            const queryUpdate: string = "UPDATE answers SET contentAnswer = ?, createdatAnswer = ? WHERE answerid = ? AND userid = ?";
+            await api.queryDatabase(queryUpdate, newContent, currentDate, answerId, userId);
+            return true;
+        } catch (error) {
+            console.error("Error updating answer:", error);
+            return false;
+        }
+    }
+
 }

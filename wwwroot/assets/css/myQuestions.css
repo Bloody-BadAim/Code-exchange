@@ -1,412 +1,263 @@
 .login-box {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 } 
 
 
 html,
 body {
-    background: #d8f3dc;
-    margin: 0 auto;
-    font-family: "Poppins", sans-serif ;
-    padding: 0;
+  background: #d8f3dc;
+  margin: 0 auto;
+  font-family: "Poppins", sans-serif ;
+  padding: 0;
 }
 p,h1{
-    padding: 20px;
+  padding: 20px;
 }
 
 button {
-    border: unset;
-    padding: 10px;
+  border: unset;
+  padding: 10px;
 }
 
 .dark-btn {
-    margin: 0 auto;
-    padding: 6px 24px;
-    border-radius: 100px;
-    background-color:#74c69d ;
-    color: rgb(0, 0, 0);
-    min-width: 128px;
-    font-weight: bold;
-    height: 50px;
-    font-family: 'Poppins', sans-serif;
-    cursor: pointer;
-    margin-top: 50px;
-
-    &:hover {
-        background-color:#3dac78 ;
-        color: white;
-        transition: 0.3s ease;
-    }
-}
-
-.dark-btn-cancel {
-  margin: auto;
+  margin: 0 auto;
   padding: 6px 24px;
   border-radius: 100px;
-  background-color:#18283b;
-  color: white;
-  min-width: 118px;
+  background-color:#74c69d ;
+  color: rgb(0, 0, 0);
+  min-width: 128px;
   font-weight: bold;
-  height: 40px;
+  height: 50px;
   font-family: 'Poppins', sans-serif;
   cursor: pointer;
-  margin-top: 20px;
-  width: 100%;
+  margin-top: 50px;
 
   &:hover {
-    background-color: #18283b;
-      color: rgba(185, 10, 10, 0.738);
+      background-color:#3dac78 ;
+      color: white;
       transition: 0.3s ease;
   }
 }
 
+.dark-btn-cancel {
+margin: auto;
+padding: 6px 24px;
+border-radius: 100px;
+background-color:#18283b;
+color: white;
+min-width: 118px;
+font-weight: bold;
+height: 40px;
+font-family: 'Poppins', sans-serif;
+cursor: pointer;
+margin-top: 20px;
+width: 100%;
+
+&:hover {
+  background-color: #18283b;
+    color: rgba(185, 10, 10, 0.738);
+    transition: 0.3s ease;
+}
+}
+
 
 .container {
-    max-width: 1280px;
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 30px;
-    background-color: rgb(255, 255, 255);
-    margin: 0 auto;
-    padding: 10px;
-    margin-top: 100px;
+  max-width: 1280px;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 30px;
+  background-color: rgb(255, 255, 255);
+  margin: 0 auto;
+  padding: 10px;
+  margin-top: 100px;
 }
 
 @media only screen and (min-width: 601px) {
-    .container {
-        width: 85%;
-    }
+  .container {
+      width: 85%;
+  }
 }
 
 @media only screen and (min-width: 993px) {
-    .container {
-        width: 70%;
-    }
+  .container {
+      width: 70%;
+  }
 }
 
 .container .row {
-    margin-left: -0.75rem;
-    margin-right: -0.75rem;
-    display: flex;
+  margin-left: -0.75rem;
+  margin-right: -0.75rem;
+  display: flex;
 }
 
 .row {
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
 }
 
 .row .col {
-    flex-grow: 1;
-    margin-left: 0.75rem;
-    margin-right: 0.75rem;
+  flex-grow: 1;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
 }
 
 .row .col.s1 {
-    width: 8.3333333333%;
-    margin-left: auto;
-    left: auto;
-    right: auto;
+  width: 8.3333333333%;
+  margin-left: auto;
+  left: auto;
+  right: auto;
 }
 
 .row .col.s2 {
-    width: 16.6666666667%;
-    margin-left: auto;
-    left: auto;
-    right: auto;
+  width: 16.6666666667%;
+  margin-left: auto;
+  left: auto;
+  right: auto;
 }
 
 .row .col.s3 {
-    width: calc(50% - 1.5rem);
-    padding: 20px;
+  width: calc(50% - 1.5rem);
+  padding: 20px;
 }
 
 .row .col.s4 {
-    width: 33.3333333333%;
-    margin-left: auto;
-    left: auto;
-    right: auto;
+  width: 33.3333333333%;
+  margin-left: auto;
+  left: auto;
+  right: auto;
 }
 
 .row .col.s5 {
-    width: 41.6666666667%;
-    margin-left: auto;
-    left: auto;
-    right: auto;
+  width: 41.6666666667%;
+  margin-left: auto;
+  left: auto;
+  right: auto;
 }
 
 .row .col.s6 {
-    width: 50%;
-    margin-left: 5%;
+  width: 50%;
+  margin-left: 5%;
 
 
 }
 
 .row .col.s7 {
-    width: 58.3333333333%;
-    margin-left: auto;
-    left: auto;
-    right: auto;
+  width: 58.3333333333%;
+  margin-left: auto;
+  left: auto;
+  right: auto;
 }
 
 .row .col.s8 {
-    width: 66.6666666667%;
-    margin-left: auto;
-    left: auto;
-    right: auto;
+  width: 66.6666666667%;
+  margin-left: auto;
+  left: auto;
+  right: auto;
 }
 
 .row .col.s9 {
-    width: calc(50% - 1.5rem);
-    padding: 20px;
+  width: calc(50% - 1.5rem);
+  padding: 20px;
 }
 
 .row .col.s10 {
-    width: 83.3333333333%;
-    margin-left: auto;
-    left: auto;
-    right: auto;
+  width: 83.3333333333%;
+  margin-left: auto;
+  left: auto;
+  right: auto;
 }
 
 .row .col.s11 {
-    width: 91.6666666667%;
-    margin-left: auto;
-    left: auto;
-    right: auto;
+  width: 91.6666666667%;
+  margin-left: auto;
+  left: auto;
+  right: auto;
 }
 
 .row .col.s12 {
-    width: 100%;
-    margin-left: auto;
-    left: auto;
-    right: auto;
+  width: 100%;
+  margin-left: auto;
+  left: auto;
+  right: auto;
 }
 
 
 .image-container img {
-    max-width: 91%;
-    height: auto;
-    border-radius: 20px;
+  max-width: 91%;
+  height: auto;
+  border-radius: 20px;
 }
 
 .image-container-sub img {
-    max-width: 70%;
-    height: auto;
-    border-radius: 20px;
+  max-width: 70%;
+  height: auto;
+  border-radius: 20px;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
-/* Custom Styles */
-
-/* Style for Questions List */
-#questionsDisplay {
-  margin-top: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-}
-
-#questionsDisplay div {
-  border-bottom: 1px solid #ddd;
-  padding: 10px 15px;
-  cursor: pointer;
-}
-
-#questionsDisplay div:last-child {
-  border-bottom: none;
-}
-
-#questionsDisplay div:hover {
-  background-color: #f1f1f1;
-}
-
-/* Style for Question and Answer Details */
-#questionDetailView .modal-content {
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-#questionContent, #answersList {
-  padding: 15px;
-  border-top: 1px solid #ddd;
-  background-color: #fff;
-}
-
-#questionContent h3 {
-  margin-top: 0;
-}
-
-#answerSection {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #f7f7f7;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-#answerInput {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-h1, h2 {
-  color: #333;
-}
-
-.dark-btn, .dark-btn-cancel {
-  border-radius: 4px;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-.dark-btn {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.dark-btn-cancel {
-  background-color: #6c757d;
-  color: #fff;
-}
-
-.dark-btn:hover {
-  background-color: #0056b3;
-}
-
-.dark-btn-cancel:hover {
-  background-color: #545b62;
-}
-#addCodeSnippet {
-  background-color: #4CAF50; /* Green */
-  color: white;
-  padding: 10px 15px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-#addCodeSnippet:hover {
-  background-color: #45a049;
-}
-
-.answer-input {
-  width: 100%;
-  min-height: 100px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-family: monospace;
-  line-height: 1.5;
-  background-color: #fff;
-}
-
-.code-preview {
-  display: none; /* Initially hidden */
-  white-space: pre-wrap;
-  background-color: #282c34; /* Dark background for code */
-  color: #abb2bf; /* Light grey color for text */
-  padding: 10px;
-  border-radius: 4px;
-  margin-top: 10px;
-  overflow-x: auto;
-}
-
-/* Add this CSS to your existing stylesheet */
-.code-preview {
-  display: none; /* Initially hidden */
-  white-space: pre-wrap;
-  background-color: #282c34; /* Dark background for code */
-  color: #abb2bf; /* Light grey color for text */
-  padding: 10px;
-  border-radius: 4px;
-  margin-top: 10px;
-  overflow-x: auto;
-}
-
-/* Style for the textarea and the code snippet */
-textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-family: 'Courier New', Courier, monospace; /* Monospace font for code */
-  background-color: #f8f8f8; /* Light grey background */
-  color: #333; /* Dark text for contrast */
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-textarea.code-snippet {
-  background-color: #272822; /* Dark background for code snippet */
-  color: #f8f2c1; /* Light color text for code */
-  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
-}
 
 tbody,
 tr,
 td {
-    text-align: center;
-    margin: auto;
-    padding: 15px;
-    border-radius: 1px;
-    max-width: 350px;
-    white-space: nowrap;
+  text-align: center;
+  margin: auto;
+  padding: 15px;
+  border-radius: 1px;
+  max-width: 350px;
+  white-space: nowrap;
 
 }
 
 thead,
 th {
-    text-align: center;
-    margin: auto;
-    padding: 10px;
-    border-radius: 10px;
-    max-width: 350px;
-    white-space: nowrap;
+  text-align: center;
+  margin: auto;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 350px;
+  white-space: nowrap;
 }
 
 @media only screen and (min-width: 601px) {
-    table {
-        width: 85%;
-        overflow: scroll;
-    }
+  table {
+      width: 85%;
+      overflow: scroll;
+  }
 }
 
 @media only screen and (min-width: 993px) {
-    table {
-        width: 70%;
-        overflow: scroll;
-    }
+  table {
+      width: 70%;
+      overflow: scroll;
+  }
 }
 
 
 th {
-    border: 1px solid #3dac78;
-    box-shadow: 1px 3px #74c69d;
+  border: 1px solid #3dac78;
+  box-shadow: 1px 3px #74c69d;
 
 }
 
 tbody tr {
-    border: 1px solid #3dac78;
-    box-shadow: 1px 1px 4px 2px #74c69d;
-    border-radius: 0px;
-    transition: 0.4s ease;
+  border: 1px solid #3dac78;
+  box-shadow: 1px 1px 4px 2px #74c69d;
+  border-radius: 0px;
+  transition: 0.4s ease;
 
 }
 
 tbody tr:hover {
-    box-shadow: 1px 1px 4px 2px #3dac78;
-    border-radius: 50px;
-    color: black;
-    cursor: pointer;
-    overflow: hidden;
-    transition: 0.2s ease;
+  box-shadow: 1px 1px 4px 2px #3dac78;
+  border-radius: 50px;
+  color: black;
+  cursor: pointer;
+  overflow: hidden;
+  transition: 0.2s ease;
 
 }
 
@@ -414,19 +265,19 @@ tbody tr:hover {
 
 
 table {
-    background: rgba(255, 255, 255, 0.93);
-    padding: 5rem;
-    display: table;
-    width: 100%;
-    height: 100vh;
-    vertical-align: middle;
-    justify-content: center;
-    border-collapse: separate;
-    border-spacing: 0 25px;
+  background: rgba(255, 255, 255, 0.93);
+  padding: 5rem;
+  display: table;
+  width: 100%;
+  height: 100vh;
+  vertical-align: middle;
+  justify-content: center;
+  border-collapse: separate;
+  border-spacing: 0 25px;
 }
 
 a {
-    text-decoration: none;
-    color: #ffffff;
-    cursor: pointer;
+  text-decoration: none;
+  color: #ffffff;
+  cursor: pointer;
 }
