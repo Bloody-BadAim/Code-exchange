@@ -18,11 +18,13 @@ Dit verslag heeft betrekking op de gebruikerstest van onze webapplicatie, ontwik
 - Functioneren van mislukten.
 
 **Deelnemers**
+
 Twee gebruikers met hetzelfde ervaringsniveau:
 
 - Djamilo
 - Milad
 
+**Taken**
 
 - Een vraag zoeken en bekijken.
 - Een nieuwe vraag plaatsen.
