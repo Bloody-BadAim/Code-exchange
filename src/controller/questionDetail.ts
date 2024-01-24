@@ -33,15 +33,16 @@ class QuestionDetailHandler {
                     const answerElement: HTMLDivElement = document.createElement("div");
                     answerElement.classList.add("answer-item");
                     answerElement.innerHTML = `
-                    <button id="upvotebtn-${answer._answerid}" class="upvotebtn">
-                        <i class='bx bxs-upvote'></i>
-                    </button>
-                    <button id="downvotebtn-${answer._answerid}" class="downvotebtn">
-                        <i class='bx bxs-downvote'></i>
-                    </button>
+                        <button id="upvotebtn-${answer._answerid}" class="upvotebtn">
+                            <i class='bx bxs-upvote'></i>
+                        </button>
+                        <button id="downvotebtn-${answer._answerid}" class="downvotebtn">
+                            <i class='bx bxs-downvote'></i>
+                        </button>
+
                         <p class="answer-content">${answer._contentAnswer}</p>
                         <p class="answer-details">Posted by ${answer._username} on ${new Date(answer._createdatAnswer).toLocaleDateString()}</p>
-                    `;
+                        `;
                     this.answersList.appendChild(answerElement);
                 });
 
@@ -130,7 +131,6 @@ class QuestionDetailHandler {
         } catch (error) {
             console.error("Initialization failed:", error);
         }
-
 
     }
 

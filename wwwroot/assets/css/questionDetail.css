@@ -201,12 +201,29 @@ a {
     color: #777;
 }
 
+.upvotebtn,
+.downvotebtn{
+    background: none;
+    border: none;
+    font-size: 25px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.upvotebtn:hover {
+    color: #B7e4c7;
+}
+
+.downvotebtn:hover {
+    color: rgb(255, 98, 98);
+}
+
 #codeSnippetContainer {
     background-color: #000000; /* Dark background for contrast */
     color: #fff; /* Light text for readability */
     padding: 10px;
     margin-bottom: 20px;
-    display: none; /* Hidden by default, shown when there's a code snippet */
+    display: none; /*Hidden by default, shown when there's a code snippet */
     word-break: break-word; /* Use break-word to keep words intact if possible */
     overflow-wrap: break-word;
     border-radius: 5px;
@@ -256,22 +273,5 @@ textarea {
   textarea:focus::placeholder {
     opacity: 0.5; /* Fades the placeholder text slightly */
   }
-  #upvotebtn,
-#downvotebtn{
-    background: none;
-    border: none;
-    font-size: 25px;
-    margin: 10px 0;
-    cursor: pointer;
-}
-
-#upvotebtn:hover {
-    color: #B7e4c7;
-}
-
-#downvotebtn:hover {
-    color: rgb(255, 98, 98);
-}
-
   
 
