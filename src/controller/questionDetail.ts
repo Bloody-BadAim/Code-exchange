@@ -51,23 +51,15 @@ class QuestionDetailHandler {
         await this.loadAndDisplayAnswers(questionId);
     }
 
-
     private updateQuestionView(question: QuestionQueries): void {
-        const contentElement: HTMLDivElement = document.createElement("div");
-        contentElement.innerHTML = `
-        <h2>${question._content}</h2>
-        <p>Asked by ${question._username} on ${new Date(question._createdAt).toLocaleDateString()}</p>
-    `;
-
-        // Check if there's a code snippet in the content
-        const codeSnippetMatch: RegExpMatchArray  = question._content.match(/```([\s\S]*?)```/)!;
-        if (codeSnippetMatch) {
-            const codeSnippetContainer: HTMLElement = document.getElementById("codeSnippetContainer") as HTMLElement;
-            codeSnippetContainer.innerText = codeSnippetMatch[1];
-        }
-
-        this.questionTitle.appendChild(contentElement);
+        this.questionTitle.innerHTML = `
+            <h2>${question._content}</h2>
+            <p>Asked by ${question._username} on ${new Date(question._createdAt).toLocaleDateString()}</p>
+        `;
+        
     }
+
+    
 
     private async loadAndDisplayAnswers(questionId: number): Promise<void> {
         const answers: any = await AnswerQuaries.getAnswersByQuestionId(questionId);
@@ -82,17 +74,17 @@ class QuestionDetailHandler {
     private createAnswerElement(answer: AnswerQuaries): HTMLElement {
         const answerElement: HTMLDivElement = document.createElement("div");
         answerElement.classList.add("answer-item");
-
+    
         // Convert the answer content, checking for code snippets
         const convertedContent: string = this.convertContent(answer._contentAnswer);
-
+    
         answerElement.innerHTML = `
             <p class="answer-content">${convertedContent}</p>
             <p class="answer-details">Posted by ${answer._username} on ${new Date(answer._createdatAnswer).toLocaleDateString()}</p>
         `;
         return answerElement;
     }
-
+    
     private convertContent(content: string): string {
         // Simple example to convert code snippets - you may need a more robust solution
         return content.replace(/```(\n[\s\S]*?\n)```/g, "<div class=\"code-snippet\">$1</div>");

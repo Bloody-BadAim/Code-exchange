@@ -38,16 +38,6 @@ class MyAnswerView {
 
                 this.answersContainer.appendChild(row);
 
-                // Event delegation to handle clicks on the row, but not on buttons
-                row.addEventListener("click", (event) => {
-                    if (event.target instanceof HTMLButtonElement) return;
-                    if (answer._questionid !== undefined) {
-                        sessionStorage.setItem("selectedQuestionId", answer._questionid.toString());
-                        window.location.href = "questionDetail.html";
-                    } else {
-                        console.error("Question ID is undefined.");
-                    }
-                });
 
                 const editBtn: HTMLButtonElement = row.querySelector(".edit-btn") as HTMLButtonElement;
                 const saveBtn: HTMLButtonElement = row.querySelector(".save-btn") as HTMLButtonElement;
@@ -74,9 +64,14 @@ class MyAnswerView {
                         editTextArea.style.display = "none";
                         editBtn.style.display = "";
                         saveBtn.style.display = "none";
+                        if (answer._questionid !== undefined) {
+                            sessionStorage.setItem("selectedQuestionId", answer._questionid.toString());
+                            window.location.href = "questionDetail.html";
+                        } else {
+                            console.error("Question ID is undefined.");
+                        }
                     }
                 });
-
                 deleteBtn.addEventListener("click", async (e) => {
                     e.stopPropagation();  // Prevent the row click event
                     const confirmed: boolean = confirm("Are you sure you want to delete this answer?");
