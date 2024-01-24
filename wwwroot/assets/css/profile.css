@@ -99,6 +99,7 @@ img {
     height: 130px;
     border-radius: 70%;
     object-fit: cover;
+    display: inline-block;
 }
 
 .user-img {
@@ -224,5 +225,27 @@ img {
     margin-top: 2px;
     outline: none;
     border-style: solid;
+}
+
+.ratingsWrapper{
+    /* border: thin solid #555; */
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 0 10px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.ratings{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items:center;
+   
+   
+
+}
+.ratings span {
+    font-size: 25px;
 }
 

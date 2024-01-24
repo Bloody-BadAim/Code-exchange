@@ -1,5 +1,6 @@
 import { QuestionQueries } from "../model/question";
 import { AnswerQuaries } from "../model/answer";
+import { VoteController } from "./voteController";
 
 class QuestionDetailHandler {
     private questionTitle = document.getElementById("questionTitle") as HTMLElement;
@@ -23,10 +24,114 @@ class QuestionDetailHandler {
 
             document.getElementById("submitAnswer")?.addEventListener("click", async () => {
                 await this.handleAnswerSubmission(questionId);
+
+
+                const answers: AnswerQuaries[] = await AnswerQuaries.getAnswersByQuestionId(questionId);
+                this.answersList.innerHTML = "";
+        
+                answers.forEach((answer) => {
+                    const answerElement: HTMLDivElement = document.createElement("div");
+                    answerElement.classList.add("answer-item");
+                    answerElement.innerHTML = `
+                    <button id="upvotebtn-${answer._answerid}" class="upvotebtn">
+                        <i class='bx bxs-upvote'></i>
+                    </button>
+                    <button id="downvotebtn-${answer._answerid}" class="downvotebtn">
+                        <i class='bx bxs-downvote'></i>
+                    </button>
+                        <p class="answer-content">${answer._contentAnswer}</p>
+                        <p class="answer-details">Posted by ${answer._username} on ${new Date(answer._createdatAnswer).toLocaleDateString()}</p>
+                    `;
+                    this.answersList.appendChild(answerElement);
+                });
+
+
+                const voteController: VoteController = new VoteController();
+
+                const buttons: NodeListOf<HTMLButtonElement> = document.querySelectorAll("button");
+                const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll("input");
+                console.log(buttons);
+                console.log(inputs);
+
+                buttons.forEach(button => {
+                    button.addEventListener("click", () => {
+                
+                        console.log(`Button clicked! ID: ${button.id}`);
+
+                        const useridStorage: string | null= sessionStorage.getItem("userid");
+                        const userid: number = Number(useridStorage!);
+
+                        const arraybtn: any = button.id.split("-");
+                        const answerid: number = arraybtn[1];
+
+                        const blabla: any = voteController.totalVotesRating(userid);
+
+                        if(arraybtn[0] === "upvotebtn"){
+                            const code: any = voteController.Vote(userid, answerid, true, null);
+                            const otherFakeBtn: any = "downvotebtn" + `-${answerid}`;
+                            const otherBtn: HTMLElement | null = document.getElementById(otherFakeBtn);
+
+                            const color: HTMLButtonElement = document.getElementById(`${button.id}`) as HTMLButtonElement;
+
+                            if (color) {
+
+                                const computedStyles: CSSStyleDeclaration = getComputedStyle(color);
+                                const buttonColor: string = computedStyles.color;
+
+
+                                if (buttonColor === "rgb(61, 172, 120)" || buttonColor === "#3dac78") {
+                                    color.style.color = "black";
+                                } else {
+                                    otherBtn!.style.color = "black";
+                                    localStorage.setItem("color", "#3dac78");
+                                    color.style.color = "#3dac78";
+                                
+                                    const totalVotes: any = voteController.loadVote(answerid);
+                                    const totalvote: [] = totalVotes[0];
+                                    console.log(totalvote);
+
+                                }
+
+                            }
+
+                            return code;
+
+
+                        }else if(arraybtn[0] === "downvotebtn"){
+                            const code: any = voteController.Vote(userid, answerid, null, true);
+                            const otherFakeBtn: any = "upvotebtn" + `-${answerid}`;
+                            const otherBtn: HTMLElement | null = document.getElementById(otherFakeBtn);
+
+                            const color: HTMLButtonElement = document.getElementById(`${button.id}`) as HTMLButtonElement;
+                            
+                            if (color) {
+                                const computedStyles: CSSStyleDeclaration = getComputedStyle(color);
+                                const buttonColor: string = computedStyles.color;
+                            
+                                if (buttonColor === "rgb(255, 0, 0)" || buttonColor === "red") {
+                                    // If it's red, change it to black
+                                    color.style.color = "black";
+
+                                } else{
+                                    otherBtn!.style.color = "black";
+                                    color.style.color = "red";
+                                }
+                            }      
+                            return code;
+
+                        }else {
+                            console.log("both null error");
+                        }
+
+                    });
+
+                });
             });
         } catch (error) {
             console.error("Initialization failed:", error);
         }
+
+
     }
 
     private getQuestionIdFromSession(): number {

@@ -26,8 +26,8 @@ input{
 } 
 
 
-#upvotebtn,
-#downvotebtn{
+.upvotebtn,
+.downvotebtn{
     background: none;
     border: none;
     font-size: 25px;
@@ -35,11 +35,11 @@ input{
     cursor: pointer;
 }
 
-#upvotebtn:hover {
+.upvotebtn:hover {
     color: #B7e4c7;
 }
 
-#downvotebtn:hover {
+.downvotebtn:hover {
     color: rgb(255, 98, 98);
 }
 
