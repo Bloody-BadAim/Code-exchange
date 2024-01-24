@@ -6,9 +6,11 @@ body {
     font-family: "Poppins", sans-serif ;
     padding: 0;
 }
-h1{
+h1,h2{
     padding: 20px;
     text-align: center;
+    
+
 }
 p{
     padding: 20px;
@@ -43,9 +45,11 @@ button {
 .question-title {
     margin-bottom: 20px;
     padding: 15px;
-    background-color: #f9f9f9;
+    background-color: #74c69d8f;
     border-left: 4px solid #74c69d ;
     word-break: break-all;
+    box-shadow: 4px 0px 0px 0px #74c69d;
+    border-radius: 20px;
 }
 .container {
     max-width: 1280px;
@@ -188,17 +192,22 @@ a {
     border-bottom: 1px solid #ccc;
     padding: 10px;
     margin-bottom: 10px;
+    border: solid 3px #74c69d;
+    border-radius: 50px;
+    box-shadow: 1px 1px 4px 2px #74c69d;
 }
 
 .answer-content {
     font-size: 1.2em;
     word-break: break-word; /* Use break-word to keep words intact if possible */
     overflow-wrap: break-word;
+   
 }
 
 .answer-details {
     font-size: 0.8em;
     color: #777;
+   
 }
 
 #codeSnippetContainer {
@@ -228,7 +237,7 @@ pre {
 /* Style for the textarea element */
 textarea {
     border-radius: 30px;
-    border: 1px solid #74c69d;
+    border: 2px solid #080a09;
     width: 100%;
     max-width: 100%;
     padding: 20px; /* Add padding for aesthetic spacing inside the textarea */
@@ -241,7 +250,7 @@ textarea {
   /* Pseudo-element for the placeholder */
   textarea::placeholder {
     text-align: center; /* Centers the placeholder text */
-    color: #74c69d; /* Light grey color for the placeholder text */
+    color: #050907; /* Light grey color for the placeholder text */
     opacity: 1; /* Ensures the placeholder is fully visible */
     transition: all 0.3s ease; /* Smooth transition for the placeholder */
   }
@@ -256,22 +265,23 @@ textarea {
   textarea:focus::placeholder {
     opacity: 0.5; /* Fades the placeholder text slightly */
   }
-  #upvotebtn,
-#downvotebtn{
-    background: none;
-    border: none;
-    font-size: 25px;
-    margin: 10px 0;
+
+  .rating-stars {
+    display: flex;
+    justify-content: flex-end; /* Align stars to the right */
     cursor: pointer;
 }
 
-#upvotebtn:hover {
-    color: #B7e4c7;
+.rating-stars .star {
+    display: inline-block;
+    color: #ddd; /* Default color of stars */
+    font-size: 24px; /* Size of the stars */
+    transition: color 0.3s ease; /* Transition effect for color change */
 }
 
-#downvotebtn:hover {
-    color: rgb(255, 98, 98);
+.rating-stars .star.rated {
+    color: #30aa71; /* Color of rated stars */
+
 }
 
-  
 

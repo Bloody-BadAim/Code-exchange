@@ -2,120 +2,60 @@ import "../config";
 import { api } from "@hboictcloud/api";
 import { BaseQueries } from "./baseQa";
 
-
-/**
- * Class representing queries related to voting on answers.
- * Extends the BaseQueries class for common user information.
- */
 export class VoteQueries extends BaseQueries {
-
-    /**
-     * The ID of the answer for which the vote is being recorded.
-     */
     public _answerid: number;
-    
-    /**
-     * Indicates whether the user is upvoting the answer.
-     */
-    public _upvote: boolean;
+    public _rating: number;
 
-    /**
-     * Indicates whether the user is downvoting the answer.
-     */
-    public _downvote: boolean;
-
-    /**
-     * Creates an instance of VoteQueries.
-     * @param userid - The ID of the user performing the vote.
-     * @param username - The username of the user performing the vote.
-     * @param answerid - The ID of the answer for which the vote is being recorded.
-     * @param upvote - Indicates whether the user is upvoting the answer.
-     * @param downvote - Indicates whether the user is downvoting the answer.
-     */
-    public constructor(userid: number, username: string, answerid: number, upvote: boolean, downvote: boolean) {
+    public constructor(userid: number, username: string, answerid: number, rating: number) {
         super(userid, username);
         this._answerid = answerid;
-        this._upvote = upvote;
-        this._downvote = downvote;
+        this._rating = rating;
     }
 
-    /**
-     * Checks if the user has voted on a particular answer.
-     * @param userid - The ID of the user.
-     * @param answerid - The ID of the answer.
-     * @returns A Promise resolving to a string or undefined based on the vote status.
-     */
-    public static async checkVote(userid: number, answerid: number): Promise<string | undefined> {
-        const selectString: string = "SELECT upvote, downvote FROM vote WHERE userid = ? AND answerid = ?";
-        const select: any = await api.queryDatabase(selectString, userid, answerid);
-        return select;
+    // Check if the user has already rated an answer
+    public static async checkRating(userid: number, answerid: number): Promise<any> {
+        try {
+            const selectString: string = "SELECT rating FROM vote WHERE userid = ? AND answerid = ?";
+            const result: any = await api.queryDatabase(selectString, userid, answerid);
+            return result.length ? result[0].rating : null;
+        } catch (error) {
+            console.error("Error checking rating:", error);
+            throw error;
+        }
     }
 
-    /**
-     * Inserts a new vote record into the database.
-     * @param userid - The ID of the user performing the vote.
-     * @param answerid - The ID of the answer for which the vote is being recorded.
-     * @param upvote - Indicates whether the user is upvoting the answer.
-     * @param downvote - Indicates whether the user is downvoting the answer.
-     * @returns A Promise resolving to a boolean indicating the success of the insertion.
-     */
-    public static async insertVote(userid: number, answerid: number, upvote: boolean | null, downvote: boolean | null): Promise<boolean> {
-        const insert: any = await api.queryDatabase("INSERT INTO vote (userid, answerid, upvote, downvote) VALUES (?, ?, ?, ?)", userid, answerid, upvote, downvote);
-        console.log(insert);
-        return insert;
+    // Insert or update a rating for an answer
+    public static async setRating(userid: number, answerid: number, rating: number): Promise<boolean> {
+        try {
+            const currentRating: any = await this.checkRating(userid, answerid);
+            if (currentRating !== null) {
+                const updateString: string = "UPDATE vote SET rating = ? WHERE userid = ? AND answerid = ?";
+                await api.queryDatabase(updateString, rating, userid, answerid);
+            } else {
+                const insertString: string = "INSERT INTO vote (userid, answerid, rating) VALUES (?, ?, ?)";
+                await api.queryDatabase(insertString, userid, answerid, rating);
+            }
+            return true;
+        } catch (error) {
+            console.error("Error setting rating:", error);
+            throw error;
+        }
     }
 
-    /**
-     * Deletes a vote record from the database.
-     * @param userid - The ID of the user.
-     * @param answerid - The ID of the answer.
-     * @returns A Promise resolving to a boolean indicating the success of the deletion.
-     */
-    public static async deleteVote(userid: number, answerid: number): Promise<boolean> {
-        const deletequery: any = await api.queryDatabase("DELETE FROM vote WHERE userid = ? AND answerid = ?", userid, answerid);
-        return deletequery;
-    }
-
-    /**
-     * Updates an existing vote record in the database.
-     * @param userid - The ID of the user.
-     * @param answerid - The ID of the answer.
-     * @param upvote - Indicates whether the user is upvoting the answer.
-     * @param downvote - Indicates whether the user is downvoting the answer.
-     * @returns A Promise resolving to a boolean indicating the success of the update.
-     */
-    public static async updateVote(userid: number, answerid: number, upvote: boolean | null, downvote: boolean | null): Promise<boolean> {
-        const update: any = await api.queryDatabase("UPDATE vote SET upvote = ?, downvote = ? WHERE userid = ? AND answerid = ?", upvote, downvote, userid, answerid);
-        return update;
-    }
-
-    /**
-     * Retrieves the vote information for a specific answer.
-     * @param answerid - The ID of the answer.
-     * @returns A Promise resolving to an object containing answer ID, total upvotes, and total downvotes.
-     */
-    public static async getVote(answerid: number): Promise<any> {
-        const getAll: any = await api.queryDatabase("SELECT answerid, COALESCE(SUM(upvote), 0) AS total_upvotes, COALESCE(SUM(downvote), 0) AS total_downvotes FROM vote WHERE answerid = ? GROUP BY answerid", answerid);
-        return getAll;
-    }
-
-    /**
-     * Retrieves all answers voted on by a specific user.
-     * @param userid - The ID of the user.
-     * @returns A Promise resolving to an array of answer IDs.
-     */
-    public static async getAllVote(userid: number): Promise<any> {
-        const getAll: any = await api.queryDatabase("SELECT answerid FROM answers WHERE userid = ?", userid);
-        return getAll;
-    }
-
-    /**
-     * Retrieves the user ID associated with a specific answer.
-     * @param answerid - The ID of the answer.
-     * @returns A Promise resolving to the user ID.
-     */
-    public static async useridFromAnswer(answerid: number): Promise<any> {
-        const getuserid: any = await api.queryDatabase("SELECT userid FROM answers WHERE answerid = ?", answerid);
-        return getuserid;
+    // Get the average rating for an answer
+    public static async getUserAverageRating(userid: number): Promise<number> {
+        try {
+            const queryString: string = `
+                SELECT AVG(v.rating) as averageUserRating
+                FROM vote v
+                JOIN answers a ON v.answerid = a.answerid
+                WHERE a.userid = ?
+            `;
+            const result: any = await api.queryDatabase(queryString, userid);
+            return result.length ? result[0].averageUserRating || 0 : 0;
+        } catch (error) {
+            console.error("Error getting user's average rating:", error);
+            throw error;
+        }
     }
 }

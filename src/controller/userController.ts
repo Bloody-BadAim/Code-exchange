@@ -131,7 +131,6 @@ export class UserController {
                 firstname ? UserQueries.updateProfileFunction("firstname", firstname) : null,
                 lastname ? UserQueries.updateProfileFunction("lastname", lastname) : null,
                 username ? UserQueries.updateProfileFunction("username", username) : null,
-                email ? UserQueries.updateProfileFunction("email", email) : null,
             ]);
 
             // Update session storage
