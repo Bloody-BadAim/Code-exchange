@@ -126,4 +126,5 @@ export class UserController {
         sessionStorage.setItem("username", username);
         sessionStorage.setItem("email", email);
     }
+
 }
