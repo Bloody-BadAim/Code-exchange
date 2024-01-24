@@ -21,7 +21,7 @@ class MainView {
     private async loadPersonalQuestions(): Promise<void> {
         try {
             const questions: QuestionQueries[] = await this.myQuestionsController.getPersonalQuestions();
-            questions.forEach((question: { _content: string; _createdAt: string | number | Date; _questionid: any; }) => {
+            questions.reverse().forEach((question: { _content: string; _createdAt: string | number | Date; _questionid: any; }) => {
                 const row: HTMLTableRowElement = document.createElement("tr");
                 row.innerHTML = `
                     <td>${this.username}</td>

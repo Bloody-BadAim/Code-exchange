@@ -22,7 +22,7 @@ class MyAnswerView {
             const myAnswers: AnswerQuaries[] = await this.answerController.getMyAnswers();
             this.answersContainer.innerHTML = "";
 
-            myAnswers.forEach(answer => {
+            myAnswers.reverse().forEach(answer => {
                 const row: HTMLTableRowElement = document.createElement("tr");
                 row.innerHTML = `
                     <td><span class="answer-text">${answer._contentAnswer}</span><textarea class="edit-textarea" style="display: none;">${answer._contentAnswer}</textarea></td>

@@ -34,6 +34,17 @@ export class MainView {
                 <td>${question._content}</td>
                 <td>${new Date(question._createdAt).toLocaleDateString()}</td>
             `;
+
+            // Add click event listener to each row
+            row.addEventListener("click", () => {
+                if (question._questionid !== undefined) {
+                    sessionStorage.setItem("selectedQuestionId", question._questionid.toString());
+                    window.location.href = "questionDetail.html";
+                } else {
+                    console.error("Question ID is undefined.");
+                }
+            });
+
             this.questionsDisplay.appendChild(row);
         });
     }
