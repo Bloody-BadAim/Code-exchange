@@ -9,6 +9,17 @@ class MyAnswerView {
         this.answerController = new MyAnswerController();
         this.answersContainer = this.getHTMLElement("myAnswersContainer");
         this.displayMyAnswers();
+        document.addEventListener("searchEvent", (event: Event) => this.handleSearch(event as CustomEvent));
+    }
+
+    private handleSearch(event: CustomEvent): void {
+        const searchTerm: string = event.detail.toLowerCase();
+        const rows: NodeListOf<HTMLTableRowElement> = this.answersContainer.querySelectorAll("tr");
+
+        rows.forEach(row => {
+            const isVisible: boolean = row.textContent?.toLowerCase().includes(searchTerm) ?? false;
+            row.style.display = isVisible ? "" : "none";
+        });
     }
 
     private getHTMLElement(elementId: string): HTMLElement {

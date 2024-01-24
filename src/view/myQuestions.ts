@@ -12,7 +12,18 @@ class MainView {
         this.myQuestionsController = new MyQuestionsController();
         this.username = sessionStorage.getItem("username");
         this.init();
+        document.addEventListener("searchEvent", (event: Event) => this.handleSearch(event as CustomEvent));
     }
+    private handleSearch(event: CustomEvent): void {
+        const searchTerm: string = event.detail.toLowerCase();
+        const rows: NodeListOf<HTMLTableRowElement> = this.questionsDisplay.querySelectorAll("tr");
+
+        rows.forEach(row => {
+            const isVisible: boolean = row.textContent?.toLowerCase().includes(searchTerm) ?? false;
+            row.style.display = isVisible ? "" : "none";
+        });
+    }
+
 
     private async init(): Promise<void> {
         await this.loadPersonalQuestions();
