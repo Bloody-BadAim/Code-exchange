@@ -10,6 +10,17 @@ class QuestionDetailHandler {
 
     public constructor() {
         this.initialize();
+        document.addEventListener("searchEvent", (event: Event) => this.handleSearch(event as CustomEvent));
+    }
+
+    private handleSearch(event: CustomEvent): void {
+        const searchTerm: string = event.detail.toLowerCase();
+        const answers: NodeListOf<HTMLDivElement> = this.answersList.querySelectorAll(".answer-item");
+
+        answers.forEach(answer => {
+            const isVisible: boolean = answer.textContent?.toLowerCase().includes(searchTerm) || false;
+            answer.style.display = isVisible ? "" : "none";
+        });
     }
 
     public async initialize(): Promise<void> {
@@ -29,7 +40,7 @@ class QuestionDetailHandler {
                 const answers: AnswerQuaries[] = await AnswerQuaries.getAnswersByQuestionId(questionId);
                 this.answersList.innerHTML = "";
         
-                answers.forEach((answer) => {
+                answers.reverse().forEach((answer) => {
                     const answerElement: HTMLDivElement = document.createElement("div");
                     answerElement.classList.add("answer-item");
                     answerElement.innerHTML = `
@@ -65,7 +76,6 @@ class QuestionDetailHandler {
                         const arraybtn: any = button.id.split("-");
                         const answerid: number = arraybtn[1];
 
-                        const blabla: any = voteController.totalVotesRating(userid);
 
                         if(arraybtn[0] === "upvotebtn"){
                             const code: any = voteController.Vote(userid, answerid, true, null);
