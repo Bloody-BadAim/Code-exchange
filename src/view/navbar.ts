@@ -17,6 +17,7 @@ class NavbarHandler {
             if (headerElement) {
                 headerElement.innerHTML = navbarHtml;
                 this.setupLogoutButton();
+                this.setupSearchFunctionality();
             }
         } catch (error) {
             console.error("Error fetching navbar:", error);
@@ -33,9 +34,23 @@ class NavbarHandler {
             console.error("Logout button not found in the navbar.");
         }
     }
+
+    private setupSearchFunctionality(): void {
+        const searchForm: HTMLFormElement = document.querySelector("form[role='search']")!;
+        const searchInput: HTMLInputElement = document.querySelector("input[type='search']")!;
+
+        if (searchForm && searchInput) {
+            searchForm.addEventListener("submit", (event) => {
+                event.preventDefault();
+                const searchTerm: string = searchInput.value;
+                document.dispatchEvent(new CustomEvent("searchEvent", { detail: searchTerm }));
+            });
+        } else {
+            console.error("Search form or input not found in the navbar.");
+        }
+    }
 }
 
-// Initialize the NavbarHandler when the document is loaded
 document.addEventListener("DOMContentLoaded", () => {
     new NavbarHandler();
 });

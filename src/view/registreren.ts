@@ -16,11 +16,29 @@ class RegistrationView {
      * Initialize event listeners for the registration view.
      */
     private initEventListeners(): void {
+        document.getElementById("registrationForm")?.addEventListener("submit", (event) => this.handleFormSubmit(event));
         document.getElementById("btnRegister")?.addEventListener("click", () => this.registerUser());
         document.getElementById("myFormLogin")?.addEventListener("submit", (event) => this.loginUser(event));
         document.getElementById("logout")?.addEventListener("click", () => this.logoutUser());
     }
+    private handleFormSubmit(event: Event): void {
+        event.preventDefault();
+        if (this.validateEmail()) {
+            this.registerUser();
+        }
+    }
 
+    private validateEmail(): boolean {
+        const emailInput: HTMLInputElement = document.getElementById("email") as HTMLInputElement;
+        const emailError: HTMLElement = document.getElementById("emailError")!;
+        if (emailInput.validity.valid) {
+            emailError.style.display = "none";
+            return true;
+        } else {
+            emailError.style.display = "block";
+            return false;
+        }
+    }
     /**
      * Handles user registration.
      */

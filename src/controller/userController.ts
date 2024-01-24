@@ -1,55 +1,62 @@
 import { UserQueries } from "../model/user";
 
-/**
- * Class representing the controller for user-related actions.
- */
 export class UserController {
-
-    /**
-     * Registers a new user.
-     * @param {string} email - User's email address.
-     * @param {string} username - User's username.
-     * @param {string} firstname - User's first name.
-     * @param {string} lastname - User's last name.
-     * @param {string} password - User's password.
-     * @returns {Promise<void>} A promise that resolves when registration is complete.
-     */
     public async register(email: string, username: string, firstname: string, lastname: string, password: string): Promise<void> {
-        if (!email.trim() || !username.trim() || !firstname.trim() || !lastname.trim() || !password.trim()) {
-            alert("All fields are required.");
-            return; // Exit the function if any field is empty
-        }
+        if (!this.validateRegistrationFields(email, username, firstname, lastname, password)) return;
+
         try {
-            // Check if email exists
-            const emailExists: boolean = await UserQueries.checkEmailExists(email);
-            if (emailExists) {
-                throw new Error("Email already exists");
-            }
-
-            // Check if username exists
-            const usernameExists: boolean = await UserQueries.checkUsernameExists(username);
-            if (usernameExists) {
-                throw new Error("Username already exists");
-            }
-
-            // Create account
-            const userId: number | undefined = await UserQueries.createAccount(email, username, firstname, lastname, password);
-            if (userId === undefined) {
-                throw new Error("Registration failed");
-            }
-
-            // Set session storage and navigate to the main page
-            sessionStorage.setItem("userid", String(userId));
-            sessionStorage.setItem("email", email);
-            sessionStorage.setItem("firstname", firstname);
-            sessionStorage.setItem("lastname", lastname);
-            sessionStorage.setItem("username", username);
-
-            alert("Registration successful!");
-            window.location.href = "./main.html";
+            await this.checkUserExists(email, username);
+            await this.createUserAccount(email, username, firstname, lastname, password);
+            this.setSessionStorageAndNavigate(email, username, firstname, lastname);
         } catch (error) {
-            alert(`Login failed: ${error}`);
+            alert(`Registration failed: ${error}`);
         }
+    }
+
+    private validateRegistrationFields(email: string, username: string, firstname: string, lastname: string, password: string): boolean {
+        if (!email || !username || !firstname || !lastname || !password) {
+            alert("All fields are required.");
+            return false;
+        }
+        if (!this.validateEmail(email)) {
+            alert("Invalid email format.");
+            return false;
+        }
+        return true;
+    }
+
+    private validateEmail(email: string): boolean {
+        const re: RegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        return re.test(email);
+    }
+
+    private async checkUserExists(email: string, username: string): Promise<void> {
+        const emailExists: boolean = await UserQueries.checkEmailExists(email);
+        if (emailExists) {
+            throw new Error("Email already in use.");
+        }
+
+        const usernameExists: boolean= await UserQueries.checkUsernameExists(username);
+        if (usernameExists) {
+            throw new Error("Username already taken.");
+        }
+    }
+
+    private async createUserAccount(email: string, username: string, firstname: string, lastname: string, password: string): Promise<void> {
+        const userId: number | undefined = await UserQueries.createAccount(email, username, firstname, lastname, password);
+        if (!userId) {
+            throw new Error("Account creation failed.");
+        }
+        sessionStorage.setItem("userid", String(userId));
+    }
+
+    private setSessionStorageAndNavigate(email: string, username: string, firstname: string, lastname: string): void {
+        sessionStorage.setItem("email", email);
+        sessionStorage.setItem("username", username);
+        sessionStorage.setItem("firstname", firstname);
+        sessionStorage.setItem("lastname", lastname);
+        alert("Registration successful!");
+        window.location.href = "./main.html";
     }
 
     /**

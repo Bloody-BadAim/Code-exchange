@@ -13,6 +13,7 @@ body {
 }
 p,h1{
     padding: 20px;
+    text-align: center;
 }
 
 button {
@@ -203,13 +204,14 @@ a {
 tbody,
 tr,
 td {
-    text-align: center;
-    margin: auto;
-    padding: 15px;
-    border-radius: 1px;
-    max-width: 350px;
-    white-space: nowrap;
-
+  text-align: center;
+  margin: auto;
+  padding: 15px;
+  border-radius: 1px;
+  max-width: 350px;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
 }
 
 thead,

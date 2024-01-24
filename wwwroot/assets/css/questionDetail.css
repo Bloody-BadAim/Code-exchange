@@ -6,7 +6,11 @@ body {
     font-family: "Poppins", sans-serif ;
     padding: 0;
 }
-p,h1{
+h1{
+    padding: 20px;
+    text-align: center;
+}
+p{
     padding: 20px;
 }
 
@@ -26,7 +30,9 @@ button {
     height: 50px;
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
-    margin-top: 50px;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 100%;
 
     &:hover {
         background-color:#3dac78 ;
@@ -38,7 +44,8 @@ button {
     margin-bottom: 20px;
     padding: 15px;
     background-color: #f9f9f9;
-    border-left: 4px solid #007bff;
+    border-left: 4px solid #74c69d ;
+    word-break: break-all;
 }
 .container {
     max-width: 1280px;
@@ -185,24 +192,67 @@ a {
 
 .answer-content {
     font-size: 1.2em;
+    word-break: break-word; /* Use break-word to keep words intact if possible */
+    overflow-wrap: break-word;
 }
 
 .answer-details {
     font-size: 0.8em;
     color: #777;
 }
-.code-snippet-container {
-    background-color: #000;
-    color: #fff;
+#codeSnippetContainer {
+    background-color: #000000; /* Dark background for contrast */
+    color: #fff; /* Light text for readability */
     padding: 10px;
-    margin-bottom: 10px;
-    white-space: pre-wrap;
-    font-family: monospace;
+    margin-bottom: 20px;
+    display: none; /* Hidden by default, shown when there's a code snippet */
+    word-break: break-word; /* Use break-word to keep words intact if possible */
+    overflow-wrap: break-word;
+    border-radius: 5px;
+    
 }
-#codeSnippetContainer code {
-    background-color: #333; /* Black background for code */
-    color: #fff; /* White text for code */
-    display: block;
+pre {
+    white-space: pre-wrap; /* Allows the text to wrap */
+    word-wrap: break-word; /* Breaks the words to prevent overflow */
+    overflow: hidden; /* Hides the scrollbar and ensures content fits within the container */
+    margin: auto; /* Adjust margin if needed */
+    background: #080707; /* Optional: background color for visibility */
+    border-radius: 1px; /* Optional: rounded corners for aesthetics */
+    font-family: monospace; /* Optional: monospace font for code readability */
+    color: white;
     padding: 10px;
-    overflow-x: auto;
+    text-justify: auto;
+    border-radius: 5px;
 }
+/* Style for the textarea element */
+textarea {
+    border-radius: 30px;
+    border: 1px solid #74c69d;
+    width: 100%;
+    max-width: 100%;
+    padding: 20px; /* Add padding for aesthetic spacing inside the textarea */
+    outline: none; /* Removes the default focus outline */
+    transition: all 0.3s ease; /* Smooth transition for focus styles */
+    text-align: center; /* Centers the text */
+    overflow: auto; /* Ensures the content is scrollable if it overflows */
+  }
+  
+  /* Pseudo-element for the placeholder */
+  textarea::placeholder {
+    text-align: center; /* Centers the placeholder text */
+    color: #74c69d; /* Light grey color for the placeholder text */
+    opacity: 1; /* Ensures the placeholder is fully visible */
+    transition: all 0.3s ease; /* Smooth transition for the placeholder */
+  }
+  
+  /* Pseudo-class for when the textarea is focused */
+  textarea:focus {
+    border-color: #3dac78; /* Darker border when focused */
+    box-shadow: 0 0 8px #3dac78; /* Shadow effect for depth */
+  }
+  
+  /* Pseudo-class for when the textarea is focused and also styles the placeholder */
+  textarea:focus::placeholder {
+    opacity: 0.5; /* Fades the placeholder text slightly */
+  }
+  
