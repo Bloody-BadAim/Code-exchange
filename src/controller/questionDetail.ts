@@ -37,6 +37,7 @@ class QuestionDetailHandler {
             document.getElementById("submitAnswer")?.addEventListener("click", async () => {
                 await this.handleAnswerSubmission(questionId);
                 await this.loadAndDisplayAnswers(questionId);
+
             });
 
         } catch (error) {
