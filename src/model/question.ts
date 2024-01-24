@@ -64,7 +64,7 @@ export class QuestionQueries extends BaseQueries {
             return undefined;
         } catch (error) {
             console.error("Error getting question by ID:", error);
-            throw error;
+            return undefined;
         }
     }
 
@@ -81,7 +81,7 @@ export class QuestionQueries extends BaseQueries {
             return result.insertId;
         } catch (error) {
             console.error("Error posting question:", error);
-            throw error;
+            return undefined;
         }
     }
 
@@ -106,7 +106,7 @@ export class QuestionQueries extends BaseQueries {
             });
         } catch (error) {
             console.error("Error getting questions:", error);
-            throw error;
+            return []; // Return an empty array in case of error
         }
     }
 
@@ -120,17 +120,16 @@ export class QuestionQueries extends BaseQueries {
     public static async getAllPersonalQuestions(userid: number): Promise<any[]> {
         try {
             const query: string = "SELECT * FROM questions WHERE userid = ?";
-            const questions: any = await api.queryDatabase(query, [userid]); // Make sure to pass the userid to the query
+            const questions: any = await api.queryDatabase(query, [userid]);
             return questions.map((q: { questionid: any; content: any; createdAt: any; username: any; }) => ({
                 _questionid: q.questionid,
                 _content: q.content,
                 _createdAt: q.createdAt,
-                // Include username if it's part of the question record, or if it's needed, join with the user table to get it
-                _username: q.username, 
+                _username: q.username,
             }));
         } catch (error) {
             console.error("Error getting personal questions:", error);
-            throw error;
+            return [];
         }
     }
 }

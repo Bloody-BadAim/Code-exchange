@@ -12,6 +12,7 @@ export class MyAnswerController {
         }
     }
 
+    // Haalt de antwoorden van de ingelogde gebruiker op
     public async getMyAnswers(): Promise<AnswerQuaries[]> {
         try {
             return await AnswerQuaries.getAnswersByUserId(this.userId);
@@ -20,4 +21,25 @@ export class MyAnswerController {
             throw error;
         }
     }
+
+    // Werkt een specifiek antwoord van de gebruiker bij
+    public async updateAnswer(answerId: number, newContent: string): Promise<boolean> {
+        try {
+            return await AnswerQuaries.updateAnswer(answerId, newContent, this.userId);
+        } catch (error) {
+            console.error("Error updating answer:", error);
+            return false;
+        }
+    }
+
+
+    public async deleteAnswer(answerId: number): Promise<boolean> {
+        try {
+            return await AnswerQuaries.deleteAnswer(answerId, this.userId);
+        } catch (error) {
+            console.error("Error in deleting answer:", error);
+            return false;
+        }
+    }
+    // Voeg hier eventuele andere methoden toe die je nodig hebt voor de controller
 }

@@ -22,16 +22,16 @@ export class UserQueries extends BaseQueries {
         super(userid, username);
     }
 
-    // public async checkExists(key: string, value: string): Promise<boolean> {
-    //     try {
-    //         const checkQuery: string = `SELECT COUNT(*) AS count FROM user WHERE ${key} = ?`;
-    //         const result: any = await api.queryDatabase(checkQuery, [value]);
-    //         return result[0].count > 0;
-    //     } catch (error) {
-    //         console.error(`Error checking if ${key} exists:`, error);
-    //         throw error;
-    //     }
-    // }
+    public async checkExists(key: string, value: string): Promise<boolean> {
+        try {
+            const checkQuery: string = `SELECT COUNT(*) AS count FROM user WHERE ${key} = ?`;
+            const result: any = await api.queryDatabase(checkQuery, [value]);
+            return result[0].count > 0;
+        } catch (error) {
+            console.error(`Error checking if ${key} exists:`, error);
+            throw error;
+        }
+    }
 
     public static async checkEmailExists(email: string): Promise<boolean> {
         try {
@@ -65,7 +65,7 @@ export class UserQueries extends BaseQueries {
      */
     public static async createAccount(email: string, username: string, firstname: string, lastname: string, password: string): Promise<number | undefined> {
         try {
-            const registerData: any = await api.queryDatabase("INSERT INTO user (email, username, firstname, lastname, password) VALUES (?, ?, ?, ?, ?)", [email, username, firstname, lastname, password]);
+            const registerData: any = await api.queryDatabase("INSERT INTO user (email, username, firstname, lastname, password) VALUES (?, ?, ?, ?, ?)", email, username, firstname, lastname, password);
             return registerData.insertId;
         } catch (error) {
             console.error("Error creating account:", error);

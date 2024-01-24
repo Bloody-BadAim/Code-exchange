@@ -2,31 +2,50 @@ import { QuestionQueries } from "../model/question";
 import { AnswerQuaries } from "../model/answer";
 
 export class QuestionController {
+    public constructor() { }
 
-    public constructor() {}
-
-    // Method to post a new question
     public async postQuestion(userId: number, content: string): Promise<number | undefined> {
-        return QuestionQueries.postQuestion(userId, content);
+        try {
+            return await QuestionQueries.postQuestion(userId, content);
+        } catch (error) {
+            console.error("Error in postQuestion:", error);
+            return undefined; // Return undefined in case of error
+        }
     }
 
-    // Method to get a specific question by its ID
-    public async getQuestionById(questionid: number): Promise<QuestionQueries | undefined> {
-        return QuestionQueries.getQuestionById(questionid);
+    public async getQuestionById(questionId: number): Promise<QuestionQueries | undefined> {
+        try {
+            return await QuestionQueries.getQuestionById(questionId);
+        } catch (error) {
+            console.error("Error in getQuestionById:", error);
+            return undefined; // Return undefined in case of error
+        }
     }
 
-    // Method to get all questions
     public async getAllQuestions(): Promise<QuestionQueries[]> {
-        return QuestionQueries.getAllQuestions();
+        try {
+            return await QuestionQueries.getAllQuestions();
+        } catch (error) {
+            console.error("Error in getAllQuestions:", error);
+            return []; // Return an empty array in case of error
+        }
     }
 
-    // Method to post a new answer to a question
-    public async postAnswer(questionid: number, userId: number, contentAnswer: string): Promise<number | undefined> {
-        return AnswerQuaries.postAnswer(questionid, userId, contentAnswer);
+    public async postAnswer(questionId: number, userId: number, content: string): Promise<number | undefined> {
+        try {
+            return await AnswerQuaries.postAnswer(questionId, userId, content);
+        } catch (error) {
+            console.error("Error in postAnswer:", error);
+            return undefined; // Return undefined in case of error
+        }
     }
 
-    // Method to get all answers for a specific question
-    public async getAnswersByQuestionId(questionid: number): Promise<AnswerQuaries[]> {
-        return AnswerQuaries.getAnswersByQuestionId(questionid);
+    public async getAnswersByQuestionId(questionId: number): Promise<AnswerQuaries[]> {
+        try {
+            return await AnswerQuaries.getAnswersByQuestionId(questionId);
+        } catch (error) {
+            console.error("Error in getAnswersByQuestionId:", error);
+            return []; // Return an empty array in case of error
+        }
     }
 }

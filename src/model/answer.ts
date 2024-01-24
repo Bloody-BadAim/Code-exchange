@@ -125,13 +125,26 @@ export class AnswerQuaries extends BaseQueries {
     public static async updateAnswer(answerId: number, newContent: string, userId: number): Promise<boolean> {
         try {
             const currentDate: Date = new Date();
+            const formattedDate: string = currentDate.toISOString().slice(0, 19).replace("T", " ");
             const queryUpdate: string = "UPDATE answers SET contentAnswer = ?, createdatAnswer = ? WHERE answerid = ? AND userid = ?";
-            await api.queryDatabase(queryUpdate, newContent, currentDate, answerId, userId);
+            await api.queryDatabase(queryUpdate, newContent, formattedDate, answerId, userId);
             return true;
         } catch (error) {
             console.error("Error updating answer:", error);
             return false;
         }
     }
+
+    public static async deleteAnswer(answerId: number, userId: number): Promise<boolean> {
+        try {
+            const queryDelete: string = "DELETE FROM answers WHERE answerid = ? AND userid = ?";
+            await api.queryDatabase(queryDelete, answerId, userId);
+            return true;
+        } catch (error) {
+            console.error("Error deleting answer:", error);
+            return false;
+        }
+    }
+    
 
 }

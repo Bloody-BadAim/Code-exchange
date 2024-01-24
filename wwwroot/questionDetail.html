@@ -18,14 +18,18 @@
         <div id="questionTitle" class="question-title">
             <!-- Question will be loaded here -->
         </div>
-        <div id="answersList" class="answers-list">
+        <!-- Add this div to contain the code snippet -->
+        <div id="codeSnippetContainer" class="code-snippet-container" style="display: none;"></div>
+        <h1>Post your answer</h1>
+        <textarea id="newAnswer" placeholder="Your answer..."></textarea>
+        <textarea id="codeSnippetAnswer" placeholder="Add your code snippet here (optional)..."></textarea>
+        <button class="dark-btn" id="submitAnswer">Submit Answer</button>
+        <div id="answersList" class="answers-list ">
+            
             <!-- Styled answers will be loaded here -->
         </div>
-        <div id="vote" class="vote">
-
-        </div>
-        <textarea id="newAnswer" placeholder="Your answer..."></textarea>
-        <button id="submitAnswer">Submit Answer</button>
+     
+        
     </div>
 
     <script src="src/view/navbar.ts" type="module"></script>
