@@ -1,70 +1,102 @@
 import { QuestionQueries } from "../model/question";
 import { AnswerQuaries } from "../model/answer";
 
-/**
- * Class responsible for handling question details and associated answers.
- */
 class QuestionDetailHandler {
     private questionTitle = document.getElementById("questionTitle") as HTMLElement;
     private answersList = document.getElementById("answersList") as HTMLElement;
     private newAnswer = document.getElementById("newAnswer") as HTMLTextAreaElement;
 
-    /**
-     * Constructor for QuestionDetailHandler class.
-     * Initializes the handler by loading the question details.
-     */
     public constructor() {
         this.initialize();
     }
 
-    /**
-     * Initializes the handler by setting up the UI and event listeners.
-     */
     public async initialize(): Promise<void> {
-        const questionId: number = Number(sessionStorage.getItem("selectedQuestionId"));
-        await this.loadQuestionDetails(questionId);
+        try {
+            const questionId: number = this.getQuestionIdFromSession();
+            await this.loadQuestionDetails(questionId);
 
-        document.getElementById("submitAnswer")?.addEventListener("click", async () => {
-            const userId: number = parseInt(sessionStorage.getItem("userid")!); // Get user ID from session storage
-            const response: number | undefined = await AnswerQuaries.postAnswer(questionId, userId, this.newAnswer.value);
-            if (response) {
-                this.newAnswer.value = ""; // Clear the textarea after posting
-                await this.loadQuestionDetails(questionId); // Refresh the answers list
-            }
-        });
+            document.getElementById("submitAnswer")?.addEventListener("click", async () => {
+                await this.handleAnswerSubmission(questionId);
+            });
+        } catch (error) {
+            console.error("Initialization failed:", error);
+            // Handle initialization error (e.g., show error message)
+        }
     }
 
-    /**
-     * Loads and displays the details of a specific question and its answers.
-     * @param {number} questionId - The ID of the question to load.
-     */
+    private getQuestionIdFromSession(): number {
+        const questionId: number = Number(sessionStorage.getItem("selectedQuestionId"));
+        if (!questionId) throw new Error("Question ID not found in session storage");
+        return questionId;
+    }
+
+    private async handleAnswerSubmission(questionId: number): Promise<void> {
+        const userId: number = Number(sessionStorage.getItem("userid"));
+        if (!userId) throw new Error("User not logged in");
+
+        const response: any = await AnswerQuaries.postAnswer(questionId, userId, this.newAnswer.value);
+        if (response) {
+            this.newAnswer.value = "";
+            await this.loadQuestionDetails(questionId);
+        } else {
+            // Handle failed submission (e.g., show error message)
+        }
+    }
+
     private async loadQuestionDetails(questionId: number): Promise<void> {
-        // Load question details
         const question: QuestionQueries | undefined = await QuestionQueries.getQuestionById(questionId);
-        if (question) {
-            this.questionTitle.innerHTML = `
-                <h2>${question._content}</h2>
-                <p>Asked by ${question._username} on ${new Date(question._createdAt).toLocaleDateString()}</p>
-            `;
+        if (!question) throw new Error("Question not found");
+
+        this.updateQuestionView(question);
+        await this.loadAndDisplayAnswers(questionId);
+    }
+
+
+    private updateQuestionView(question: QuestionQueries): void {
+        const contentElement: HTMLDivElement = document.createElement("div");
+        contentElement.innerHTML = `
+        <h2>${question._content}</h2>
+        <p>Asked by ${question._username} on ${new Date(question._createdAt).toLocaleDateString()}</p>
+    `;
+
+        // Check if there's a code snippet in the content
+        const codeSnippetMatch: RegExpMatchArray  = question._content.match(/```([\s\S]*?)```/)!;
+        if (codeSnippetMatch) {
+            const codeSnippetContainer: HTMLElement = document.getElementById("codeSnippetContainer") as HTMLElement;
+            codeSnippetContainer.innerText = codeSnippetMatch[1];
         }
 
-        // Load and display answers
-        const answers: AnswerQuaries[] = await AnswerQuaries.getAnswersByQuestionId(questionId);
-        this.answersList.innerHTML = ""; // Clear the answers list before adding new ones
-
-        answers.forEach((answer) => {
-            const answerElement: HTMLDivElement = document.createElement("div");
-            answerElement.classList.add("answer-item");
-            answerElement.innerHTML = `
-                <p class="answer-content">${answer._contentAnswer}</p>
-                <p class="answer-details">Posted by ${answer._username} on ${new Date(answer._createdatAnswer).toLocaleDateString()}</p>
-            `;
-            this.answersList.appendChild(answerElement);
-        });
-        
+        this.questionTitle.appendChild(contentElement);
     }
 
+    private async loadAndDisplayAnswers(questionId: number): Promise<void> {
+        const answers: any = await AnswerQuaries.getAnswersByQuestionId(questionId);
+        this.answersList.innerHTML = "";
+
+        answers.forEach((answer: any) => {
+            const answerElement: HTMLElement = this.createAnswerElement(answer);
+            this.answersList.appendChild(answerElement);
+        });
+    }
+
+    private createAnswerElement(answer: AnswerQuaries): HTMLElement {
+        const answerElement: HTMLDivElement = document.createElement("div");
+        answerElement.classList.add("answer-item");
+
+        // Convert the answer content, checking for code snippets
+        const convertedContent: string = this.convertContent(answer._contentAnswer);
+
+        answerElement.innerHTML = `
+            <p class="answer-content">${convertedContent}</p>
+            <p class="answer-details">Posted by ${answer._username} on ${new Date(answer._createdatAnswer).toLocaleDateString()}</p>
+        `;
+        return answerElement;
+    }
+
+    private convertContent(content: string): string {
+        // Simple example to convert code snippets - you may need a more robust solution
+        return content.replace(/```(\n[\s\S]*?\n)```/g, "<div class=\"code-snippet\">$1</div>");
+    }
 }
 
 new QuestionDetailHandler();
-

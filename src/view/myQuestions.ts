@@ -1,7 +1,8 @@
 import { MyQuestionsController } from "../controller/myQuestionController";
 import { QuestionController } from "../controller/questionController";
+import { QuestionQueries } from "../model/question";
 
-export class MainView {
+class MainView {
     private questionsDisplay: HTMLElement;
     private myQuestionsController: MyQuestionsController;
     private username: string | null;
@@ -9,7 +10,7 @@ export class MainView {
     public constructor() {
         this.questionsDisplay = document.getElementById("questionsDisplay") as HTMLElement;
         this.myQuestionsController = new MyQuestionsController();
-        this.username = sessionStorage.getItem("username"); // Get the username from the session storage
+        this.username = sessionStorage.getItem("username");
         this.init();
     }
 
@@ -19,12 +20,11 @@ export class MainView {
 
     private async loadPersonalQuestions(): Promise<void> {
         try {
-            const questions: any = await this.myQuestionsController.getPersonalQuestions();
-           
+            const questions: QuestionQueries[] = await this.myQuestionsController.getPersonalQuestions();
             questions.forEach((question: { _content: string; _createdAt: string | number | Date; _questionid: any; }) => {
                 const row: HTMLTableRowElement = document.createElement("tr");
                 row.innerHTML = `
-                    <td>${this.username}</td> <!-- Use the username from session storage -->
+                    <td>${this.username}</td>
                     <td>${question._content}</td>
                     <td>${new Date(question._createdAt).toLocaleDateString()}</td>
                 `;
@@ -39,10 +39,6 @@ export class MainView {
         }
     }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    new MainView();
-});
 
 class MyQuestionsView {
     private questionController: QuestionController;
@@ -60,7 +56,7 @@ class MyQuestionsView {
 
     private async postQuestion(): Promise<void> {
         const questionContent: string = (document.getElementById("questionContent") as HTMLTextAreaElement).value;
-        const codeSnippet: string = (document.getElementById("codeSnippet") as HTMLTextAreaElement).value;
+     
 
         if (!questionContent.trim()) {
             alert("Please enter your question.");
@@ -68,17 +64,19 @@ class MyQuestionsView {
         }
 
         const userId: number = parseInt(sessionStorage.getItem("userid")!);
+       
+        
+        const codeSnippet: string = (document.getElementById("codeSnippet") as HTMLTextAreaElement).value;
         let fullQuestionContent: string = questionContent;
         
         if (codeSnippet.trim()) {
-            fullQuestionContent += "\n\n```" + codeSnippet + "```";
+            fullQuestionContent += "\n\n```\n" + codeSnippet + "\n```";
         }
-
         try {
             const questionId: number | undefined = await this.questionController.postQuestion(userId, fullQuestionContent);
             if (questionId) {
                 alert("Question posted successfully!");
-                window.location.reload(); // Or navigate to the question detail page
+                window.location.reload();
             } else {
                 alert("Failed to post the question.");
             }
@@ -89,7 +87,8 @@ class MyQuestionsView {
     }
 }
 
+// Initialization of the views
 document.addEventListener("DOMContentLoaded", () => {
+    new MainView();
     new MyQuestionsView();
 });
-

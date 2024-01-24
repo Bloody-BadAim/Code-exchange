@@ -113,3 +113,80 @@ function logout(): void {
     sessionStorage.clear();
     window.location.href = "index.html";
 }
+
+
+
+
+// import { UserController } from "../controller/userController";
+
+// /**
+//  * Class representing the profile view.
+//  */
+// class ProfileView {
+//     private userController: UserController;
+//     private inputFirstname: HTMLElement;
+//     private inputLastname: HTMLElement;
+//     private inputUsername: HTMLElement;
+//     private inputEmail: HTMLElement;
+
+//     public constructor() {
+//         this.userController = new UserController();
+//         this.inputFirstname = document.getElementById("inputFirstname") as HTMLElement;
+//         this.inputLastname = document.getElementById("inputLastname") as HTMLElement;
+//         this.inputUsername = document.getElementById("inputUsername") as HTMLElement;
+//         this.inputEmail = document.getElementById("inputEmail") as HTMLElement;
+
+//         this.attachEventListeners();
+//         this.loadProfile();
+//     }
+
+//     private attachEventListeners(): void {
+//         document.getElementById("closeBtn")?.addEventListener("click", this.closePopup);
+//         document.getElementById("btnEdit")?.addEventListener("click", this.openPopup);
+//         document.getElementById("btnUpdateProfile")?.addEventListener("click", this.updateProfile);
+//         document.getElementById("deleteBtn")?.addEventListener("click", this.deleteProfile);
+
+//         const btnLogout: HTMLElement = document.getElementById("logout")!;
+//         btnLogout.addEventListener("click", this.logout);
+//     }
+
+//     private loadProfile(): void {
+//         // Retrieve user data from session storage
+//         const firstname: string | null = sessionStorage.getItem("firstname");
+//         const lastname: string | null = sessionStorage.getItem("lastname");
+//         const username: string | null = sessionStorage.getItem("username");
+//         const email: string | null = sessionStorage.getItem("email");
+
+//         this.inputFirstname.innerHTML = `<strong>Firstname:</strong> <em>${firstname}</em>`;
+//         this.inputLastname.innerHTML = `<strong>Lastname:</strong> <em>${lastname}</em>`;
+//         this.inputUsername.innerHTML = `<strong>Username:</strong> <em>${username}</em>`;
+//         this.inputEmail.innerHTML = `<strong>Email:</strong> <em>${email}</em>`;
+//     }
+
+//     private closePopup = (): void => {
+//         document.querySelector("#popup")?.classList.remove("active");
+//     };
+
+//     private openPopup = (): void => {
+//         document.querySelector("#popup")?.classList.add("active");
+//         // ... rest of the code for opening popup
+//     };
+
+//     private updateProfile = async (): Promise<void> => {
+//         // ... rest of the code for updating profile
+//     };
+
+//     private deleteProfile = async (): Promise<void> => {
+//         // ... rest of the code for deleting profile
+//     };
+
+//     private logout = (): void => {
+//         sessionStorage.clear();
+//         window.location.href = "index.html";
+//     }
+// }
+
+// // Initialize the profile view when the DOM is fully loaded
+// document.addEventListener("DOMContentLoaded", () => {
+//     new ProfileView();
+// });

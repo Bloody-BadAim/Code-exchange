@@ -191,3 +191,18 @@ a {
     font-size: 0.8em;
     color: #777;
 }
+.code-snippet-container {
+    background-color: #000;
+    color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    white-space: pre-wrap;
+    font-family: monospace;
+}
+#codeSnippetContainer code {
+    background-color: #333; /* Black background for code */
+    color: #fff; /* White text for code */
+    display: block;
+    padding: 10px;
+    overflow-x: auto;
+}

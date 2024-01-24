@@ -31,7 +31,7 @@ button {
     height: 50px;
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
-    margin-top: 50px;
+    margin-top: 10px;
 
     &:hover {
         background-color:#3dac78 ;
@@ -41,18 +41,17 @@ button {
 }
 
 .dark-btn-cancel {
-  margin: auto;
-  padding: 6px 24px;
-  border-radius: 100px;
+    margin: 0 auto;
+    padding: 6px 24px;
+    border-radius: 100px;
   background-color:#18283b;
   color: white;
-  min-width: 118px;
-  font-weight: bold;
-  height: 40px;
-  font-family: 'Poppins', sans-serif;
-  cursor: pointer;
-  margin-top: 20px;
-  width: 100%;
+  min-width: 128px;
+    font-weight: bold;
+    height: 50px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    margin-top: 10px;
 
   &:hover {
     background-color: #18283b;
@@ -281,3 +280,4 @@ a {
     color: #ffffff;
     cursor: pointer;
 }
+

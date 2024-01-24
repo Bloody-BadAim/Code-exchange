@@ -1,54 +1,66 @@
 import "../config";
 import { UserController } from "../controller/userController";
 
-// Create an instance of UserController
-const userController: UserController = new UserController();
-
 /**
- * Event listener for the registration button.
- * Collects user input and calls the register function from UserController.
+ * Class representing the registration view.
  */
-document.getElementById("btnRegister")?.addEventListener("click", async () => {
-    // Retrieve user input from registration form fields
-    const email: string = (document.getElementById("email") as HTMLInputElement).value;
-    const username: string = (document.getElementById("username") as HTMLInputElement).value;
-    const firstname: string = (document.getElementById("firstname") as HTMLInputElement).value;
-    const lastname: string = (document.getElementById("lastname") as HTMLInputElement).value;
-    const password: string = (document.getElementById("password") as HTMLInputElement).value;
-    
-    try {
-        // Register the user using the UserController
-        await userController.register(email, username, firstname, lastname, password);
-    } catch (error) {
-        // Handle any errors that occur during registration
+class RegistrationView {
+    private userController: UserController;
+
+    public constructor() {
+        this.userController = new UserController();
+        this.initEventListeners();
     }
-});
 
-/**
- * Event listener for the login form submission.
- * Prevents default form submission behavior and calls the login function.
- */
-document.getElementById("myFormLogin")?.addEventListener("submit", async (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior
-
-    // Retrieve user input from login form fields
-    const email: string = (document.getElementById("emailLogin") as HTMLInputElement).value;
-    const password: string = (document.getElementById("passwordLogin") as HTMLInputElement).value;
-
-    try {
-        // Log in the user using the UserController
-        await userController.login(email, password);
-    } catch (error) {
-        // Handle any errors that occur during login
-        console.error("Login error:", error);
+    /**
+     * Initialize event listeners for the registration view.
+     */
+    private initEventListeners(): void {
+        document.getElementById("btnRegister")?.addEventListener("click", () => this.registerUser());
+        document.getElementById("myFormLogin")?.addEventListener("submit", (event) => this.loginUser(event));
+        document.getElementById("logout")?.addEventListener("click", () => this.logoutUser());
     }
-});
 
-/**
- * Event listener for the logout button.
- * Calls the logout function from UserController when clicked.
- */
-document.getElementById("logout")?.addEventListener("click", () => {
-    // Log out the user using the UserController
-    userController.logout();
-});
+    /**
+     * Handles user registration.
+     */
+    private async registerUser(): Promise<void> {
+        const email: string = (document.getElementById("email") as HTMLInputElement).value;
+        const username : string= (document.getElementById("username") as HTMLInputElement).value;
+        const firstname: string = (document.getElementById("firstname") as HTMLInputElement).value;
+        const lastname : string= (document.getElementById("lastname") as HTMLInputElement).value;
+        const password : string= (document.getElementById("password") as HTMLInputElement).value;
+
+        try {
+            await this.userController.register(email, username, firstname, lastname, password);
+        } catch (error) {
+            console.error("Registration error:", error);
+        }
+    }
+
+    /**
+     * Handles user login.
+     * @param {Event} event - The event object.
+     */
+    private async loginUser(event: Event): Promise<void> {
+        event.preventDefault();
+        const email : string= (document.getElementById("emailLogin") as HTMLInputElement).value;
+        const password: string = (document.getElementById("passwordLogin") as HTMLInputElement).value;
+
+        try {
+            await this.userController.login(email, password);
+        } catch (error) {
+            console.error("Login error:", error);
+        }
+    }
+
+    /**
+     * Handles user logout.
+     */
+    private logoutUser(): void {
+        this.userController.logout();
+    }
+}
+
+// Create an instance of the registration view to set up the event listeners.
+new RegistrationView();
