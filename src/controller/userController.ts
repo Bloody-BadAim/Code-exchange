@@ -175,4 +175,15 @@ export class UserController {
             return undefined; // Return undefined in case of an error
         }
     }
+
+    public async insertpfp(pfp: any): Promise<any>{
+        const insert: any = await UserQueries.insertpfp(pfp);
+        return insert;
+
+    }
+
+    public async getgetpfp(): Promise<any>{
+        const select: any = await UserQueries.getpfp();
+        return select;
+    }
 }

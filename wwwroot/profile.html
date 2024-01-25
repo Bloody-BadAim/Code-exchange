@@ -20,7 +20,7 @@
             <div class="wrapper">
                 <div class="user-img">
                     <img src="/assets/img" id="photo" />
-                    <input type="file" id="file" />
+                    <input type="file" accept="image/jpeg, image/png, image/jpg" id="file" />
                     <label for="file" id="uploadbtn"><i class='bx bx-camera'></i></label>
                     <div class="ratingsWrapper">
                         <div id="ratingsProfile" class="ratings">
@@ -67,20 +67,20 @@
                     <div class="inputField">
                         <div>
                             <h2>firstname</h2>
-                            <input id="editFirstname" type="text">
+                            <input id="editFirstname" type="text" required>
                         </div>
                         <div>
                             <h2>lastname</h2>
-                            <input id="editLastname" type="text">
+                            <input id="editLastname" type="text" required>
                         </div>
                     </div>
                     <div class="inputField">
                         <h2>username</h2>
-                        <input id="editUsername" type="text">
+                        <input id="editUsername" type="text" required>
                     </div>
                     <div class="inputField">
                             <h2>email</h2>
-                            <input id="editEmail" type="text">
+                            <input id="editEmail" type="email" required>
                     </div>
                     <div class="inputField">
                         <button id="btnUpdateProfile" type="submit">Update</button>
