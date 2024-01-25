@@ -2,8 +2,8 @@ import { UserController } from "../controller/userController";
 import { VoteController } from "../controller/voteController";
 import { VoteQueries } from "../model/vote";
 
-
 // Creating an instance of the UserController
+const voteController: VoteController = new VoteController();
 const userController: UserController = new UserController();
 
 // Function to load profile information into the UI
@@ -63,8 +63,13 @@ document.getElementById("btnEdit")?.addEventListener("click", function(){
     if(email){
         editEmail.value = email || " ";
     }
-    displayAverageRating();
 });
+
+
+function isValidEmail(email: string): boolean {
+    const emailRegex: any = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
 
 // Event listener to update user profile with new input values
 document.getElementById("btnUpdateProfile")?.addEventListener("click", async () => {
@@ -73,16 +78,27 @@ document.getElementById("btnUpdateProfile")?.addEventListener("click", async () 
     const inputUsername: string = (document.getElementById("editUsername") as HTMLInputElement).value;
     const inputEmail: string = (document.getElementById("editEmail") as HTMLInputElement).value;
 
-    try {
-        // Calling the updateProfile method from the UserController
-        await userController.updateProfile(inputFirstname, inputLastname, inputUsername, inputEmail);
-        alert("Profile successfully updated.");
-        // Reloading the page after successful update
-        window.location.reload();
-    } catch (error) {
-        console.error("Update Profile Error:", error);
-        alert("An error occurred while updating the profile.");
+    if (inputEmail) {
+        if (isValidEmail(inputEmail)) {
+            // Valid email address
+            console.log("Valid email address");
+            try {
+                // Calling the updateProfile method from the UserController
+                await userController.updateProfile(inputFirstname, inputLastname, inputUsername, inputEmail);
+                alert("Profile successfully updated.");
+                // Reloading the page after successful update
+                window.location.reload();
+            } catch (error) {
+                console.error("Update Profile Error:", error);
+                alert("An error occurred while updating the profile.");
+            }
+        } else {
+            // Invalid email address
+            console.log("Invalid email address");
+            alert("wrong email");
+        }
     }
+    
 });
 
 // Event listener to delete user profile
@@ -116,21 +132,83 @@ function logout(): void {
 }
 async function displayAverageRating(): Promise<void> {
     try {
-        const userId: number | null = Number(sessionStorage.getItem("userid"));
-        if (userId === null) {
+        const userid: number | null = Number(sessionStorage.getItem("userid"));
+        if (userid === null) {
             console.error("User ID not found in session storage.");
             return;
         }
 
-        const averageRating: number = await VoteQueries.getUserAverageRating(userId);
-        const ratingsProfile: HTMLElement | null = document.getElementById("ratingsProfile");
+        const averageRating: number = await voteController.getAverageRating(userid);
+        const vijf: any = document.getElementById("5");
+        const vier: any = document.getElementById("4");
+        const drie: any = document.getElementById("3");
+        const twee: any = document.getElementById("2");
+        const een: any = document.getElementById("1");
 
-        if (ratingsProfile) {
-            // Update the ratingsProfile element with the average rating
-            ratingsProfile.textContent = `Average Rating: ${averageRating.toFixed(1)} / 5`;
+        if(averageRating >= 5){
+            vijf.style.color = "gold";
+            vier.style.color = "gold";
+            drie.style.color = "gold";
+            twee.style.color = "gold";
+            een.style.color = "gold";
+
+        }else if(averageRating >=4){
+            vier.style.color = "gold";
+            drie.style.color = "gold";
+            twee.style.color = "gold";
+            een.style.color = "gold";
+
+        }else if(averageRating >=3){
+            drie.style.color = "gold";
+            twee.style.color = "gold";
+            een.style.color = "gold";
+            
+        }else if(averageRating >=2){
+            twee.style.color = "gold";
+            een.style.color = "gold";
+            
+        }else if(averageRating >=1){
+            een.style.color = "gold";
         }
+
     } catch (error) {
         console.error("Error displaying average rating:", error);
     }
 }
+
+
+
+const profilePic: HTMLImageElement | null = document.getElementById("photo") as HTMLImageElement | null;
+const inputFile: HTMLInputElement | null = document.getElementById("file") as HTMLInputElement | null;
+
+if (profilePic && inputFile) {
+    inputFile.addEventListener("change", function () {
+        if (inputFile.files && inputFile.files[0]) {
+            profilePic.src = URL.createObjectURL(inputFile.files[0]);
+            console.log(profilePic.src);
+            sessionStorage.setItem("pfp", profilePic.src);
+        }
+    });
+}    
+
+async function loadPicture(): Promise<void>{
+    const profilePic: HTMLImageElement | null = document.getElementById("photo") as HTMLImageElement | null;
+    const inputFile: HTMLInputElement | null = document.getElementById("file") as HTMLInputElement | null;
+
+    // const blob: any = await userController.getgetpfp();
+    // const blob1: any = blob[0];
+    // const blobReal: any = Object.values(blob1)[0];
+    // console.log(blobReal);
+
+
+    const getsrc: any = sessionStorage.getItem("pfp");
+    console.log(getsrc);
+
+    profilePic!.src = getsrc;
+
+    const insert: any = userController.insertpfp(getsrc);
+}
+
+loadPicture();
 loadProfile();
+displayAverageRating();

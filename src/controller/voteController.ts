@@ -1,3 +1,4 @@
+import { AnswerQuaries } from "../model/answer";
 import { VoteQueries } from "../model/vote";
 
 export class VoteController {
@@ -13,11 +14,33 @@ export class VoteController {
         }
     }
 
-    public async getAverageRating(answerid: number): Promise<number> {
+    public async getAverageRating(userid: number): Promise<number> {
         try {
-            // Call VoteQueries to get the average rating for an answer
-            const averageRating: number = await VoteQueries.getUserAverageRating(answerid);
-            return averageRating;
+            let totaal: number = 0;
+            let aantal: number = 0;
+
+            const allAnswers: any = await VoteQueries.getAllAnswers(userid);
+            
+            for (const item of allAnswers) {
+
+                const answerid : number= item.answerid;
+                const getRating: any = await VoteQueries.getUserAverageRating(answerid);
+                const sumRating: any= getRating[0];
+                const value: any = (Object.values(sumRating)[0]);
+                if(value > 0 ){
+                    aantal = aantal + 1;
+                }
+                if(getRating.length > 0){
+                    totaal += value;
+                }
+            }
+
+            const realAverage: number = Math.round((totaal / aantal)/5);
+
+            
+            // let averageRating: number = Math.round((rating / 5));
+            // console.log(averageRating);
+            return realAverage;
         } catch (error) {
             console.error("Error getting average rating:", error);
             throw error;

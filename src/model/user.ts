@@ -137,4 +137,20 @@ export class UserQueries extends BaseQueries {
         const deleteStringFunction: any = await api.queryDatabase("DELETE FROM user WHERE userid = ?", newUserid);
         return deleteStringFunction;
     }
+
+    public static async insertpfp(pfp: any): Promise<any>{
+        const wuserid: string | null = sessionStorage.getItem("userid");
+        const userid: number = Number(wuserid);
+        const insertQuery: any = "UPDATE user SET pfp = ? WHERE userid = ?";
+        const result: any = await api.queryDatabase(insertQuery, pfp, userid);
+        return result;
+    }
+
+    public static async getpfp(): Promise<any>{
+        const wuserid: string | null = sessionStorage.getItem("userid");
+        const userid: number = Number(wuserid);
+        const select: any = await api.queryDatabase("SELECT pfp FROM user WHERE userid = ?", userid);
+        return select;
+
+    }
 }

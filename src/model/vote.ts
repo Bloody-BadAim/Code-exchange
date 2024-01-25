@@ -42,20 +42,36 @@ export class VoteQueries extends BaseQueries {
         }
     }
 
-    // Get the average rating for an answer
-    public static async getUserAverageRating(userid: number): Promise<number> {
-        try {
-            const queryString: string = `
-                SELECT AVG(v.rating) as averageUserRating
-                FROM vote v
-                JOIN answers a ON v.answerid = a.answerid
-                WHERE a.userid = ?
-            `;
-            const result: any = await api.queryDatabase(queryString, userid);
-            return result.length ? result[0].averageUserRating || 0 : 0;
-        } catch (error) {
-            console.error("Error getting user's average rating:", error);
-            throw error;
+    public static async getAllAnswers(userid: number): Promise<number[] | unknown> {
+        try{
+            const allAnswers: any = await api.queryDatabase("SELECT answerid FROM answers WHERE userid = ?", userid);
+            return allAnswers;
+        }catch(error){
+            console.log("error getting users all answers", error);
+            return error;
         }
     }
+
+    public static async count(answerid: number): Promise<any>{
+        try{
+            const count: any = await api.queryDatabase("");
+           
+        }catch(error){
+            console.log("error at counting", error);
+            return error;
+        }
+    }
+
+    // Get the average rating for an answer
+    public static async getUserAverageRating(answerid: number): Promise<number | unknown> {
+        try{
+            const getAverage: any = await api.queryDatabase("SELECT sum(rating) FROM vote WHERE answerid = ?", answerid);
+            return getAverage;
+
+        }catch(error){
+            console.log("error with getting average", error);
+            return error;
+        }
+    }    
+         
 }
