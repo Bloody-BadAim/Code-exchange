@@ -85,7 +85,7 @@ document.getElementById("btnUpdateProfile")?.addEventListener("click", async () 
             try {
                 // Calling the updateProfile method from the UserController
                 await userController.updateProfile(inputFirstname, inputLastname, inputUsername, inputEmail);
-                alert("Profile successfully updated.");
+              
                 // Reloading the page after successful update
                 window.location.reload();
             } catch (error) {
