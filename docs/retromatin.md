@@ -11,3 +11,5 @@
 <h2>Handleiding voor Yusuf</h2>
 
 Ik was heel blij met Yusuf. Hij is enthousiast en toont veel inzet. Hij werkt hard, is aardig en was echt een top teamgenoot. Hij heeft zichzelf heel goed ontwikkeld in het proces en heeft ook veel geleerd. Ik ben heel trots op hem en ben blij dat we de kans hebben gekregen om samen te werken. De enige tip die ik heb, is zorg dat je alle tijd af hebt.
+
+Link naar de whitebord foto: https://gitlab.fdmci.hva.nl/propedeuse-hbo-ict/onderwijs/2023-2024/out-b-se-bim/blok-2/mooruukaanuu54/-/blob/main/docs/Screenshot_2024-01-25_130558.png
